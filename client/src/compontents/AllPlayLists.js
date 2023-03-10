@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function AllPlayLists() {
-    // fetch the information needed for the playlist cards
+    // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
     const userName = 'Austin'
     const PlaylistName = 'my Playlist'
 return (
