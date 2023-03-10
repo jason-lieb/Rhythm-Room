@@ -4,6 +4,7 @@ const path = require('path')
 // const db = require('./config/connection')
 // const routes = require('./routes')
 
+// hello
 require('dotenv').config()
 
 // const { typeDefs, resolvers } = require('./schemas')
