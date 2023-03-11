@@ -2,26 +2,73 @@ const { Comment, Playlist, User } = require ('../models');
 
 const resolvers = {
   Query: {
-      playlists: async () => Playlist.find(),
+      playlists: async () => Playlist.find().populate('owner'),
       playlist: async (parent, { id }, context) => {
-        const playlist = await Playlist.findById(id).populate('comments')
+        const playlist = await Playlist.findById(id) //.populate(['comment']) add this back when we start doign comments
         return playlist 
       },
       user: async (parent, { id }, context) => {
         const user = await User.findById(id).populate(['createdplaylist', 'likedplaylist'])
         return user
       },
-      users: async () => User.find(),
+      users: async () => User.find({}).populate(['createdplaylist', 'likedplaylist']),
 
   },
   Mutation: {
+    // adds a user to the db
     addUser: async(parent, args) => {
       const user = await User.create(args);
       return user
+    },
+    //adds an about me section to the user
+    addAbout: async(parent, { _id, about }) => {
+      const user = await User.findOneAndUpdate(
+        { _id: _id },
+        { about: about },
+        { new: true }
+      )
+      return (user)
+    },
+    // adds a picture to the user
+    addPic: async(parent, { _id, profilePic }) => {
+      const user = await User.findOneAndUpdate(
+        { _id: _id },
+        { profilePic: profilePic },
+        { new: true }
+      )
+      return (user)
+    },
+    // creates a new playlist and adds it to the user model that created it
+    addPlaylist: async (parent, { name, _id, owner }) => {
+      const list = await Playlist.create({ name: name, playlistId: _id, owner: owner })
+      const user = await User.findOneAndUpdate(
+        { _id: _id },
+        { $addToSet: { createdplaylist: list._id } },
+        { new: true }
+      )
+      return (list, user)
+      
+    },
+    // adds the liked playlist to the user info
+    addLikedPlaylist: async ( parent, { ownerId, _id }) => {
+      const list = await Playlist.findById(_id)
+      const user = await User.findOneAndUpdate(
+        { _id: ownerId },
+        { $addToSet: { likedplaylist: list._id } },
+        { new: true }
+      )
+      return (list, user) 
+    },
+    // reomves the liked playlist from the user info
+    removeLikedPlaylist: async ( parent, { ownerId, _id }) => {
+      const list = await Playlist.findById(_id)
+      const user = await User.findOneAndUpdate(
+        { _id: ownerId },
+        { $pull: { likedplaylist: list._id } },
+        { new: true }
+      )
+      return (list, user) 
     }
-    // addPlaylist: async(parent, args) => {
-    //   const 
-    // }
   },
 }
 
