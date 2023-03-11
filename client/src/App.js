@@ -5,10 +5,8 @@ import Discover from './components/pages/Discover'
 import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
-import Home from './Home'
-import LoginSpotify from './Login'
 
-const code = new URLSearchParams(window.location.search).get('code')
+// const code = new URLSearchParams(window.location.search).get('code')
 
 // rendering the entire app
 function App() {

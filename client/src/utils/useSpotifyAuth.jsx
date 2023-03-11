@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import SpotifyWebApi from 'spotify-web-api-node'
 
 export default function useSpotifyAuth(code) {
+  const spotifyApi = new SpotifyWebApi({
+    clientId: '538c7cde1253426896361ee2d3a79d9f',
+  })
+
   const [accessToken, setAccessToken] = useState()
   const [refreshToken, setRefreshToken] = useState()
   const [expiresIn, setExpiresIn] = useState()
@@ -38,5 +43,5 @@ export default function useSpotifyAuth(code) {
     return () => clearInterval(interval)
   }, [refreshToken, expiresIn])
 
-  return accessToken
+  return { accessToken, spotifyApi }
 }
