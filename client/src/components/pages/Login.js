@@ -6,17 +6,42 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ConcertImg from '../../assets/music.jpg';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 
 const css = `
   .container-box {
     display: flex;
     justify-content: center;
-    align-itemns: center;
+    align-items: center;
     height: 100vh;
+    background-color: #242038;
   }
   .card {
     height: 500px; 
+    background-color: #8d86c9;
+    color: white;
+  }
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .username {
+    margin-left: 10px;
+    
+  }
+  .text{
+    color: white;
+  }
+  .button {
+    color: white;
+  }
+  text-field {
+    color: white;
   }
 `
 
@@ -31,15 +56,39 @@ export default function Login() {
           title="concert"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography className='text' gutterBottom variant="h5" component="div">
             Welcome to Rhythm Room!
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography className='text' variant="body2" color="text.secondary">
             Rythm Room is a place for people to share their favorite music- just log in with your spotify account to begin!
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Login With Spotify</Button>
+        <CardActions className='card-actions'>
+        <Box
+          component="form"
+          className='username'
+          sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField id="outlined-basic" className = "text-field" label="Username" variant="outlined" />
+        </Box>
+        <Box
+          component="form"
+          sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField id="outlined-basic" className='text-field' label="Password" variant="outlined" />
+        </Box>
+          <div>
+            <Button className='button' size="small">Login</Button>
+            <Button className='button'size="small">Sign Up</Button>
+          </div>
         </CardActions>
       </Card>
     </div>
