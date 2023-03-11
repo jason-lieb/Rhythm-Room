@@ -21,6 +21,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  about: {
+    type: String,
+
+  },
+  profilePic: {
+    type: String
+  },
   createdplaylist: [
     {
       type: Schema.Types.ObjectId,
