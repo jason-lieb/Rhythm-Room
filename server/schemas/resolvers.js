@@ -18,10 +18,17 @@ const resolvers = {
     addUser: async(parent, args) => {
       const user = await User.create(args);
       return user
+    },
+    addPlaylist: async(parent, { name, owner }) => {
+      const list = await Playlist.create({ name: name, playlistId: owner })
+      const user = await User.findOneAndUpdate(
+        { _id: owner },
+        { $addToSet: { name: name } },
+        { new: true }
+      )
+      return (list, user)
+      
     }
-    // addPlaylist: async(parent, args) => {
-    //   const 
-    // }
   },
 }
 

@@ -34,6 +34,7 @@ const typeDefs = gql`
 
   type Mutation {
     addUser( username: String!, email: String!, password: String!): User
+    addPlaylist( name: String!, owner: String!): Playlist
   }
 `
 
