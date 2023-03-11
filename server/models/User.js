@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
+const { Playlist } = require('./Playlist')
 
 const userSchema = new Schema({
   username: {
@@ -11,12 +12,27 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    match: [/.+@.+\..+/, 'Must use a valid email address'],
+    match: [
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      'Must use a valid email address',
+    ],
   },
   password: {
     type: String,
     required: true,
   },
+  createdplaylist: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Playlist',
+    },
+  ],
+  likedplaylist: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Playlist',
+    },
+  ],
 })
 
 // hash user password

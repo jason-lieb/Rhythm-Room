@@ -1,9 +1,9 @@
 import React from 'react'
-
+import AllPlayLists from '../AllPlayLists'
 function Discover() {
     return (
-        <div>
-
+        <div className='List-of-all-playlists'>
+            <AllPlayLists />
         </div>
     )
 }
