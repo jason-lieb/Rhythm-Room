@@ -6,7 +6,7 @@ import Discover from './components/pages/Discover'
 import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 
 import useSpotifyAuth from './utils/useSpotifyAuth'
 
@@ -14,7 +14,7 @@ const client = new ApolloClient({
   uri: 'http://localhost:5500/graphql',
   cache: new InMemoryCache(),
 })
-// rendering the entire app
+
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
@@ -35,6 +35,7 @@ function App() {
           />
         </Routes>
       </Router>
+      {/* <Footer /> */}
     </ApolloProvider>
   )
 }
