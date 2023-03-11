@@ -31,31 +31,38 @@ query Users {
 `
 // queries a single user based on an id
 export const QUERY_USER = gql`
-query Users($userId: String) {
+query User($userId: String) {
     user(id: $userId) {
+    _id
+    about
+    createdplaylist {
         _id
-        username
-        email
-        password
-        createdplaylist {
-            _id
-            name
-            genres
-            owner
-            comments {
-                _id
-                commentText
-                commentAuthor
-                createdAt
-            }
+        comments {
+        commentText
+        commentAuthor
+        createdAt
+        _id
         }
-        likedplaylist {
-            _id
-            name
-            genres
-            owner
-            comments {}
+        genres
+        name
+        owner
+    }
+    email
+    likedplaylist {
+        _id
+        comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
         }
+        genres
+        name
+        owner
+    }
+    password
+    profilePic
+    username
     }
 }
 `
@@ -78,35 +85,17 @@ query Users($playlistId: String) {
 `
 // queries all playlists
 export const QUERY_ALL_PLAYLISTS = gql`
-query Users {
-    users {
+query Playlists {
+    playlists {
+        name
+        owner
         _id
-        username
-        email
-        password
-        createdplaylist {
+        genres
+        comments {
+            createdAt
+            commentText
+            commentAuthor
             _id
-            name
-            genres
-            owner
-            comments {
-                _id
-                commentText
-                commentAuthor
-                createdAt
-            }
-        }
-        likedplaylist {
-            _id
-            name
-            genres
-            owner
-            comments {
-                _id
-                commentText
-                commentAuthor
-                createdAt
-            }
         }
     }
 }
