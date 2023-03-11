@@ -2,7 +2,10 @@ const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 const path = require('path')
 const db = require('./config/connection')
-// const routes = require('./routes')
+const routes = require('./routes')
+
+// const SpotifyWebApi = require('spotify-web-api-node')
+const cors = require('cors')
 
 require('dotenv').config()
 
@@ -10,13 +13,17 @@ const { typeDefs, resolvers } = require('./schemas')
 
 const app = express()
 const PORT = process.env.PORT || 5500
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 })
 
+app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
+app.use(routes)
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
@@ -27,8 +34,6 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
-
-app.use(routes)
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start()

@@ -7,6 +7,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ConcertImg from '../../assets/music.jpg';
 
+<<<<<<< HEAD:client/src/compontents/pages/Login.js
+=======
+function Login() {
+  return <div>a</div>
+}
+>>>>>>> 52c3a05404d411a398b6d0c70809ca8e36dcd665:client/src/components/pages/Login.js
 
 const css = `
   .container-box {
