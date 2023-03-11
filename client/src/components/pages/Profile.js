@@ -1,5 +1,6 @@
 import * as React from 'react'
 // import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Card from '@mui/material/Card'
@@ -8,7 +9,7 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
-import Stack from '@mui/material/Stack'
+// import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
 import CardMedia from '@mui/material/CardMedia'
 import IconButton from '@mui/material/IconButton'
@@ -53,8 +54,8 @@ function Profile() {
     <>
       <style type="text/css">{css}</style>
       <Container maxWidth="lg" id="main-container">
-        <Container id="userinfo">
-          <Card sx={{ minWidth: 275 }}>
+        <Grid item xs={6} id="userinfo">
+          <Card>
             <CardContent>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
               <Typography variant="h4" component="div">
@@ -75,7 +76,7 @@ function Profile() {
               </Typography>
             </CardContent>
             <CardActions>
-              <a href="">
+              <a href="https://www.google.com/">
                 <Button size="small">Create/add a playlist</Button>
               </a>
             </CardActions>
@@ -83,8 +84,8 @@ function Profile() {
           {/* <div>
             <a href={AUTH_URL}>Connect your Spotify account</a>
           </div> */}
-        </Container>
-        <Stack id="playlistsection">
+        </Grid>
+        <Grid item xs={6} id="playlistsection">
           <Container>
             <Typography>Created Playlists</Typography>
             {/* Individual Playlist Card */}
@@ -267,7 +268,7 @@ function Profile() {
               />
             </Card>
           </Container>
-        </Stack>
+        </Grid>
       </Container>
     </>
   )
