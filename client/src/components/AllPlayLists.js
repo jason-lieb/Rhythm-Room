@@ -2,9 +2,13 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import PlaylistCard from './PlaylistCard'
-import Stack from '@mui/material/Stack'
+// import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import { useQuery } from '@apollo/client';
+import { QUERY_ALL_PLAYLISTS } from '../utils/queries';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -15,8 +19,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function AllPlayLists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
-  const userName = 'Austin'
-  const PlaylistName = 'my Playlist'
+  const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
+  const playlists = data?.playlists || [];
+  console.log(playlists, loading)
   return (
     <>
       <CssBaseline />
@@ -26,23 +31,15 @@ export default function AllPlayLists() {
             bgcolor: 'rgb(224,224,224, 0.2)',
             height: '100vh',
             width: '100%',
+            overflowY: 'scroll'
           }}
         >
-          <Stack spacing={1} maxWidth="lg" margin="auto" padding="15px 10px">
-            {/* this will need to be mapped to show all of the playlists */}
-            {/* CHANGETHISPART.map(info => {
-                    return <Item key={WHATEVER THE ID IS}><PlaylistCard props={} /></Item>
-                }) */}
-            <Item>
-              <PlaylistCard info={userName} list={PlaylistName} />
-            </Item>
-            <Item>
-              <PlaylistCard info={userName} list={PlaylistName} />
-            </Item>
-            <Item>
-              <PlaylistCard info={userName} list={PlaylistName} />
-            </Item>
-          </Stack>
+          <ImageList variant="masonry" cols={3} gap={7}>
+             {/* mapped to show all of the playlists */}
+            {!loading ? playlists.map(info => {
+                    return <ImageListItem key={info._id}><Item><PlaylistCard props={info} /></Item></ImageListItem>
+                }) : <div>Loading...</div>}
+          </ImageList>
         </Box>
       </Container>
     </>
