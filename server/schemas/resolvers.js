@@ -68,6 +68,15 @@ const resolvers = {
         { new: true }
       )
       return (list, user) 
+    },
+    removePlaylist: async ( parent, { ownerId, _id }) => {
+      const list = await Playlist.findById(_id)
+      const user = await User.findOneAndUpdate(
+        { _id: ownerId },
+        { $pull: { createdplaylist: list._id } },
+        { new: true }
+      )
+      return (list, user) 
     }
   },
 }

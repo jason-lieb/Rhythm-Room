@@ -41,6 +41,7 @@ const typeDefs = gql`
     removeLikedPlaylist( _id: String!, ownerId: String!): Playlist
     addAbout(about: String!, _id: String!): User
     addPic(profilePic: String!, _id: String!): User
+    removePlaylist( _id: String!, ownerId: String!): Playlist
   }
 `
 
