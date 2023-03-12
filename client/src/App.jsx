@@ -18,7 +18,6 @@ const client = new ApolloClient({
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
-
   return (
     <ApolloProvider client={client}>
       <Router>
