@@ -1,9 +1,9 @@
 // importing in stylings, router routes, and the components
 import './App.css'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { SpotifyApiContext } from './utils/SpotifyApiContext'
+import { useSpotifyApi } from './utils/SpotifyApiContext'
 import useSpotifyAuth from './utils/useSpotifyAuth'
 import Spotify from 'spotify-web-api-js'
 
@@ -21,29 +21,26 @@ const client = new ApolloClient({
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
-  const [SpotifyApi, setSpotifyApi] = useContext(SpotifyApiContext)
+  const [, setSpotifyApi] = useSpotifyApi()
 
   useEffect(() => {
     if (!accessToken) return
-    const spotify = new Spotify()
-    spotify.setAccessToken(accessToken)
-    setSpotifyApi(spotify)
-  }, [accessToken])
+    const newSpotifyState = new Spotify()
+    newSpotifyState.setAccessToken(accessToken)
+    setSpotifyApi(newSpotifyState)
+  }, [accessToken, setSpotifyApi])
 
-  if (SpotifyApi) console.log(SpotifyApi)
   return (
     <ApolloProvider client={client}>
-      <SpotifyApiContext>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Discover />} />
-            <Route path="/profile/:profileId" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/Playlist/:playlistId" element={<Playlist />} />
-          </Routes>
-        </Router>
-        <Footer />
-      </SpotifyApiContext>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Discover />} />
+          <Route path="/profile/:profileId" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/Playlist/:playlistId" element={<Playlist />} />
+        </Routes>
+      </Router>
+      <Footer />
     </ApolloProvider>
   )
 }

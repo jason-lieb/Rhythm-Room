@@ -1,14 +1,19 @@
 // import { useContext } from 'react'
-// import { SpotifyApiContext } from '../../utils/SpotifyApiContext'
 import AllPlayLists from '../AllPlayLists'
-// import LoginSpotify from '../LoginSpotify'
+import LoginSpotify from '../LoginSpotify'
 import Search from '../Search'
 
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
+
 function Discover() {
-  // const [spotifyApi] = useContext(SpotifyApiContext)
+  const [spotifyApi] = useSpotifyApi()
   return (
     <div className="List-of-all-playlists">
-      {/* {accessToken ? <p>Logged In to Spotify</p> : <LoginSpotify />} */}
+      {spotifyApi.getAccessToken() ? (
+        <p>Logged In to Spotify</p>
+      ) : (
+        <LoginSpotify />
+      )}
       <Search />
       <AllPlayLists />
     </div>
