@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import ConcertImg from '../../assets/music.jpg';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-
+import { useEffect } from 'react'
 
 const css = `
   .container-box {
@@ -46,6 +46,9 @@ const css = `
 `
 
 export default function Login() {
+  useEffect(() => {
+    document.title = 'Rythm Room - Login'
+  }, [])
   return (
     <div className='container-box'>
       <style type = "text/css">{css}</style>
