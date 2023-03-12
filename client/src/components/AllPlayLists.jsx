@@ -21,7 +21,7 @@ export default function AllPlayLists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
   const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
   const playlists = data?.playlists || []
-  // console.log(playlists, loading)
+  console.log(playlists)
   return (
     <>
       <CssBaseline />

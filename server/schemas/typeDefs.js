@@ -4,8 +4,11 @@ const typeDefs = gql`
   type Playlist {
     _id: ID!
     name: String
-    genres: String
     owner: String
+    genres: String
+    playlistId: String
+    description: String
+    images: String
     comments: [Comment]
   }
 

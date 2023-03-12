@@ -9,7 +9,7 @@ function Discover({ accessToken }) {
   }, [])
   return (
     <div className="List-of-all-playlists" style={{ backgroundColor: '#242038' }}>
-      {accessToken ? <p>Logged In to Spotify</p> : <LoginSpotify />}
+      {accessToken ? <p style={{ color: 'white', padding: '0px', margin: 0}}>Logged In to Spotify</p> : <LoginSpotify />}
       <SearchBar accessToken={accessToken} />
       <AllPlayLists />
     </div>
