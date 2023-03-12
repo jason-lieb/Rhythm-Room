@@ -1,4 +1,4 @@
-// impoting in stylings, router routes, and the components
+// importing in stylings, router routes, and the components
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
@@ -6,7 +6,7 @@ import Discover from './components/pages/Discover'
 import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
 
 import useSpotifyAuth from './utils/useSpotifyAuth'
 
@@ -35,7 +35,7 @@ function App() {
           />
         </Routes>
       </Router>
-      {/* <Footer /> */}
+      <Footer />
     </ApolloProvider>
   )
 }
