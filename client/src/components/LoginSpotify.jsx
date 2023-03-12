@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import generateRandomString from '../utils/generateRandomString'
 
 export default function LoginSpotify() {
@@ -15,5 +16,9 @@ export default function LoginSpotify() {
     window.location.href = AUTH_URL
   }
 
-  return <button onClick={loginSpotify}>Connect to Spotify</button>
+  return (
+    <Button size="small" onClick={loginSpotify}>
+      Connect Your Spotify Account
+    </Button>
+  )
 }

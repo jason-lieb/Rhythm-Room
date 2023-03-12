@@ -1,52 +1,82 @@
 [
   {
-    "username": "Brian Kernighan",
+    "username": "Sarah Johnson",
     "email": "bkernighan@techfriends.dev",
-    "password": "password01"
+    "password": "password01",
+    "about": "Hey there! I'm Sarah, a 24-year-old pop music fanatic from California. I love nothing more than singing along to Taylor Swift and Ariana Grande in my car. When I'm not listening to music, you can find me at the beach or trying out new restaurants with my friends.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Max Kanat-Alexander",
+    "username": "Michael Lee",
     "email": "mkanatalexander@techfriends.dev",
-    "password": "password02"
+    "password": "password02",
+    "about": "Yo, what's up? My name is Michael and I'm a 32-year-old hip hop head from New York City. I can't get enough of Kendrick Lamar and J. Cole - their lyrics are always on point. When I'm not bumping beats, I'm usually hitting the basketball court or catching up on my favorite shows.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Why The Lucky Stiff",
+    "username": "Emily Chen",
     "email": "wtls@techfriends.dev",
-    "password": "password03"
+    "password": "password03",
+    "about": "I'm Emily, a 19-year-old K-pop fan from Seoul, South Korea. I'm obsessed with BTS and BLACKPINK - their music and choreography are just amazing. When I'm not dancing to K-pop, you can find me studying for my exams or hanging out with my friends.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Kent Beck",
+    "username": "Alex Wong",
     "email": "kbeck@techfriends.dev",
-    "password": "password04"
+    "password": "password04",
+    "about": "Greetings! I'm Alex, a 45-year-old classic rock enthusiast from London, England. Led Zeppelin and Pink Floyd are my jam - their music is timeless. When I'm not rocking out, I'm usually exploring art galleries or sipping on some tea.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Edward V. Berard",
+    "username": "Ashley Kim",
     "email": "evberard@techfriends.dev",
-    "password": "password05"
+    "password": "password05",
+    "about": "Hey, I'm Ashley! I'm a 28-year-old indie pop lover from Los Angeles. Vampire Weekend and Tame Impala are my favorite bands - their music is so unique and catchy. When I'm not listening to music, you can find me hiking in the mountains or trying out new coffee shops.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Alan Kay",
+    "username": "Junstin Rodriguez",
     "email": "akay@techfriends.dev",
-    "password": "password06"
+    "password": "password06",
+    "about": "What's good? I'm Justin, a 22-year-old EDM fanatic from Miami. I can't get enough of Calvin Harris and The Chainsmokers - their beats always get me hyped. When I'm not partying, I'm usually at the gym or playing video games.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "C.A.R. Hoare",
+    "username": "Samantha Liu",
     "email": "choare@techfriends.dev",
-    "password": "password07"
+    "password": "password07",
+    "about": "Hi there! I'm Samantha, a 31-year-old country music lover from Nashville. Miranda Lambert and Luke Bryan are my go-to artists - their lyrics speak to me on a personal level. When I'm not listening to music, you can find me riding horses or cooking up a storm in the kitchen.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "David Thomas",
+    "username": "David Chen",
     "email": "dthomas@techfriends.dev",
-    "password": "password08"
+    "password": "password08",
+    "about": "Salutations! I'm David, a 40-year-old jazz aficionado from New Orleans. Miles Davis and John Coltrane are my heroes - their improvisation skills are out of this world. When I'm not listening to music, you can find me playing chess or practicing my trumpet.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Donald Knuth",
+    "username": "Laura Johnson",
     "email": "dknuth@techfriends.dev",
-    "password": "password09"
+    "password": "password09",
+    "about": "Hey, I'm Laura! I'm a 26-year-old R&B lover from Atlanta. Beyoncé and Frank Ocean are my favorite artists - their voices are so soulful. When I'm not listening to music, you can find me doing yoga or writing in my journal.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   },
   {
-    "username": "Lernantino",
+    "username": "Eric Kim",
     "email": "lernantino@techfriends.dev",
-    "password": "password10"
+    "password": "password10",
+    "about": "What's up? I'm Eric, a 36-year-old heavy metal head from Chicago. Metallica and Slayer are my top bands - their riffs are so powerful. When I'm not headbanging, you can find me watching horror movies or playing with my dog.",
+    "createdplaylist": [""],
+    "likedplaylist": [""]
   }
 ]

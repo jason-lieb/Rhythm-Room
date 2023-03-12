@@ -9,7 +9,7 @@ const playlistSchema = new Schema({
     type: String,
   },
   images: [{
-    type: Array,
+    type: Object,
   }],
   name: {
     type: String,

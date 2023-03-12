@@ -1,6 +1,6 @@
 // import { useEffect } from 'react'
 
-export default function Playlist({ accessToken }) {
+export default function Playlist() {
   // useEffect(() => {
   //   if (!accessToken) return
   //   spotifyApi.setAccessToken(accessToken)
