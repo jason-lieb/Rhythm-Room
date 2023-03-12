@@ -1,14 +1,17 @@
 // importing in stylings, router routes, and the components
 import './App.css'
+import { useContext, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { SpotifyApiContext } from './utils/SpotifyApiContext'
+import useSpotifyAuth from './utils/useSpotifyAuth'
+import Spotify from 'spotify-web-api-js'
+
 import Discover from './components/pages/Discover'
 import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
-
-import useSpotifyAuth from './utils/useSpotifyAuth'
 
 const client = new ApolloClient({
   uri: 'http://localhost:5500/graphql',
@@ -18,24 +21,29 @@ const client = new ApolloClient({
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
+  const [SpotifyApi, setSpotifyApi] = useContext(SpotifyApiContext)
 
+  useEffect(() => {
+    if (!accessToken) return
+    const spotify = new Spotify()
+    spotify.setAccessToken(accessToken)
+    setSpotifyApi(spotify)
+  }, [accessToken])
+
+  if (SpotifyApi) console.log(SpotifyApi)
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Discover accessToken={accessToken} />} />
-          <Route
-            path="/profile/:profileId"
-            element={<Profile accessToken={accessToken} />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/Playlist/:playlistId"
-            element={<Playlist accessToken={accessToken} />}
-          />
-        </Routes>
-      </Router>
-      <Footer />
+      <SpotifyApiContext>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Discover />} />
+            <Route path="/profile/:profileId" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Playlist/:playlistId" element={<Playlist />} />
+          </Routes>
+        </Router>
+        <Footer />
+      </SpotifyApiContext>
     </ApolloProvider>
   )
 }

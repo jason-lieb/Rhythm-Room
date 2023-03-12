@@ -46,7 +46,6 @@ function Profile() {
   return (
     <div>
       <>
-        <LoginSpotify />
         <style type="text/css">{css}</style>
         <Container maxWidth="lg" id="main-container">
           <Grid item xs={6} id="userinfo">
@@ -58,9 +57,7 @@ function Profile() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <a href={AUTH_URL}>
-                  <Button size="small">Connect your Spotify Account</Button>
-                </a>
+                <LoginSpotify />
               </CardActions>
               <CardContent>
                 <Typography variant="h5">About Me</Typography>
