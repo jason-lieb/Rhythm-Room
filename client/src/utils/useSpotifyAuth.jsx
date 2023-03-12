@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import SpotifyWebApi from 'spotify-web-api-node'
 
 export default function useSpotifyAuth(code) {
-  const spotifyApi = new SpotifyWebApi({
-    clientId: '538c7cde1253426896361ee2d3a79d9f',
-  })
-
   const [accessToken, setAccessToken] = useState()
   const [refreshToken, setRefreshToken] = useState()
   const [expiresIn, setExpiresIn] = useState()
 
   useEffect(() => {
+    if (!code) return
     axios
       .post('http://localhost:5500/api/auth/login', { code })
       .then((res) => {
@@ -32,6 +28,7 @@ export default function useSpotifyAuth(code) {
       axios
         .post('http://localhost:5500/api/auth/refresh', { refreshToken })
         .then((res) => {
+          console.log('res.data', res.data)
           setAccessToken(res.data.accessToken)
           setExpiresIn(res.data.expiresIn)
         })
@@ -42,6 +39,5 @@ export default function useSpotifyAuth(code) {
 
     return () => clearInterval(interval)
   }, [refreshToken, expiresIn])
-
-  return { accessToken, spotifyApi }
+  return accessToken
 }

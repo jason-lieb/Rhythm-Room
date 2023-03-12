@@ -3,11 +3,9 @@ const { ApolloServer } = require('apollo-server-express')
 const path = require('path')
 const db = require('./config/connection')
 const routes = require('./routes')
-
-// const SpotifyWebApi = require('spotify-web-api-node')
 const cors = require('cors')
 
-require('dotenv').config()
+// require('dotenv').config()
 
 const { typeDefs, resolvers } = require('./schemas')
 
@@ -38,12 +36,12 @@ app.get('/', (req, res) => {
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start()
   server.applyMiddleware({ app })
-db.once('open', () => {
-app.listen(PORT, () => {
-  console.log(`Server running on port:${PORT}`)
-  console.log(`GraphQL server running on port:${PORT}${server.graphqlPath}`)
-})
-})
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port:${PORT}`)
+      console.log(`GraphQL server running on port:${PORT}${server.graphqlPath}`)
+    })
+  })
 }
 
 startApolloServer(typeDefs, resolvers)
