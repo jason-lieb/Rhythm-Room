@@ -85,21 +85,26 @@ query Users($playlistId: String) {
 `
 // queries all playlists
 export const QUERY_ALL_PLAYLISTS = gql`
-query Playlists {
+  query Playlists {
     playlists {
-    name
-    _id
-    genres
-    comments {
+      name
+      _id
+      genres
+      comments {
         createdAt
         commentText
         commentAuthor
         _id
+      }
+      description
+      playlistId
+      owner {
+        display_name
+        href
+      }
+      images {
+        url
+      }
     }
-    description
-    playlistId
-    owner
-    images
-    }
-}
+  }
 `
