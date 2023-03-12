@@ -31,7 +31,6 @@ export default function AllPlayLists() {
             bgcolor: 'rgb(224,224,224, 0.2)',
             height: '100vh',
             width: '100%',
-            overflowY: 'scroll',
           }}
         >
           <ImageList variant="masonry" cols={3} gap={7}>
@@ -39,8 +38,8 @@ export default function AllPlayLists() {
             {!loading ? (
               playlists.map((info) => {
                 return (
-                  <ImageListItem key={info._id}>
-                    <Item>
+                  <ImageListItem key={info._id} >
+                    <Item style={{ backgroundColor: '#8d86c9' }}>
                       <PlaylistCard props={info} />
                     </Item>
                   </ImageListItem>
