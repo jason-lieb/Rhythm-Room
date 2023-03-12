@@ -33,6 +33,9 @@ function App() {
             path="/Playlist/:playlistId"
             element={<Playlist accessToken={accessToken} />}
           />
+          <Route path= "/Profile"
+          element={<Profile/>}
+          />
         </Routes>
       </Router>
       {/* <Footer /> */}
