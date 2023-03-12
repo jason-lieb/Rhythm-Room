@@ -21,7 +21,7 @@ export default function AllPlayLists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
   const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
   const playlists = data?.playlists || []
-  console.log(playlists)
+  // console.log(playlists)
   return (
     <>
       <CssBaseline />
@@ -38,7 +38,7 @@ export default function AllPlayLists() {
             {!loading ? (
               playlists.map((info) => {
                 return (
-                  <ImageListItem key={info._id} >
+                  <ImageListItem key={info._id}>
                     <Item style={{ backgroundColor: '#8d86c9' }}>
                       <PlaylistCard props={info} />
                     </Item>

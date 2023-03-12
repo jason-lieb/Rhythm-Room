@@ -1,16 +1,24 @@
+// import { useContext } from 'react'
 import AllPlayLists from '../AllPlayLists'
 import LoginSpotify from '../LoginSpotify'
-import SearchBar from '../Search'
+import Search from '../Search'
 import { useEffect } from 'react'
-function Discover({ accessToken }) {
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
+
+function Discover() {
   // Changes the little tab name at the top of the browser
   useEffect(() => {
     document.title = 'Rythm Room - Discover'
   }, [])
+  const [spotifyApi] = useSpotifyApi()
   return (
-    <div className="List-of-all-playlists" style={{ backgroundColor: '#242038' }}>
-      {accessToken ? <p style={{ color: 'white', padding: '0px', margin: 0}}>Logged In to Spotify</p> : <LoginSpotify />}
-      <SearchBar accessToken={accessToken} />
+    <div className="List-of-all-playlists">
+      {spotifyApi.getAccessToken() ? (
+        <p>Logged In to Spotify</p>
+      ) : (
+        <LoginSpotify />
+      )}
+      <Search />
       <AllPlayLists />
     </div>
   )
