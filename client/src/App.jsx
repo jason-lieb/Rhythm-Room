@@ -37,7 +37,13 @@ function App() {
           <Route path="/" element={<Discover />} />
           <Route path="/profile/:profileId" element={<Profile />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/Playlist/:playlistId" element={<Playlist />} />
+          <Route
+            path="/Playlist/:playlistId"
+            element={<Playlist accessToken={accessToken} />}
+          />
+          <Route path= "/Profile"
+          element={<Profile/>}
+          />
         </Routes>
       </Router>
       <Footer />
