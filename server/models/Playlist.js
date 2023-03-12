@@ -2,9 +2,15 @@ const { Schema, model, SchemaType } = require('mongoose')
 
 const playlistSchema = new Schema({
   playlistId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
+  description: {
+    type: String,
+  },
+  images: [{
+    type: Array,
+  }],
   name: {
     type: String,
   },
@@ -12,7 +18,7 @@ const playlistSchema = new Schema({
     type: String,
   },
   owner: {
-    type: String,
+    type: Object,
   },
   comments: [
     {

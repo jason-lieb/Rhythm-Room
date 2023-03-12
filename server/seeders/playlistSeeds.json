@@ -1,0 +1,226 @@
+[
+  {
+    "description": "Nighttime is the right time for these party hits!",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWXi7h4mmmkzD"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXi7h4mmmkzD",
+    "playlistId": "37i9dQZF1DWXi7h4mmmkzD",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799",
+        "width": null
+      }
+    ],
+    "name": "Country Nights",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "Calm piano music for sleeping.",
+    "playlistId": "37i9dQZF1DX03b46zi3S82",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003df3ed0d891ac979568452312",
+        "width": null
+      }
+    ],
+    "name": "Sleepy Piano",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "The best in new & current Dancehall. Cover: Moyann",
+    "playlistId": "37i9dQZF1DXan38dNVDdl4",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f0000000348d51f8642e60b249c001df2",
+        "width": null
+      }
+    ],
+    "name": "Dancehall Official",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "sparkling, shimmery synth pop ✨",
+    "playlistId": "37i9dQZF1DXbcP8BbYEQaO",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003d4c392652a93ac073f357e08",
+        "width": null
+      }
+    ],
+    "name": "night pop",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "Just vibes. Cover: Chris Wendell",
+    "playlistId": "37i9dQZF1DWT34oeYRnJ0R",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003981116c8de485bab2e980616",
+        "width": null
+      }
+    ],
+    "name": "Vibras",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "Welcome to the dark side of the club.",
+    "playlistId": "37i9dQZF1DX6J5NfMJS675",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f000000038103cb15cc2d6cfb861312fa",
+        "width": null
+      }
+    ],
+    "name": "Techno Bunker",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "Ambient drone to make you feel weightless.",
+    "playlistId": "37i9dQZF1DX1n9whBbBKoL",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003293f5bac477b87de316e75aa",
+        "width": null
+      }
+    ],
+    "name": "Floating Through Space",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "slow burners for late nights",
+    "playlistId": "37i9dQZF1DXdQvOLqzNHSW",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f000000033df638bf5c33922ceb4c185a",
+        "width": null
+      }
+    ],
+    "name": "late night vibes",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "Moody beats for sleepless nights.",
+    "playlistId": "37i9dQZF1DXdipfKDeMPTE",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003218b8e12a311a9bc16114d2c",
+        "width": null
+      }
+    ],
+    "name": "Late Night Beats",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  },
+  {
+    "description": "Silky sounds for the sheets.",
+    "playlistId": "37i9dQZF1DWVGy1YP1ojM5",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f00000003871ab3b0849a1ec9a37e0c20",
+        "width": null
+      }
+    ],
+    "name": "Silk Sheets",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    }
+  }
+]
