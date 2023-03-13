@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
 import { useQuery } from '@apollo/client'
+import { Link } from 'react-router-dom'
 import { QUERY_ALL_PLAYLISTS } from '../utils/queries'
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -23,34 +24,30 @@ export default function AllPlayLists() {
   const playlists = data?.playlists || []
   // console.log(playlists)
   return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            bgcolor: 'rgb(224,224,224, 0.2)',
-            height: '100vh',
-            width: '100%',
-          }}
-        >
-          <ImageList variant="masonry" cols={3} gap={7}>
+          <ImageList cols={3} gap={8} sx={{ padding: '10px'}}>
             {/* mapped to show all of the playlists */}
             {!loading ? (
               playlists.map((info) => {
                 return (
-                  <ImageListItem key={info._id}>
-                    <Item style={{ backgroundColor: '#8d86c9' }}>
-                      <PlaylistCard props={info} />
-                    </Item>
-                  </ImageListItem>
+                    <Link key={info._id} to={`/Playlist/${info._id}`}>
+                    <ImageListItem>
+                      {/* <Item style={{ backgroundColor: '#8d86c9', height: '250px' }}> */}
+                        {/* <PlaylistCard props={info} /> */}
+                      {/* </Item> */}
+                      <img
+                      src={`${info.images[0].url}?w=248&fit=crop&auto=format`}
+                      srcSet={`${info.images[0].url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                      alt='as'
+                      loading="lazy"
+                      style={{ minHeight: 10 }}
+                      />
+                    </ImageListItem>
+                    </Link>
                 )
               })
             ) : (
               <div>Loading...</div>
             )}
           </ImageList>
-        </Box>
-      </Container>
-    </>
   )
 }
