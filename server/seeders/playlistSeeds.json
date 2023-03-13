@@ -1,19 +1,20 @@
 [
   {
-    "description": "Nighttime is the right time for these party hits!",
+    "collaborative": false,
+    "description": "Unwind and let the afternoon unfold.",
     "external_urls": {
-      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWXi7h4mmmkzD"
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX4E3UdUs7fUx"
     },
-    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXi7h4mmmkzD",
-    "playlistId": "37i9dQZF1DWXi7h4mmmkzD",
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX4E3UdUs7fUx",
+    "playlistId": "37i9dQZF1DX4E3UdUs7fUx",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799",
+        "url": "https://i.scdn.co/image/ab67706f000000031cb21db1932b5c9139bbf136",
         "width": null
       }
     ],
-    "name": "Country Nights",
+    "name": "Afternoon Acoustic",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -23,19 +24,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3NjAwNTIwMCwwMDAwMDAwMDg1OGQ0OGQ1ZmE1NmE4YWI1OTg1MzAwYTlkNTY3N2Jm",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX4E3UdUs7fUx/tracks",
+      "total": 100
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX4E3UdUs7fUx"
   },
   {
-    "description": "Calm piano music for sleeping.",
-    "playlistId": "37i9dQZF1DX03b46zi3S82",
+    "collaborative": false,
+    "description": "Recent hits and new songs from your fave artists. Cover: Lauren Daigle",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX0b1hHYQtJjp"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0b1hHYQtJjp",
+    "playlistId": "37i9dQZF1DX0b1hHYQtJjp",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003df3ed0d891ac979568452312",
+        "url": "https://i.scdn.co/image/ab67706f000000036ea7e964f74fae2235fc0509",
         "width": null
       }
     ],
-    "name": "Sleepy Piano",
+    "name": "Just Good Music",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -45,19 +60,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODU2OTQ3MSwwMDAwMDAwMGRlOTk0YTJjN2M4ZjE3OTVhYjkwMDAyZWM4ZTI5YTZi",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0b1hHYQtJjp/tracks",
+      "total": 80
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX0b1hHYQtJjp"
   },
   {
-    "description": "The best in new & current Dancehall. Cover: Moyann",
-    "playlistId": "37i9dQZF1DXan38dNVDdl4",
+    "collaborative": false,
+    "description": "A new shade of Country. Cover: Lainey Wilson",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWUgBy0IJPlHq"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUgBy0IJPlHq",
+    "playlistId": "37i9dQZF1DWUgBy0IJPlHq",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f0000000348d51f8642e60b249c001df2",
+        "url": "https://i.scdn.co/image/ab67706f0000000363af271f98024e262d364962",
         "width": null
       }
     ],
-    "name": "Dancehall Official",
+    "name": "Indigo",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -67,19 +96,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQyNDQwMCwwMDAwMDAwMDdlY2QxNDFiNjcwOWU3OTE2YWM2YWEyYmE3MDM5NzJj",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUgBy0IJPlHq/tracks",
+      "total": 101
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWUgBy0IJPlHq"
   },
   {
-    "description": "sparkling, shimmery synth pop ✨",
-    "playlistId": "37i9dQZF1DXbcP8BbYEQaO",
+    "collaborative": false,
+    "description": "The best uptempo pop for the workout girlies",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX5gQonLbZD9s"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5gQonLbZD9s",
+    "playlistId": "37i9dQZF1DX5gQonLbZD9s",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003d4c392652a93ac073f357e08",
+        "url": "https://i.scdn.co/image/ab67706f000000033915bd8f9fccdc60c899c8f1",
         "width": null
       }
     ],
-    "name": "night pop",
+    "name": "Pumped Pop",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -89,19 +132,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQyNDQwMCwwMDAwMDAwMGI3NzliNDc1ODBhZDA3MmQ4ODY0NDZhM2ZhZjk3ODBk",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5gQonLbZD9s/tracks",
+      "total": 75
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX5gQonLbZD9s"
   },
   {
-    "description": "Just vibes. Cover: Chris Wendell",
-    "playlistId": "37i9dQZF1DWT34oeYRnJ0R",
+    "collaborative": false,
+    "description": "Classical tunes to make you feel good. ",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX5Lm1ZiObdc3"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5Lm1ZiObdc3",
+    "playlistId": "37i9dQZF1DX5Lm1ZiObdc3",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003981116c8de485bab2e980616",
+        "url": "https://i.scdn.co/image/ab67706f000000032006c28bcecfda6c7495afa2",
         "width": null
       }
     ],
-    "name": "Vibras",
+    "name": "Feel Good Classical",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -111,19 +168,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQ0NTcwMCwwMDAwMDAwMDkxZWZlZjM4NjI2OGQ4ZjY4ZDIyN2Y3MGQyNTY4OGYz",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5Lm1ZiObdc3/tracks",
+      "total": 46
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX5Lm1ZiObdc3"
   },
   {
-    "description": "Welcome to the dark side of the club.",
-    "playlistId": "37i9dQZF1DX6J5NfMJS675",
+    "collaborative": false,
+    "description": "Rock legends & epic songs that continue to inspire generations. Cover: Queen",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWXRqgorJj26U"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXRqgorJj26U",
+    "playlistId": "37i9dQZF1DWXRqgorJj26U",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f000000038103cb15cc2d6cfb861312fa",
+        "url": "https://i.scdn.co/image/ab67706f000000035e81461d7898c4309ef0e02d",
         "width": null
       }
     ],
-    "name": "Techno Bunker",
+    "name": "Rock Classics",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -133,19 +204,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQyNDQ2MCwwMDAwMDAwMGMwZjBjOGZiMGQ1NDc1Yzc5Njk4OGZiZTk1ZTdmYzZm",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXRqgorJj26U/tracks",
+      "total": 165
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWXRqgorJj26U"
   },
   {
-    "description": "Ambient drone to make you feel weightless.",
-    "playlistId": "37i9dQZF1DX1n9whBbBKoL",
+    "collaborative": false,
+    "description": "Calm your mind with gentle piano and ambient music.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWXe9gFZP0gtP"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXe9gFZP0gtP",
+    "playlistId": "37i9dQZF1DWXe9gFZP0gtP",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003293f5bac477b87de316e75aa",
+        "url": "https://i.scdn.co/image/ab67706f00000003468762ec9fd93a2dc3b167ee",
         "width": null
       }
     ],
-    "name": "Floating Through Space",
+    "name": "Stress Relief",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -155,19 +240,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQwNjQ2MCwwMDAwMDAwMDBmMzcyZThiOWNmZWRlMjk0MzIxMDlhMjA0ZmMwMjA3",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWXe9gFZP0gtP/tracks",
+      "total": 211
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWXe9gFZP0gtP"
   },
   {
-    "description": "slow burners for late nights",
-    "playlistId": "37i9dQZF1DXdQvOLqzNHSW",
+    "collaborative": false,
+    "description": "The original chill instrumental beats playlist.",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX0SM0LYsmbMT"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0SM0LYsmbMT",
+    "playlistId": "37i9dQZF1DX0SM0LYsmbMT",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f000000033df638bf5c33922ceb4c185a",
+        "url": "https://i.scdn.co/image/ab67706f000000035ea54b91b073c2776b966e7b",
         "width": null
       }
     ],
-    "name": "late night vibes",
+    "name": "Jazz Vibes",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -177,19 +276,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQwMjgwMCwwMDAwMDAwMGM0Y2FlMzA2NTFiZjc0MmU1Yzc1N2ZjY2Q4OWM2ZDNi",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0SM0LYsmbMT/tracks",
+      "total": 300
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX0SM0LYsmbMT"
   },
   {
-    "description": "Moody beats for sleepless nights.",
-    "playlistId": "37i9dQZF1DXdipfKDeMPTE",
+    "collaborative": false,
+    "description": "The best of today's funk. Cover: Adi Oasis",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWZgauS5j6pMv"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWZgauS5j6pMv",
+    "playlistId": "37i9dQZF1DWZgauS5j6pMv",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003218b8e12a311a9bc16114d2c",
+        "url": "https://i.scdn.co/image/ab67706f0000000313ae84bfe0405a096765346b",
         "width": null
       }
     ],
-    "name": "Late Night Beats",
+    "name": "Nu-Funk",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -199,19 +312,33 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODQyNDQ2MCwwMDAwMDAwMDc0YmMyNzVlNDcwZTY1MTMxMjQyZjgwOGEwZjVkNWYx",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWZgauS5j6pMv/tracks",
+      "total": 101
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWZgauS5j6pMv"
   },
   {
-    "description": "Silky sounds for the sheets.",
-    "playlistId": "37i9dQZF1DWVGy1YP1ojM5",
+    "collaborative": false,
+    "description": "Discover your favorite new chill pop songs. Cover: Alexander Stewart ",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX5CdVP4rz81C"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5CdVP4rz81C",
+    "playlistId": "37i9dQZF1DX5CdVP4rz81C",
     "images": [
       {
         "height": null,
-        "url": "https://i.scdn.co/image/ab67706f00000003871ab3b0849a1ec9a37e0c20",
+        "url": "https://i.scdn.co/image/ab67706f0000000340d4a73ecc5a5dda95a51c94",
         "width": null
       }
     ],
-    "name": "Silk Sheets",
+    "name": "Fresh & Chill",
     "owner": {
       "display_name": "Spotify",
       "external_urls": {
@@ -221,6 +348,15 @@
       "id": "spotify",
       "type": "user",
       "uri": "spotify:user:spotify"
-    }
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTY3ODIyMjAyMSwwMDAwMDAwMDA0YTgxYTRlZTc2ZWI1YzEwMmI3NGIzNTU1NzMxZDI1",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5CdVP4rz81C/tracks",
+      "total": 100
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX5CdVP4rz81C"
   }
 ]

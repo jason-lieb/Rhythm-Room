@@ -3,7 +3,7 @@ const { Comment, Playlist, User } = require ('../models');
 
 const resolvers = {
   Query: {
-      playlists: async () => Playlist.find().populate('owner'),
+      playlists: async () => Playlist.find().populate(['owner','items']),
       playlist: async (parent, { id }, context) => {
         const playlist = await Playlist.findById(id) //.populate(['comment']) add this back when we start doign comments
         return playlist 

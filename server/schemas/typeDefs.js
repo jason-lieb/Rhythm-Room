@@ -4,11 +4,13 @@ const typeDefs = gql`
   type Playlist {
     _id: ID!
     name: String
-    owner: Owner 
+    owner: Owner
     genres: String
     playlistId: String
     description: String
     images: [Image]
+    tracks: Track
+    items: [Item]
     comments: [Comment]
   }
 
@@ -19,6 +21,18 @@ const typeDefs = gql`
 
   type Image {
     url: String
+  }
+
+  type Track {
+    href: String
+    total: Int
+  }
+
+  type Item {
+    trackId: String
+    name: String
+    artist: [String]
+    duration_ms: Int
   }
 
   type Comment {
@@ -47,17 +61,15 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser( username: String!, email: String!, password: String!): User
-    addPlaylist( name: String!, _id: String!, owner: String!): Playlist
-    addLikedPlaylist( _id: String!, ownerId: String!): Playlist
-    removeLikedPlaylist( _id: String!, ownerId: String!): Playlist
+    addUser(username: String!, email: String!, password: String!): User
+    addPlaylist(name: String!, _id: String!, owner: String!): Playlist
+    addLikedPlaylist(_id: String!, ownerId: String!): Playlist
+    removeLikedPlaylist(_id: String!, ownerId: String!): Playlist
     addAbout(about: String!, _id: String!): User
     addPic(profilePic: String!, _id: String!): User
-    removePlaylist( _id: String!, ownerId: String!): Playlist
+    removePlaylist(_id: String!, ownerId: String!): Playlist
     login(email: String!, password: String!): User
   }
 `
-
-
 
 module.exports = typeDefs
