@@ -13,6 +13,8 @@ import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
 
+import LoginProvider from './utils/LoginContext'
+
 const client = new ApolloClient({
   uri: 'http://localhost:5500/graphql',
   cache: new InMemoryCache(),
@@ -32,21 +34,23 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Discover />} />
-          <Route path="/profile/:profileId" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/Playlist/:playlistId"
-            element={<Playlist accessToken={accessToken} />}
-          />
-          <Route path= "/Profile"
-          element={<Profile/>}
-          />
-        </Routes>
-      </Router>
-      <Footer />
+      <LoginProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Discover />} />
+            <Route path="/profile/:profileId" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/Playlist/:playlistId"
+              element={<Playlist accessToken={accessToken} />}
+            />
+            <Route path= "/Profile"
+            element={<Profile/>}
+            />
+          </Routes>
+        </Router>
+        <Footer />
+      </LoginProvider>
     </ApolloProvider>
   )
 }

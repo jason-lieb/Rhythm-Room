@@ -8,8 +8,10 @@ import Typography from '@mui/material/Typography';
 import ConcertImg from '../../assets/music.jpg';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useEffect } from 'react'
-
+import { useState, useEffect } from 'react'
+import { USER_LOGIN } from '../../utils/mutations'
+import { useMutation } from '@apollo/client';
+import { useLogin } from '../../utils/LoginContext'
 const css = `
   .container-box {
     display: flex;
@@ -46,6 +48,27 @@ const css = `
 `
 
 export default function Login() {
+  const{ sessionId, toggleSession } = useLogin()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [login, { error }] = useMutation(USER_LOGIN);
+  const handleEmailChange = (event) => {
+    const { name, value } = event.target;
+    setEmail(value);
+  };
+  const handlePassChange = (event) => {
+    const { name, value } = event.target;
+    setPassword(value);
+  };
+  const buttonClick = async (event) => {
+    console.log('button works')
+    console.log(email, password);
+    const { data } = await login({
+      variables: { email: email, password: password }
+    })
+    setEmail('')
+    setPassword('')
+  }
   useEffect(() => {
     document.title = 'Rythm Room - Login'
   }, [])
@@ -76,7 +99,7 @@ export default function Login() {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" className = "text-field" label="Username" variant="outlined" />
+          <TextField onChange={handleEmailChange} value={email} id="outlined-basic" className = "text-field" label="email" variant="outlined" />
         </Box>
         <Box
           component="form"
@@ -86,10 +109,10 @@ export default function Login() {
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" className='text-field' label="Password" variant="outlined" />
+          <TextField onChange={handlePassChange} value={password} id="outlined-basic" className='text-field' label="Password" variant="outlined" />
         </Box>
           <div>
-            <Button className='button' size="small">Login</Button>
+            <Button onClick={buttonClick} className='button' size="small">Login</Button>
             <Button className='button'size="small">Sign Up</Button>
           </div>
         </CardActions>
