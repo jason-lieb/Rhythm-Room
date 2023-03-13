@@ -40,21 +40,21 @@ export default function ButtonAppBar() {
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <style type = "text/css">{css}</style>
+      <style type="text/css">{css}</style>
       <AppBar position="static">
-        <Toolbar className = 'navbar'>
+        <Toolbar className="navbar">
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Rhythm-Room
+            Rhythm Room
           </Typography>
-          {/* toggle login or logout */}
           {spotifyApi.getAccessToken() ? (
             <p>Logged In to Spotify</p>
           ) : (
-            <LoginSpotify /> && window.location.pathname === '/'
+            <LoginSpotify />
           )}
           <Button color="inherit" onClick={handleDiscover}>
             Discover
           </Button>
+          {/* toggle login or logout */}
           {sessionId ? (
             <>
               <Button color="inherit" onClick={handleProfile}>
