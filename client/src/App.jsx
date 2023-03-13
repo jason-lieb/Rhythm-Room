@@ -7,6 +7,7 @@ import { useSpotifyApi } from './utils/SpotifyApiContext'
 import useSpotifyAuth from './utils/useSpotifyAuth'
 import Spotify from 'spotify-web-api-js'
 
+import Nav from './components/Nav'
 import Discover from './components/pages/Discover'
 import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
@@ -36,6 +37,7 @@ function App() {
     <ApolloProvider client={client}>
       <LoginProvider>
         <Router>
+        <Nav />
           <Routes>
             <Route path="/" element={<Discover />} />
             <Route path="/profile/:profileId" element={<Profile />} />

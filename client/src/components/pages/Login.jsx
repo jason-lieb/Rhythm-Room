@@ -48,7 +48,7 @@ const css = `
 `
 
 export default function Login() {
-  const{ sessionId, toggleSession } = useLogin()
+  const{ sessionId, toggleSession, getUsername } = useLogin()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [login, { error }] = useMutation(USER_LOGIN);
@@ -66,7 +66,9 @@ export default function Login() {
     const { data } = await login({
       variables: { email: email, password: password }
     })
+    console.log(data)
     toggleSession(data.login._id)
+    getUsername(data.login.username)
     setEmail('')
     setPassword('')
   }
