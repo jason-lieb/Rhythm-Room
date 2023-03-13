@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 
 const css = {
-  backgroundColor: 'black',
+  backgroundColor: '#242038',
   padding: '8px',
   borderRadius: '7px',
   width: 100,
@@ -17,7 +17,7 @@ function Footer() {
       sx={{
         width: '100%',
         height: 300,
-        backgroundColor: 'navy',
+        backgroundColor: '#595381',
       }}
     >
       <div
