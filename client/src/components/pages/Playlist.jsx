@@ -9,9 +9,10 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import Song from '../Song'
 import Comment from '../Comment'
 
+import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
-import { QUERY_PLAYLIST } from '../../utils/queries'
-import { useQuery } from '@apollo/client'
+// import { QUERY_PLAYLIST } from '../../utils/queries'
+// import { useQuery } from '@apollo/client'
 
 const css = `
   .playlistContainer {
@@ -42,17 +43,20 @@ const css = `
 
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
-  const playlist = {
-    name: 'Playlist Name',
-    numOfSongs: 100,
-    length: '1 hour, 4 minutes',
-    tracks: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-    comments: [{}, {}, {}, {}],
-  }
-  // const { loading, data } = useQuery(QUERY_PLAYLIST)
+
+  // const { loading, data } = useQuery(QUERY_PLAYLIST, {variables: {playlist_id: ... }})
   // const playlist = data?.playlist || {}
 
   // if (loading) return <div>Loading...</div>
+
+  const playlist = {
+    name: 'Playlist Name',
+    tracks: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+    comments: [{}, {}, {}, {}],
+  }
+  playlist.numOfTracks = playlist.tracks.length
+  playlist.duration = getPlaylistDuration(playlist.tracks)
+
   return (
     <div className="playlistContainer">
       <style type="text/css">{css}</style>
@@ -60,8 +64,11 @@ export default function Playlist() {
         <Grid item xs={12} className="imgContainer">
           <img
             className="img"
-            src="https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799"
-            alt=""
+            src={
+              playlist.images?.url ||
+              'https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799'
+            }
+            alt={`${playlist.name} Playlist`}
           />
         </Grid>
         <Grid item>
@@ -69,7 +76,7 @@ export default function Playlist() {
             {playlist.name}
           </Typography>
           <Typography variant="subtitle1">
-            {playlist.numOfSongs} Songs, {playlist.length}
+            {playlist.numOfTracks} Songs, {playlist.duration}
           </Typography>
         </Grid>
         <Grid item className="actions">
@@ -106,7 +113,7 @@ export default function Playlist() {
             index={index}
             title={song.title}
             artist={song.artist}
-            length={song.length}
+            duration={song.duration}
           />
         ))}
       </Container>

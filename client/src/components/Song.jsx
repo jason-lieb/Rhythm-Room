@@ -19,10 +19,10 @@ const css = `
   }
   `
 
-export default function Song({ index, title, artist, length }) {
+export default function Song({ index, title, artist, duration }) {
   title = title ?? 'title'
   artist = artist ?? 'artist'
-  length = length ?? '3:45'
+  duration = duration ?? '3:45'
   return (
     <Grid container spacing={2} key={index} className="track">
       <style type="text/css">{css}</style>
@@ -40,7 +40,7 @@ export default function Song({ index, title, artist, length }) {
         </Typography>
       </Grid>
       <Grid item xs={1} className="containerDuration">
-        <Typography variant="subtitle1">{length}</Typography>
+        <Typography variant="subtitle1">{duration}</Typography>
       </Grid>
     </Grid>
   )
