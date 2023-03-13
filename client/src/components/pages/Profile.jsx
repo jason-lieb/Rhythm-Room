@@ -14,7 +14,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext'
 import Avatar from '@mui/material/Avatar'
 import { useTheme } from '@mui/material/styles'
 import { useQuery } from '@apollo/client'
-import { QUERY_USER } from '../utils/queries'
+import { QUERY_PLAYLIST, QUERY_USER } from '../../utils/queries'
 import { useParams } from 'react-router-dom'
 
 const css = `
@@ -81,13 +81,17 @@ export default function Login() {
     variables: { userId: profileId },
   })
 
+  const user = data?.user || {}
+
   if (loading) {
     return <div>Loading...</div>
   }
 
   return (
     <div className="container-box">
-      {console.log(data)}
+      {console.log(profileId)}
+      {console.log(loading)}
+      {console.log(user)}
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
