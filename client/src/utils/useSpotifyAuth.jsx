@@ -11,6 +11,7 @@ export default function useSpotifyAuth(code) {
     axios
       .post('http://localhost:5500/api/auth/login', { code })
       .then((res) => {
+        console.log(res.data.accessToken)
         setAccessToken(res.data.accessToken)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)

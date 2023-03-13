@@ -9,6 +9,8 @@ const typeDefs = gql`
     playlistId: String
     description: String
     images: [Image]
+    tracks: Track
+    items: [Item]
     comments: [Comment]
   }
 
@@ -19,6 +21,18 @@ const typeDefs = gql`
 
   type Image {
     url: String
+  }
+
+  type Track {
+    href: String
+    total: Int
+  }
+
+  type Item {
+    trackId: String
+    name: String
+    artist: [String]
+    duration_ms: Int
   }
 
   type Comment {
