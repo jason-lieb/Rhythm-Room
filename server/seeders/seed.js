@@ -11,15 +11,15 @@ db.once('open', async () => {
     await User.create(userSeeds)
 
     for (let i = 0; i < playlistSeed.length; i++) {
-      const { _id, thoughtAuthor } = await Playlist.create(playlistSeed[i])
-      // const user = await User.findOneAndUpdate(
-      //   { username: thoughtAuthor },
-      //   {
-      //     $addToSet: {
-      //       thoughts: _id,
-      //     },
-      //   }
-      // )
+      const { _id} = await Playlist.create(playlistSeed[i])
+      const user = await User.findOneAndUpdate(
+        {},
+        {
+          $addToSet: {
+            likedplaylist: _id,
+          },
+        }
+      )
     }
   } catch (err) {
     console.error(err)

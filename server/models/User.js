@@ -23,10 +23,9 @@ const userSchema = new Schema({
   },
   about: {
     type: String,
-
   },
   profilePic: {
-    type: String
+    type: String,
   },
   createdplaylist: [
     {

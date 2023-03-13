@@ -21,6 +21,8 @@ const client = new ApolloClient({
 function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
+<<<<<<< HEAD
+=======
   const [, setSpotifyApi] = useSpotifyApi()
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function App() {
     setSpotifyApi(newSpotifyState)
   }, [accessToken, setSpotifyApi])
 
+>>>>>>> dcd11b991cc4c2ae36d3bdb332acbfdbac0f3785
   return (
     <ApolloProvider client={client}>
       <Router>
