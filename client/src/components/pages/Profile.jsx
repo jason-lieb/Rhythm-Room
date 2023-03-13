@@ -16,18 +16,19 @@ import { useTheme } from '@mui/material/styles'
 import { useQuery } from '@apollo/client'
 import { QUERY_PLAYLIST, QUERY_USER } from '../../utils/queries'
 import { useParams } from 'react-router-dom'
+import { flexbox } from '@mui/system'
 
 const css = `
   .container-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    // height: 100vh;
     background-color: #242038;
   }
   .card {
-    height: 75vh; 
-    width: 75vh;
+    // height: 75vh; 
+    // width: 75vh;
     background-color: #8d86c9;
     color: white;
     display: flex;
@@ -63,13 +64,13 @@ const css = `
     padding-left: 20px;
   }
   .liked-playlist {
-    width: 35vh;
-    height: 35vh;
+    // width: 35vh;
+    // height: 35vh;
     margin: 15px;
   }
   .created-playlist {
-    width: 35vh;
-    height: 35vh;
+    // width: 35vh;
+    // height: 35vh;
     margin: 15px;
   }
 `
@@ -83,7 +84,18 @@ export default function Login() {
 
   const generateLikedPlaylists = () => {
     return user.likedplaylist.map((playlist) => (
-      <Typography>{playlist.name}</Typography>
+      <Card sx={{ display: 'flex' }}>
+        {console.log(playlist.images[0])}
+        <CardContent>
+          <Typography variant="h5">{playlist.name}</Typography>
+        </CardContent>
+        <CardMedia
+          component="img"
+          sx={{ width: 151 }}
+          image={playlist.images[0].url}
+          alt="Live from space album cover"
+        />
+      </Card>
     ))
   }
 
@@ -95,7 +107,6 @@ export default function Login() {
 
   return (
     <div className="container-box">
-      {console.log(user)}
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
