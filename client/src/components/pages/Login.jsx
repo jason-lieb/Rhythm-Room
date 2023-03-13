@@ -66,6 +66,7 @@ export default function Login() {
     const { data } = await login({
       variables: { email: email, password: password }
     })
+    toggleSession(data.login._id)
     setEmail('')
     setPassword('')
   }
