@@ -81,6 +81,12 @@ export default function Login() {
     variables: { userId: profileId },
   })
 
+  const generateLikedPlaylists = () => {
+    return user.likedplaylist.map((playlist) => (
+      <Typography>{playlist.name}</Typography>
+    ))
+  }
+
   const user = data?.user || {}
   console.log(data)
   if (loading) {
@@ -89,6 +95,7 @@ export default function Login() {
 
   return (
     <div className="container-box">
+      {console.log(user)}
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
@@ -98,7 +105,7 @@ export default function Login() {
               src="/static/images/avatar/1.jpg"
               sx={{ width: 100, height: 100 }}
             />
-            <Typography className="user-name">Name Example</Typography>
+            <Typography className="user-name">{user.username}</Typography>
           </div>
           <CardContent>
             <Typography
@@ -110,70 +117,17 @@ export default function Login() {
               About Me:
             </Typography>
             <Typography className="text" variant="body2" color="text.secondary">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-              expedita facilis consequuntur rerum saepe tenetur eum enim
-              quaerat, eaque assumenda cupiditate fugiat sunt fuga hic vero
-              eligendi suscipit sit qui voluptate magnam. Quos reiciendis
-              praesentium culpa nostrum nulla earum, enim libero aperiam at
-              inventore? Iure quis voluptatem quas deserunt maiores. Cupiditate
-              fugit quod eos magni. Ipsam ad possimus voluptatibus dicta culpa
-              accusantium quam! Repellat ad veniam et alias earum nisi
-              consectetur tempore excepturi sunt, sint, a atque vel blanditiis
-              aspernatur iusto amet ut assumenda? Iure corporis quis sed facilis
-              placeat ab repellat, incidunt vitae esse eius saepe tempore, vel
-              consequuntur?
+              {user.about}
             </Typography>
           </CardContent>
         </div>
         <div className="right-content">
           <Card className="liked-playlist">
-            <Typography>Liked Playlist</Typography>
-            <Card sx={{ display: 'flex' }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <CardContent sx={{ flex: '1 0 auto' }}>
-                  <Typography component="div" variant="h5">
-                    Live From Space
-                  </Typography>
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Mac Miller
-                  </Typography>
-                </CardContent>
-                <Box
-                  sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}
-                >
-                  <IconButton aria-label="previous">
-                    {theme.direction === 'rtl' ? (
-                      <SkipNextIcon />
-                    ) : (
-                      <SkipPreviousIcon />
-                    )}
-                  </IconButton>
-                  <IconButton aria-label="play/pause">
-                    <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-                  </IconButton>
-                  <IconButton aria-label="next">
-                    {theme.direction === 'rtl' ? (
-                      <SkipPreviousIcon />
-                    ) : (
-                      <SkipNextIcon />
-                    )}
-                  </IconButton>
-                </Box>
-              </Box>
-              <CardMedia
-                component="img"
-                sx={{ width: 151 }}
-                image="/static/images/cards/live-from-space.jpg"
-                alt="Live from space album cover"
-              />
-            </Card>
+            <Typography>Liked Playlists</Typography>
+            {generateLikedPlaylists()}
           </Card>
           <Card className="created-playlist">
-            <Typography>Created Playlist</Typography>
+            <Typography>Created Playlists</Typography>
           </Card>
         </div>
       </Card>
