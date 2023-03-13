@@ -55,12 +55,9 @@ export default function CreateAccount() {
         setPassword(value);
     };
     const buttonClick = async (event) => {
-        console.log('button works')
-        console.log(email, password);
         const { data } = await addUser({
             variables: { email: email, username: userName, password: password }
         })
-        console.log(data)
         toggleSession(data.addUser._id)
         getUsername(data.addUser.username)
         setEmail('')

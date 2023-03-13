@@ -85,13 +85,11 @@ export default function Login() {
       const { data } = await login({
         variables: { email: email, password: password }
       })
-      console.log(data)
       toggleSession(data.login._id)
       getUsername(data.login.username)
       setEmail('')
       setPassword('')
     } else {
-      console.log('Please enter a valid email')
       handleOpen();
     }
   }
