@@ -17,7 +17,7 @@ export default function LoginSpotify() {
   }
 
   return (
-    <Button size="small" onClick={loginSpotify}>
+    <Button sx={{ color: 'white' }} size="small" onClick={loginSpotify}>
       Connect Your Spotify Account
     </Button>
   )
