@@ -7,11 +7,14 @@ import { useSpotifyApi } from './utils/SpotifyApiContext'
 import useSpotifyAuth from './utils/useSpotifyAuth'
 import Spotify from 'spotify-web-api-js'
 
+import Nav from './components/Nav'
 import Discover from './components/pages/Discover'
 import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
+
+import LoginProvider from './utils/LoginContext'
 
 const client = new ApolloClient({
   uri: 'http://localhost:5500/graphql',
@@ -32,21 +35,24 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Discover />} />
-          <Route path="/profile/:profileId" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/Playlist/:playlistId"
-            element={<Playlist accessToken={accessToken} />}
-          />
-          <Route path= "/Profile"
-          element={<Profile/>}
-          />
-        </Routes>
-      </Router>
-      <Footer />
+      <LoginProvider>
+        <Router>
+        <Nav />
+          <Routes>
+            <Route path="/" element={<Discover />} />
+            <Route path="/profile/:profileId" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/Playlist/:playlistId"
+              element={<Playlist accessToken={accessToken} />}
+            />
+            <Route path= "/Profile"
+            element={<Profile/>}
+            />
+          </Routes>
+        </Router>
+        <Footer />
+      </LoginProvider>
     </ApolloProvider>
   )
 }

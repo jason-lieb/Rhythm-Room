@@ -41,14 +41,26 @@ mutation Mutation($id: String!, $ownerId: String!) {
 `
 // removes a playlist from "liked" section of a user.
 export const REMOVE_LIKED_PLAYLIST = gql `
-mutation Mutation($id: String!, $ownerId: String!) {
+mutation RemoveLikedPlaylist($id: String!, $ownerId: String!) {
     removeLikedPlaylist(_id: $id, ownerId: $ownerId) {
+    _id
+    comments {
         _id
-        name
-        genres
-        owner
-        comments {
-        }
+        commentText
+        commentAuthor
+        createdAt
+    }
+    description
+    genres
+    images {
+        url
+    }
+    name
+    owner {
+        display_name
+        href
+    }
+    playlistId
     }
 }
 `
@@ -87,6 +99,15 @@ mutation Mutation($username: String!, $email: String!, $password: String!) {
         password
         about
         profilePic
+    }
+}
+`
+
+export const USER_LOGIN = gql `
+mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+    _id
+    username
     }
 }
 `
