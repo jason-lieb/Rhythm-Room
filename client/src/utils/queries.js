@@ -1,87 +1,88 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 // queries all users
 export const QUERY_ALL_USERS = gql`
-query Users {
+  query Users {
     users {
+      _id
+      username
+      email
+      password
+      createdplaylist {
         _id
-        username
-        email
-        password
-        createdplaylist {
-            _id
-            name
-            genres
-            owner
-            comments {
-                _id
-                commentText
-                commentAuthor
-                createdAt
-            }
+        name
+        genres
+        owner
+        comments {
+          _id
+          commentText
+          commentAuthor
+          createdAt
         }
-        likedplaylist {
-            _id
-            name
-            genres
-            owner
-        }
+      }
+      likedplaylist {
+        _id
+        name
+        genres
+        owner
+      }
     }
-}
+  }
 `
 // queries a single user based on an id
 export const QUERY_USER = gql`
-query User($userId: String) {
+  query User($userId: ID) {
     user(id: $userId) {
-    _id
-    about
-    createdplaylist {
+      username
+      email
+      about
+      createdplaylist {
         _id
-        comments {
-        commentText
-        commentAuthor
-        createdAt
-        _id
+        name
+        owner {
+          display_name
+          href
         }
         genres
+        playlistId
+        description
+        images {
+          url
+        }
+      }
+      likedplaylist {
+        _id
         name
-        owner
-    }
-    email
-    likedplaylist {
-        _id
-        comments {
-        _id
-        commentAuthor
-        commentText
-        createdAt
+        owner {
+          display_name
+          href
         }
         genres
-        name
-        owner
+        playlistId
+        description
+        images {
+          url
+        }
+      }
     }
-    password
-    profilePic
-    username
-    }
-}
+  }
 `
 // queries one playlist based on an id
 export const QUERY_PLAYLIST = gql`
-query Users($playlistId: String) {
+  query Users($playlistId: String) {
     playlist(id: $playlistId) {
+      _id
+      name
+      genres
+      owner
+      comments {
         _id
-        name
-        genres
-        owner
-        comments {
-            _id
-            commentText
-            commentAuthor
-            createdAt
-        }
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
-}
+  }
 `
 // queries all playlists
 export const QUERY_ALL_PLAYLISTS = gql`
