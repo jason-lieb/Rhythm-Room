@@ -8,6 +8,8 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 
+import LoginSpotify from './LoginSpotify'
+import { useSpotifyApi } from '../utils/SpotifyApiContext'
 import { useLogin } from '../utils/LoginContext'
 
 const css = `
@@ -17,6 +19,7 @@ const css = `
 `
 
 export default function ButtonAppBar() {
+  const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
   const { sessionId, logout, username } = useLogin()
 
@@ -43,10 +46,15 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Rhythm-Room
           </Typography>
+          {/* toggle login or logout */}
+          {spotifyApi.getAccessToken() ? (
+            <p>Logged In to Spotify</p>
+          ) : (
+            <LoginSpotify /> && window.location.href === '/'
+          )}
           <Button color="inherit" onClick={handleDiscover}>
             Discover
           </Button>
-          {/* toggle login or logout */}
           {sessionId ? (
             <>
               <Button color="inherit" onClick={handleProfile}>
