@@ -1,22 +1,18 @@
-import * as React from 'react'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
+// import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-import Button from '@mui/material/Button'
+// import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import ConcertImg from '../../assets/music.jpg'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious'
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import SkipNextIcon from '@mui/icons-material/SkipNext'
+// import ConcertImg from '../../assets/music.jpg'
+// import Box from '@mui/material/Box'
+// import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
 import { useTheme } from '@mui/material/styles'
 import { useQuery } from '@apollo/client'
 import { QUERY_PLAYLIST, QUERY_USER } from '../../utils/queries'
 import { useParams } from 'react-router-dom'
-import { flexbox } from '@mui/system'
+// import { flexbox } from '@mui/system'
 
 const css = `
   .container-box {
@@ -27,7 +23,7 @@ const css = `
     background-color: #242038;
   }
   .card {
-    // height: 75vh; 
+    // height: 75vh;
     // width: 75vh;
     background-color: #8d86c9;
     color: white;
@@ -38,11 +34,11 @@ const css = `
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
   }
   .username {
     margin-left: 10px;
-    
+
   }
   .text{
     color: white;
