@@ -12,6 +12,12 @@ import LoginSpotify from './LoginSpotify'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
 import { useLogin } from '../utils/LoginContext'
 
+const css = `
+  .navbar {
+    background-color: #595381;
+  }
+`
+
 export default function ButtonAppBar() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
@@ -34,17 +40,9 @@ export default function ButtonAppBar() {
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <style type = "text/css">{css}</style>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Toolbar className = 'navbar'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Rhythm-Room
           </Typography>
