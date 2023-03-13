@@ -52,7 +52,7 @@ export default function ButtonAppBar() {
           {spotifyApi.getAccessToken() ? (
             <p>Logged In to Spotify</p>
           ) : (
-            <LoginSpotify /> && window.location.href === '/'
+            <LoginSpotify /> && window.location.pathname === '/'
           )}
           <Button color="inherit" onClick={handleDiscover}>
             Discover
