@@ -10,6 +10,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 import { useLogin } from '../utils/LoginContext'
 
+const css = `
+  .navbar {
+    background-color: #595381;
+  }
+`
+
 export default function ButtonAppBar() {
   const navigate = useNavigate()
   const { sessionId, logout, username } = useLogin()
@@ -31,17 +37,9 @@ export default function ButtonAppBar() {
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <style type = "text/css">{css}</style>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Toolbar className = 'navbar'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Rhythm-Room
           </Typography>

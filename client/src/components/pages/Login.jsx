@@ -1,3 +1,4 @@
+// importing all of the neccesary material ui components
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,10 +9,13 @@ import Typography from '@mui/material/Typography';
 import ConcertImg from '../../assets/music.jpg';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useState, useEffect } from 'react'
-import { USER_LOGIN } from '../../utils/mutations'
+import { useState, useEffect } from 'react';
+import { USER_LOGIN } from '../../utils/mutations';
 import { useMutation } from '@apollo/client';
-import { useLogin } from '../../utils/LoginContext'
+import { useLogin } from '../../utils/LoginContext';
+import CreateAccount from '../CreateAccount';
+import Modal from '@mui/material/Modal';
+// css stylings for the page
 const css = `
   .container-box {
     display: flex;
@@ -32,10 +36,6 @@ const css = `
     justify-content: center;
     
   }
-  .username {
-    margin-left: 10px;
-    
-  }
   .text{
     color: white;
   }
@@ -46,11 +46,25 @@ const css = `
     color: white;
   }
 `
-
+// styling for the modal
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+// exporting defalault function for login
 export default function Login() {
   const{ sessionId, toggleSession, getUsername } = useLogin()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loginPage, setLoginPage] = useState('login')
+  const [open, setOpen] = React.useState(false);
   const [login, { error }] = useMutation(USER_LOGIN);
   const handleEmailChange = (event) => {
     const { name, value } = event.target;
@@ -60,17 +74,26 @@ export default function Login() {
     const { name, value } = event.target;
     setPassword(value);
   };
+  const loginChange = () => {
+    setLoginPage('createUser')
+  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const buttonClick = async (event) => {
-    console.log('button works')
-    console.log(email, password);
-    const { data } = await login({
-      variables: { email: email, password: password }
-    })
-    console.log(data)
-    toggleSession(data.login._id)
-    getUsername(data.login.username)
-    setEmail('')
-    setPassword('')
+    const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+    if (emailRegex.test(email)){
+      const { data } = await login({
+        variables: { email: email, password: password }
+      })
+      console.log(data)
+      toggleSession(data.login._id)
+      getUsername(data.login.username)
+      setEmail('')
+      setPassword('')
+    } else {
+      console.log('Please enter a valid email')
+      handleOpen();
+    }
   }
   useEffect(() => {
     document.title = 'Rythm Room - Login'
@@ -93,31 +116,48 @@ export default function Login() {
           </Typography>
         </CardContent>
         <CardActions className='card-actions'>
-        <Box
-          component="form"
-          className='username'
-          sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField onChange={handleEmailChange} value={email} id="outlined-basic" className = "text-field" label="email" variant="outlined" />
-        </Box>
-        <Box
-          component="form"
-          sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField onChange={handlePassChange} value={password} id="outlined-basic" className='text-field' label="Password" variant="outlined" />
-        </Box>
-          <div>
-            <Button onClick={buttonClick} className='button' size="small">Login</Button>
-            <Button className='button'size="small">Sign Up</Button>
-          </div>
+          { (loginPage === 'login') ? (
+            <div>
+              <Box
+                component="form"
+                className='username'
+                sx={{
+                '& > :not(style)': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField onChange={handleEmailChange} value={email} id="outlined-basic" className = "text-field" label="email" variant="outlined" />
+              </Box>
+              <Box
+              component="form"
+              sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+              >
+                <TextField onChange={handlePassChange} value={password} id="outlined-basic" className='text-field' label="Password" variant="outlined" />
+              </Box>
+              <div>
+                <Button onClick={buttonClick} className='button' size="small">Login</Button>
+                <Button onClick={loginChange} className='button'size="small">Sign Up</Button>
+              </div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Please enter a valid email
+                  </Typography>
+                </Box>
+              </Modal>
+            </div>
+          ) : <CreateAccount/>
+          }
         </CardActions>
       </Card>
     </div>
