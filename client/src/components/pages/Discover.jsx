@@ -8,7 +8,7 @@ import { useSpotifyApi } from '../../utils/SpotifyApiContext'
 function Discover() {
   // Changes the little tab name at the top of the browser
   useEffect(() => {
-    document.title = 'Rythm Room - Discover'
+    document.title = 'Rhythm Room - Discover'
   }, [])
   const [spotifyApi] = useSpotifyApi()
   return (
