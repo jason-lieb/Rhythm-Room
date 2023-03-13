@@ -4,7 +4,7 @@ const typeDefs = gql`
   type Playlist {
     _id: ID!
     name: String
-    owner: Owner 
+    owner: Owner
     genres: String
     playlistId: String
     description: String
@@ -42,22 +42,20 @@ const typeDefs = gql`
   type Query {
     playlists: [Playlist]
     playlist(id: String): Playlist
-    user(id: String): User
+    user(id: ID): User
     users: [User]
   }
 
   type Mutation {
-    addUser( username: String!, email: String!, password: String!): User
-    addPlaylist( name: String!, _id: String!, owner: String!): Playlist
-    addLikedPlaylist( _id: String!, ownerId: String!): Playlist
-    removeLikedPlaylist( _id: String!, ownerId: String!): Playlist
+    addUser(username: String!, email: String!, password: String!): User
+    addPlaylist(name: String!, _id: String!, owner: String!): Playlist
+    addLikedPlaylist(_id: String!, ownerId: String!): Playlist
+    removeLikedPlaylist(_id: String!, ownerId: String!): Playlist
     addAbout(about: String!, _id: String!): User
     addPic(profilePic: String!, _id: String!): User
-    removePlaylist( _id: String!, ownerId: String!): Playlist
+    removePlaylist(_id: String!, ownerId: String!): Playlist
     login(email: String!, password: String!): User
   }
 `
-
-
 
 module.exports = typeDefs
