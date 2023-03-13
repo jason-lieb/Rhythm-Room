@@ -33,36 +33,37 @@ export const QUERY_ALL_USERS = gql`
 export const QUERY_USER = gql`
   query User($userId: ID) {
     user(id: $userId) {
-      _id
+      username
+      email
       about
       createdplaylist {
         _id
-        comments {
-          commentText
-          commentAuthor
-          createdAt
-          _id
+        name
+        owner {
+          display_name
+          href
         }
         genres
-        name
-        owner
+        playlistId
+        description
+        images {
+          url
+        }
       }
-      email
       likedplaylist {
         _id
-        comments {
-          _id
-          commentAuthor
-          commentText
-          createdAt
+        name
+        owner {
+          display_name
+          href
         }
         genres
-        name
-        owner
+        playlistId
+        description
+        images {
+          url
+        }
       }
-      password
-      profilePic
-      username
     }
   }
 `

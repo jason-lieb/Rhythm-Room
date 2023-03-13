@@ -9,8 +9,12 @@ const resolvers = {
         return playlist 
       },
       user: async (parent, { id }, context) => {
-        const user = await User.findById(id).populate(['createdplaylist', 'likedplaylist'])
-        return user
+        try {
+          const user = await User.findById(id).populate(['createdplaylist', 'likedplaylist'])
+          return user
+        } catch (err) {
+          console.log(err)
+        }
       },
       users: async () => User.find({}).populate(['createdplaylist', 'likedplaylist']),
 

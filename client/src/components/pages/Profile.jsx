@@ -77,21 +77,18 @@ const css = `
 export default function Login() {
   const theme = useTheme()
   const { profileId } = useParams()
-  const { loading, data } = useQuery(QUERY_USER, {
+  const { loading, data, error } = useQuery(QUERY_USER, {
     variables: { userId: profileId },
   })
 
   const user = data?.user || {}
-
+  console.log(data)
   if (loading) {
     return <div>Loading...</div>
   }
 
   return (
     <div className="container-box">
-      {console.log(profileId)}
-      {console.log(loading)}
-      {console.log(user)}
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
