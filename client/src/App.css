@@ -25,3 +25,49 @@ body {
 .link-tag:hover img{
     opacity: .1;
 }
+/* styling for the create-btn */
+.create-btn {
+    position: fixed;
+    right: 20px;
+    bottom:110px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(175,65,240,255);
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.pop-up {
+    position: absolute;
+    bottom: 60px;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: #8d86c9;
+    padding: 4px;
+    border-radius: 3px;
+    display: none;
+    color: white;
+}
+.pointy-span {
+    width: 20px;
+    height: 20px;
+    background-color: #8d86c9;
+    z-index: -1;
+    position: absolute;
+    top: 41px;
+    left: 45%;
+    transform: translateX(-50%);
+    rotate: 45deg;
+}
+.create-btn:hover .pop-up {
+    display: block;
+}
+
+.plus-img {
+    width: 85%;
+}
+
