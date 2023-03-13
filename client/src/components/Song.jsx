@@ -13,9 +13,16 @@ const css = `
     font-weight: bold;
   }
   .artists {
-  }`
+  }
+  .containerDuration {
+    text-align: right;
+  }
+  `
 
-export default function Song({ index }) {
+export default function Song({ index, title, artist, length }) {
+  title = title ?? 'title'
+  artist = artist ?? 'artist'
+  length = length ?? '3:45'
   return (
     <Grid container spacing={2} key={index} className="track">
       <style type="text/css">{css}</style>
@@ -24,16 +31,16 @@ export default function Song({ index }) {
           {index + 1}
         </Typography>
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={10}>
         <Typography variant="subtitle1" className="title">
-          Track Title
+          {title}
         </Typography>
         <Typography variant="body2" className="artists">
-          Artist Name
+          {artist}
         </Typography>
       </Grid>
-      <Grid item xs={2}>
-        <Typography variant="subtitle1">3:45</Typography>
+      <Grid item xs={1} className="containerDuration">
+        <Typography variant="subtitle1">{length}</Typography>
       </Grid>
     </Grid>
   )
