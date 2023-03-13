@@ -54,6 +54,7 @@ const typeDefs = gql`
     addAbout(about: String!, _id: String!): User
     addPic(profilePic: String!, _id: String!): User
     removePlaylist( _id: String!, ownerId: String!): Playlist
+    login(email: String!, password: String!): User
   }
 `
 

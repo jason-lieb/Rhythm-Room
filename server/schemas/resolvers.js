@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt')
 const { Comment, Playlist, User } = require ('../models');
 
 const resolvers = {
@@ -77,6 +78,17 @@ const resolvers = {
         { new: true }
       )
       return (list, user) 
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email })
+      if (!user) {
+        console.log('wrong email or password')
+      }
+      const correctPass = await bcrypt.compare(user.password, password)
+      if (!correctPass) {
+        console.log('wrong email or password')
+      }
+      return user
     }
   },
 }
