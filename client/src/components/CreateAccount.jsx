@@ -62,7 +62,6 @@ export default function CreateAccount() {
         getUsername(data.addUser.username)
         setEmail('')
         setPassword('')
-        window.location.replace('/')
     }
     useEffect(() => {
         document.title = 'Rythm Room - Create User'

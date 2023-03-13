@@ -80,11 +80,11 @@ export default function Login() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const buttonClick = async (event) => {
-    const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+  const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+  const { data } = await login({
+    variables: { email: email, password: password }
+  })
     if (emailRegex.test(email)){
-      const { data } = await login({
-        variables: { email: email, password: password }
-      })
       toggleSession(data.login._id)
       getUsername(data.login.username)
       setEmail('')
