@@ -107,6 +107,13 @@ export default function Login() {
       handleOpen()
     }
   }
+
+  const submitForm = (e) => {
+    console.log('submitForm', e)
+    e.preventDefault()
+    buttonClick(e)
+  }
+
   useEffect(() => {
     document.title = 'Rhythm Room - Login'
   }, [])
@@ -134,6 +141,7 @@ export default function Login() {
             <div>
               <Box
                 component="form"
+                onSubmit={submitForm}
                 className="username"
                 sx={{
                   '& > :not(style)': { m: 1, width: '25ch' },
@@ -152,6 +160,7 @@ export default function Login() {
               </Box>
               <Box
                 component="form"
+                onSubmit={submitForm}
                 sx={{
                   '& > :not(style)': { m: 1, width: '25ch' },
                 }}
