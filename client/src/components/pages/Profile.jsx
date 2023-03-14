@@ -109,10 +109,6 @@ export default function Profile() {
 
   //functions for About Me section
 
-  // let aboutTextDisplay
-  // const renderAboutText = () => {
-  //   aboutTextDisplay = aboutTextState
-  // }
   const handleAboutTextChange = (event) => {
     const { value } = event.target
     setAboutText(value)
