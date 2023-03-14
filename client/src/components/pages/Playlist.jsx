@@ -66,8 +66,6 @@ export default function Playlist() {
     })
   }
 
-  playlist.numOfTracks = playlist.tracks.length
-  playlist.duration = getPlaylistDuration(playlist.tracks)
   const { loading, data } = useQuery(QUERY_PLAYLIST, {
     variables: { playlistId: String(window.location.pathname.split('/')[2]) },
   })
@@ -162,7 +160,7 @@ export default function Playlist() {
             />
           ))}
       </Container>
-      {sessionId ? (
+      {sessionId &&
         <>
         <TextField
           id="outlined-multiline-static"
@@ -174,9 +172,7 @@ export default function Playlist() {
         />
         <Button variant="contained" onClick={commentButton}>Add Comment</Button>
         </>
-      ) : (
-        <Typography>Loading</Typography>
-      )}
+      }
     </div>
   )
 }
