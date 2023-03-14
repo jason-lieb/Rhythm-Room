@@ -16,7 +16,7 @@ import { useLogin } from '../../utils/LoginContext'
 import { useNavigate } from 'react-router-dom'
 import CreateAccount from '../CreateAccount'
 import Modal from '@mui/material/Modal'
-// css stylings for the page
+
 const css = `
   .container-box {
     display: flex;
