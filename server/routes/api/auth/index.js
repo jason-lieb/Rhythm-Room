@@ -10,8 +10,8 @@ router.post('/login', async (req, res) => {
   const code = req.body.code
   const redirectUri =
     process.env.HEROKU_ENV === 'production'
-      ? 'http://rhythm-room.herokuapp.com'
-      : 'http://localhost:3000'
+      ? 'http://rhythm-room.herokuapp.com/'
+      : 'http://localhost:3000/'
   const authOptions = {
     url: 'https://accounts.spotify.com/api/token/',
     form: {
@@ -38,6 +38,7 @@ router.post('/login', async (req, res) => {
         expiresIn: body.expires_in,
       })
     } else {
+      console.log(body)
       console.error(err)
       res.sendStatus(500)
     }
@@ -76,24 +77,3 @@ router.post('/refresh', async (req, res) => {
 })
 
 module.exports = router
-
-// const redirectUri = req.body.redirectUri
-// const spotifyApi = new SpotifyWebApi({
-//   redirectUri: 'http://localhost:3000/',
-//   clientId: process.env.SPOTIFY_CLIENT_ID,
-//   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-// })
-// console.log('spotifyAPI', spotifyApi)
-// spotifyApi
-//   .authorizationCodeGrant(code)
-//   .then((data) => {
-//     res.json({
-//       accessToken: data.body.access_token,
-//       refreshToken: data.body.refresh_token,
-//       expiresIn: data.body.expires_in,
-//     })
-//   })
-//   .catch((err) => {
-//     console.error(err)
-//     res.sendStatus(400)
-//   })

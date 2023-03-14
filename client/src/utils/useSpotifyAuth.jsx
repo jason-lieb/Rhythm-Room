@@ -9,12 +9,12 @@ export default function useSpotifyAuth(code) {
   let refreshURL
   switch (process.env.HEROKU_ENV) {
     case 'production':
-      authURL = 'http://rhythm-room.herokuapp.com/api/auth/login'
-      refreshURL = 'http://rhythm-room.herokuapp.com/api/auth/refresh'
+      authURL = 'http://rhythm-room.herokuapp.com/api/auth/login/'
+      refreshURL = 'http://rhythm-room.herokuapp.com/api/auth/refresh/'
       break
     default:
-      authURL = 'http://localhost:5500/api/auth/login'
-      refreshURL = 'http://localhost:5500/api/auth/refresh'
+      authURL = 'http://localhost:5500/api/auth/login/'
+      refreshURL = 'http://localhost:5500/api/auth/refresh/'
       break
   }
 
