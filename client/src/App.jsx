@@ -19,11 +19,15 @@ import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
-
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
 
+const graphqlUri =
+  process.env.HEROKU_ENV === 'production'
+    ? 'https://spotify-playlist-app.herokuapp.com/graphql/'
+    : 'http://localhost:5500/graphql/'
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5500/graphql',
+  uri: graphqlUri,
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -58,21 +62,21 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-        <Router>
-          <Nav />
-          <Routes>
-            <Route path="/" element={<Discover />} />
-            <Route path="/profile/:profileId" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/Playlist/:playlistId"
-              element={<Playlist accessToken={accessToken} />}
-            />
-            <Route path="/Profile" element={<Profile />} />
-          </Routes>
-          <CreatePlaylistBTN />
-        </Router>
-        <Footer />
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Discover />} />
+          <Route path="/profile/:profileId" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/Playlist/:playlistId"
+            element={<Playlist accessToken={accessToken} />}
+          />
+          <Route path="/Profile" element={<Profile />} />
+        </Routes>
+        <CreatePlaylistBTN />
+      </Router>
+      <Footer />
     </ApolloProvider>
   )
 }
