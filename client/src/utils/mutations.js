@@ -58,13 +58,11 @@ export const REMOVE_PLAYLIST = gql`
   }
 `
 // adds a playlist to the "liked" section of a user
-export const CREATE_LIKED_PLAYLIST = gql`
-  mutation Mutation($id: String!, $ownerId: String!) {
+export const ADD_LIKED_PLAYLIST = gql `
+mutation AddLikedPlaylist($id: String!, $ownerId: String!) {
     addLikedPlaylist(_id: $id, ownerId: $ownerId) {
-      _id
-      name
-      genres
-      owner
+    name
+    _id
     }
   }
 `
@@ -135,5 +133,5 @@ export const ADD_COMMENT = gql`
       commentUsername
       createdAt
     }
-  }
+}
 `

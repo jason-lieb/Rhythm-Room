@@ -5,11 +5,12 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
-    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments']),
+    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments', 'tracks']),
     playlist: async (parent, { id }, context) => {
       const playlist = await Playlist.findById(id).populate([
         'items',
         'comments',
+        'tracks',
       ])
       return playlist
     },
@@ -35,7 +36,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!')
     },
-    items: async (parent, args) => Track.find()
+    track: async (parent, { id }, context) => {
+      const track = await Track.findById(id)
+      return track
+    }
   },
   Mutation: {
     // adds a user to the db
