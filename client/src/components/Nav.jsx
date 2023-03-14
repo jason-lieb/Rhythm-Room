@@ -5,8 +5,6 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
 
 import LoginSpotify from './LoginSpotify'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
@@ -18,7 +16,7 @@ const css = `
   }
 `
 
-export default function ButtonAppBar() {
+export default function Nav() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
   const { sessionId, logout, username } = useLogin()
@@ -46,26 +44,38 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Rhythm Room
           </Typography>
-          {spotifyApi.getAccessToken() ? (
-            <p>Logged In to Spotify</p>
-          ) : (
-            <LoginSpotify />
+
+          {/* Render discover button if not on the discover page */}
+          {window.location.pathname !== '/' && (
+            <Button color="inherit" onClick={handleDiscover}>
+              Discover
+            </Button>
           )}
-          <Button color="inherit" onClick={handleDiscover}>
-            Discover
-          </Button>
-          {/* toggle login or logout */}
-          {sessionId ? (
+
+          {/* Render connected to spotify statement if connected to spotify*/}
+          {spotifyApi.getAccessToken() && (
+            <Button style={{ color: 'white' }} disabled>
+              Connected to Spotify
+            </Button>
+          )}
+
+          {/* Render login spotify button if already logged in but not logged into spotify */}
+          {!spotifyApi.getAccessToken() && sessionId && <LoginSpotify />}
+
+          {/* Render username button and logout button if logged in */}
+          {sessionId && (
             <>
               <Button color="inherit" onClick={handleProfile}>
                 {username}
               </Button>
-
               <Button color="inherit" onClick={handleLogoutButtonClick}>
                 Logout
               </Button>
             </>
-          ) : (
+          )}
+
+          {/* Render login button if not on the login page and not already logged in */}
+          {window.location.pathname.split('/')[1] !== 'login' && !sessionId && (
             <Button color="inherit" onClick={handleLoginButtonClick}>
               Login
             </Button>
