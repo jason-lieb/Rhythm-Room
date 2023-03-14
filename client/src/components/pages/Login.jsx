@@ -66,6 +66,7 @@ export default function Login() {
   const [loginPage, setLoginPage] = useState('login')
   const [open, setOpen] = React.useState(false);
   const [login, { error }] = useMutation(USER_LOGIN);
+  const [errorMessage, setErrorMessage] = useState('')
   const handleEmailChange = (event) => {
     const { name, value } = event.target;
     setEmail(value);
@@ -80,16 +81,22 @@ export default function Login() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const buttonClick = async (event) => {
-  const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
-  const { data } = await login({
-    variables: { email: email, password: password }
-  })
-    if (emailRegex.test(email)){
-      toggleSession(data.login._id)
-      getUsername(data.login.username)
-      setEmail('')
-      setPassword('')
-    } else {
+    try {
+      const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+      if (emailRegex.test(email)){
+        const { data } = await login({
+        variables: { email: email, password: password }
+      })
+        toggleSession(data.login._id)
+        getUsername(data.login.username)
+        setEmail('')
+        setPassword('')
+      } else {
+        setErrorMessage('Invalid Email')
+        handleOpen();
+      }
+    } catch (e) {
+      setErrorMessage(e.message);
       handleOpen();
     }
   }
@@ -149,7 +156,7 @@ export default function Login() {
               >
                 <Box sx={style}>
                   <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Please enter a valid email
+                    {errorMessage}
                   </Typography>
                 </Box>
               </Modal>
