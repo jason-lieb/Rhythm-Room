@@ -8,7 +8,7 @@ export default function AllPlayLists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
   const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
   const playlists = data?.playlists || []
-  // console.log(playlists)
+  console.log(playlists)
   return (
           <ImageList cols={3} gap={8} sx={{ padding: '10px'}}>
             {/* mapped to show all of the playlists */}
