@@ -9,10 +9,14 @@ import Typography from '@mui/material/Typography'
 // import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
 import { useTheme } from '@mui/material/styles'
-import { useQuery } from '@apollo/client'
-import { QUERY_PLAYLIST, QUERY_USER } from '../../utils/queries'
+import { useQuery, useMutation } from '@apollo/client'
+import { /*QUERY_PLAYLIST,*/ QUERY_USER } from '../../utils/queries'
 import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { CREATE_ABOUT_ME } from '../../utils/mutations'
 // import { flexbox } from '@mui/system'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
 
 const css = `
   .container-box {
@@ -77,11 +81,15 @@ export default function Profile() {
   const { loading, data, error } = useQuery(QUERY_USER, {
     variables: { userId: profileId },
   })
+  const user = data?.user || {}
+  const [addAbout, { error2 }] = useMutation(CREATE_ABOUT_ME)
+  const [aboutText, setAboutText] = useState('')
+  const [aboutTextDisplay, setAboutTextDisplay] = useState('')
 
   const generateLikedPlaylists = () => {
     return user.likedplaylist.map((playlist) => (
       <Card sx={{ display: 'flex' }}>
-        {console.log(playlist.images[0])}
+        {/* {console.log(playlist.images[0])} */}
         <CardContent>
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
@@ -95,8 +103,30 @@ export default function Profile() {
     ))
   }
 
-  const user = data?.user || {}
-  console.log(data)
+  useEffect(() => {
+    setAboutTextDisplay(user.about)
+  }, [user])
+
+  //functions for About Me section
+
+  // let aboutTextDisplay
+  // const renderAboutText = () => {
+  //   aboutTextDisplay = aboutTextState
+  // }
+  const handleAboutTextChange = (event) => {
+    const { value } = event.target
+    setAboutText(value)
+  }
+  const submitAbout = async (e) => {
+    e.preventDefault()
+    const { data } = await addAbout({
+      variables: { about: aboutText, id: profileId },
+    })
+    console.log(data.addAbout.about)
+    setAboutTextDisplay(data.addAbout.about)
+    console.log(aboutTextDisplay)
+  }
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -124,8 +154,19 @@ export default function Profile() {
               About Me:
             </Typography>
             <Typography className="text" variant="body2" color="text.secondary">
-              {user.about}
+              {aboutTextDisplay}
             </Typography>
+            <TextField
+              id="outlined-multiline-static"
+              label="Multiline"
+              multiline
+              rows={4}
+              defaultValue="Default Value"
+              onChange={handleAboutTextChange}
+            ></TextField>
+            <Button variant="contained" onClick={submitAbout}>
+              Submit
+            </Button>
           </CardContent>
         </div>
         <div className="right-content">
