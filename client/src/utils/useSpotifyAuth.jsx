@@ -32,7 +32,7 @@ export default function useSpotifyAuth(code) {
         console.error(err)
         window.location = '/'
       })
-  }, [code])
+  }, [authURL, code])
 
   useEffect(() => {
     if (!refreshToken || !expiresIn) return
@@ -40,7 +40,6 @@ export default function useSpotifyAuth(code) {
       axios
         .post(refreshURL, { refreshToken })
         .then((res) => {
-          console.log('res.data', res.data)
           setAccessToken(res.data.accessToken)
           setExpiresIn(res.data.expiresIn)
         })
@@ -50,6 +49,6 @@ export default function useSpotifyAuth(code) {
     }, (expiresIn - 60) * 1000)
 
     return () => clearInterval(interval)
-  }, [refreshToken, expiresIn])
+  }, [refreshToken, expiresIn, refreshURL])
   return accessToken
 }

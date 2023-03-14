@@ -1,5 +1,8 @@
-// importing all of the neccesary material ui components
-import * as React from 'react'
+import { useState, useEffect } from 'react'
+import { USER_LOGIN } from '../../utils/mutations'
+import { useMutation } from '@apollo/client'
+import Auth from '../../utils/auth'
+
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -9,13 +12,9 @@ import Typography from '@mui/material/Typography'
 import ConcertImg from '../../assets/music.jpg'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import { useState, useEffect } from 'react'
-import { USER_LOGIN } from '../../utils/mutations'
-import { useMutation } from '@apollo/client'
-import CreateAccount from '../CreateAccount'
 import Modal from '@mui/material/Modal'
 
-import Auth from '../../utils/auth'
+import CreateAccount from '../CreateAccount'
 
 const css = `
   .container-box {
@@ -64,22 +63,32 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginPage, setLoginPage] = useState('login')
-  const [open, setOpen] = React.useState(false)
-  const [login, { error }] = useMutation(USER_LOGIN)
+  const [open, setOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+
+  const [login] = useMutation(USER_LOGIN)
+
+  useEffect(() => {
+    document.title = 'Rhythm Room - Login'
+  }, [])
+
   const handleEmailChange = (event) => {
     const { value } = event.target
     setEmail(value)
   }
+
   const handlePassChange = (event) => {
     const { value } = event.target
     setPassword(value)
   }
+
   const loginChange = () => {
     setLoginPage('createUser')
   }
+
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
   const buttonClick = async (event) => {
     try {
       const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$')
@@ -87,7 +96,6 @@ export default function Login() {
         const { data } = await login({
           variables: { email: email, password: password },
         })
-        console.log(data.login)
         Auth.login(data.login.token)
         setEmail('')
         setPassword('')
@@ -102,14 +110,9 @@ export default function Login() {
   }
 
   const submitForm = (e) => {
-    console.log('submitForm', e)
     e.preventDefault()
     buttonClick(e)
   }
-
-  useEffect(() => {
-    document.title = 'Rhythm Room - Login'
-  }, [])
   return (
     <div className="container-box">
       <style type="text/css">{css}</style>
@@ -126,7 +129,6 @@ export default function Login() {
           </Typography>
           <Typography className="text" variant="body2" color="text.secondary">
             Rhythm Room is a place for people to share their favorite music
-            {/* - just log in with your spotify account to begin! */}
           </Typography>
         </CardContent>
         <CardActions className="card-actions">

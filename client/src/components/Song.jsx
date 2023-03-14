@@ -27,14 +27,11 @@ export default function Song({
   uri,
   chooseTrack,
 }) {
-  title = title ?? 'title'
-  artist = artist ?? 'artist'
-  duration = duration ?? '3:69'
-
   const minutes = Math.floor(duration / 60000)
   let seconds = Math.floor((duration % 60000) / 1000)
   if (seconds < 10) seconds = `0${seconds}`
   const formattedDuration = `${minutes}:${seconds}`
+
   const handlePlay = () => {
     chooseTrack(uri)
   }

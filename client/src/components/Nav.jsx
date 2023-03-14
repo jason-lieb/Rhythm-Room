@@ -1,5 +1,7 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSpotifyApi } from '../utils/SpotifyApiContext'
+import Auth from '../utils/auth'
+
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,9 +9,6 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 import LoginSpotify from './LoginSpotify'
-import { useSpotifyApi } from '../utils/SpotifyApiContext'
-
-import Auth from '../utils/auth'
 
 const css = `
   .navbar {
@@ -75,11 +74,12 @@ export default function Nav() {
           )}
 
           {/* Render login button if not on the login page and not already logged in */}
-          {window.location.pathname.split('/')[1] !== 'login' && !Auth.loggedIn() && (
-            <Button color="inherit" onClick={handleLoginButtonClick}>
-              Login
-            </Button>
-          )}
+          {window.location.pathname.split('/')[1] !== 'login' &&
+            !Auth.loggedIn() && (
+              <Button color="inherit" onClick={handleLoginButtonClick}>
+                Login
+              </Button>
+            )}
         </Toolbar>
       </AppBar>
     </Box>

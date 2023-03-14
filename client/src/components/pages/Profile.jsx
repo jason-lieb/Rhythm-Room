@@ -1,25 +1,17 @@
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useQuery, useMutation } from '@apollo/client'
+import { QUERY_USER } from '../../utils/queries'
+import { CREATE_ABOUT_ME } from '../../utils/mutations'
+import Auth from '../../utils/auth'
+
 import Card from '@mui/material/Card'
-// import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
-// import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-// import ConcertImg from '../../assets/music.jpg'
-// import Box from '@mui/material/Box'
-// import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
-import { useTheme } from '@mui/material/styles'
-import { useQuery, useMutation } from '@apollo/client'
-import { /*QUERY_PLAYLIST,*/ QUERY_USER } from '../../utils/queries'
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { CREATE_ABOUT_ME } from '../../utils/mutations'
-// import { flexbox } from '@mui/system'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-
-import Auth from '../../utils/auth'
-import { Navigate } from 'react-router-dom'
 
 const css = `
   .container-box {
@@ -41,11 +33,9 @@ const css = `
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
   }
   .username {
     margin-left: 10px;
-
   }
   .text{
     color: white;
@@ -79,20 +69,26 @@ const css = `
 `
 
 export default function Profile() {
-  const theme = useTheme()
+  const navigate = useNavigate()
   const { profileId } = useParams()
-  const { loading, data, error } = useQuery(QUERY_USER, {
-    variables: { userId: profileId },
-  })
-  const user = data?.user || {}
-  const [addAbout, { error2 }] = useMutation(CREATE_ABOUT_ME)
+  const [addAbout] = useMutation(CREATE_ABOUT_ME)
   const [aboutText, setAboutText] = useState('')
   const [aboutTextDisplay, setAboutTextDisplay] = useState('')
 
+  const { loading, data } = useQuery(QUERY_USER, {
+    variables: { userId: profileId },
+  })
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const user = data?.user || {}
+
+  useEffect(() => {
+    setAboutTextDisplay(user.about)
+  }, [user])
+
   const generateLikedPlaylists = () => {
-    return user.likedplaylist.map((playlist) => (
-      <Card sx={{ display: 'flex' }}>
-        {/* {console.log(playlist.images[0])} */}
+    return user.likedplaylist.map((playlist, index) => (
+      <Card key={index} sx={{ display: 'flex' }}>
         <CardContent>
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
@@ -106,10 +102,6 @@ export default function Profile() {
     ))
   }
 
-  useEffect(() => {
-    setAboutTextDisplay(user.about)
-  }, [user])
-
   //functions for About Me section
 
   const handleAboutTextChange = (event) => {
@@ -121,73 +113,68 @@ export default function Profile() {
     const { data } = await addAbout({
       variables: { about: aboutText, id: profileId },
     })
-    console.log(data.addAbout.about)
     setAboutTextDisplay(data.addAbout.about)
-    console.log(aboutTextDisplay)
   }
 
   if (loading) {
     return <div>Loading...</div>
   }
 
+  if (!Auth.loggedIn()) navigate('/login')
+
   return (
-    <>
-      {Auth.loggedIn() ? (
-        <div className="container-box">
-          <style type="text/css">{css}</style>
-          <Card className="card">
-            <div className="left-content">
-              <div className="name-header">
-                <Avatar
-                  alt="Remy Sharp"
-                  src="/static/images/avatar/1.jpg"
-                  sx={{ width: 100, height: 100 }}
-                />
-                <Typography className="user-name">{user.username}</Typography>
-              </div>
-              <CardContent>
-                <Typography
-                  className="text"
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                >
-                  About Me:
-                </Typography>
-                <Typography
-                  className="text"
-                  variant="body2"
-                  color="text.secondary"
-                >
-                  {aboutTextDisplay}
-                </Typography>
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Multiline"
-                  multiline
-                  rows={4}
-                  defaultValue="Default Value"
-                  onChange={handleAboutTextChange}
-                ></TextField>
-                <Button variant="contained" onClick={submitAbout}>
-                  Submit
-                </Button>
-              </CardContent>
-            </div>
-            <div className="right-content">
-              <Card className="liked-playlist">
-                <Typography>Liked Playlists</Typography>
-                {generateLikedPlaylists()}
-              </Card>
-              <Card className="created-playlist">
-                <Typography>Created Playlists</Typography>
-              </Card>
-            </div>
+    <div className="container-box">
+      <style type="text/css">{css}</style>
+      <Card className="card">
+        <div className="left-content">
+          {/* Avatar and username */}
+          <div className="name-header">
+            <Avatar
+              alt="Remy Sharp"
+              src="/static/images/avatar/1.jpg"
+              sx={{ width: 100, height: 100 }}
+            />
+            <Typography className="user-name">{user.username}</Typography>
+          </div>
+
+          {/* About me section */}
+          <CardContent>
+            <Typography
+              className="text"
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
+              About Me:
+            </Typography>
+            <Typography className="text" variant="body2" color="text.secondary">
+              {aboutTextDisplay}
+            </Typography>
+            <TextField
+              id="outlined-multiline-static"
+              label="Multiline"
+              multiline
+              rows={4}
+              defaultValue="Default Value"
+              onChange={handleAboutTextChange}
+            ></TextField>
+            <Button variant="contained" onClick={submitAbout}>
+              Submit
+            </Button>
+          </CardContent>
+        </div>
+
+        {/* Liked and created playlists */}
+        <div className="right-content">
+          <Card className="liked-playlist">
+            <Typography>Liked Playlists</Typography>
+            {generateLikedPlaylists()}
+          </Card>
+          <Card className="created-playlist">
+            <Typography>Created Playlists</Typography>
           </Card>
         </div>
-      ) : (
-        <Navigate to="/login" />
-      )}
-    </>
+      </Card>
+    </div>
   )
 }
