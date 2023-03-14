@@ -113,11 +113,11 @@ mutation Login($email: String!, $password: String!) {
 export const ADD_COMMENT = gql `
 mutation Mutation($commentText: String!, $commentAuthor: String!, $id: String!) {
     addComment(commentText: $commentText, commentAuthor: $commentAuthor, _id: $id) {
-      _id
-      commentAuthor
-      commentText
-      commentUsername
-      createdAt
+        _id
+        commentAuthor
+        commentText
+        commentUsername
+        createdAt
     }
-  }
+}
 `
