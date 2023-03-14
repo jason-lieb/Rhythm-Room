@@ -36,7 +36,7 @@ export default function ButtonAppBar() {
   }
 
   const handleProfile = () => {
-    navigate('./profile')
+    navigate(`/profile/${sessionId}`)
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
