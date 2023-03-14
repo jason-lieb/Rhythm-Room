@@ -8,14 +8,17 @@ function CreatePlaylistBTN() {
     const navigate = useNavigate()
     const goTo = () => {
         console.log('works')
-        navigate(`/profile/${Auth.getProfile().data._id}`)
+        navigate('/createPlaylist')
     }
-return (
+    if (Auth.loggedIn()) {
+        return (
     <button onClick={goTo} className='create-btn'>
             <img className='plus-img' src={PlusImg} alt="+"/>
         <div className='pop-up'><span>Create a Playlist</span><span className='pointy-span'></span></div>
     </button>
 )
+    }
+
 }
 
 export default CreatePlaylistBTN

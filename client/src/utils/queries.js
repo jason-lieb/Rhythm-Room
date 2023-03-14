@@ -140,3 +140,15 @@ query Query($trackId: ID) {
   }
 }
 `
+export const QUERY_ALL_SONGS = gql `
+query Query {
+  tracks {
+    _id
+    trackId
+    name
+    artist
+    duration_ms
+  }
+  
+}
+`
