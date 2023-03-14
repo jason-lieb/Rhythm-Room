@@ -38,7 +38,6 @@ export default function Song({
   const handlePlay = () => {
     chooseTrack(uri)
   }
-  console.log(uri)
   return (
     <Grid container spacing={2} key={index} className="track">
       <style type="text/css">{css}</style>

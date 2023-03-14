@@ -57,7 +57,7 @@ export default function Playlist() {
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
   const { playlistId } = useParams()
-  const [songUri, setSongUri] = useState('')
+  const [songUri, setSongUri] = useState()
 
   function chooseTrack(uri) {
     setSongUri(uri)
