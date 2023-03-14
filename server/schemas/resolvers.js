@@ -6,7 +6,10 @@ const resolvers = {
   Query: {
     playlists: async () => Playlist.find().populate(['owner', 'items', 'comments']),
     playlist: async (parent, { id }, context) => {
-      const playlist = await Playlist.findById(id).populate(['comments'])
+      const playlist = await Playlist.findById(id).populate([
+        'items',
+        'comments',
+      ])
       return playlist
     },
     user: async (parent, { id }, context) => {

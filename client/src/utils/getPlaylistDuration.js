@@ -1,11 +1,11 @@
 export default function getPlaylistDuration(tracks) {
   const totalInSeconds = tracks.reduce((total, track) => {
-    let duration = track.length ?? 225
+    let duration = track.duration_ms
     return total + duration
   }, 0)
 
-  const hours = Math.floor(totalInSeconds / 3600)
-  let minutes = (totalInSeconds % 3600) / 60
+  const hours = Math.floor(totalInSeconds / 3600000)
+  let minutes = (totalInSeconds % 3600000) / 60000
   minutes =
     minutes - Math.floor(minutes) < 0.5
       ? Math.floor(minutes)

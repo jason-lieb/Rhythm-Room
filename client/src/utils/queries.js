@@ -69,17 +69,31 @@ export const QUERY_USER = gql`
 `
 // queries one playlist based on an id
 export const QUERY_PLAYLIST = gql`
-  query Users($playlistId: String) {
+  query Playlists($playlistId: String) {
     playlist(id: $playlistId) {
-      _id
-      name
-      genres
-      owner
       comments {
-        _id
-        commentText
         commentAuthor
+        commentText
         createdAt
+      }
+      description
+      genres
+      images {
+        url
+      }
+      items {
+        name
+        duration_ms
+        artist
+      }
+      name
+      owner {
+        display_name
+        href
+      }
+      tracks {
+        total
+        href
       }
     }
   }

@@ -18,8 +18,6 @@ import LoginProvider from './utils/LoginContext'
 
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
 
-import { useLogin } from './utils/LoginContext'
-
 const client = new ApolloClient({
   uri: 'http://localhost:5500/graphql',
   cache: new InMemoryCache(),
@@ -29,7 +27,6 @@ function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
   const [, setSpotifyApi] = useSpotifyApi()
-
 
   useEffect(() => {
     if (!accessToken) return
@@ -42,7 +39,7 @@ function App() {
     <ApolloProvider client={client}>
       <LoginProvider>
         <Router>
-        <Nav />
+          <Nav />
           <Routes>
             <Route path="/" element={<Discover />} />
             <Route path="/profile/:profileId" element={<Profile />} />
@@ -51,9 +48,7 @@ function App() {
               path="/Playlist/:playlistId"
               element={<Playlist accessToken={accessToken} />}
             />
-            <Route path= "/Profile"
-            element={<Profile/>}
-            />
+            <Route path="/Profile" element={<Profile />} />
           </Routes>
           <CreatePlaylistBTN />
         </Router>

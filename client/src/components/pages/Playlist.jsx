@@ -17,8 +17,8 @@ import Button from '@mui/material/Button';
 
 import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
-// import { QUERY_PLAYLIST } from '../../utils/queries'
-// import { useQuery } from '@apollo/client'
+import { QUERY_PLAYLIST } from '../../utils/queries'
+import { useQuery } from '@apollo/client'
 
 const css = `
   .playlistContainer {
@@ -65,23 +65,23 @@ export default function Playlist() {
       variables: { commentText: commentText, commentAuthor: sessionId, commentUsername: username, id: playlistId }
     })
   }
-  // const { loading, data } = useQuery(QUERY_PLAYLIST, {variables: {playlist_id: ... }})
-  // const playlist = data?.playlist || {}
 
-  // if (loading) return <div>Loading...</div>
-
-  const playlist = {
-    name: 'Playlist Name',
-    tracks: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
-    comments: [{}, {}, {}, {}],
-  }
   playlist.numOfTracks = playlist.tracks.length
   playlist.duration = getPlaylistDuration(playlist.tracks)
+  const { loading, data } = useQuery(QUERY_PLAYLIST, {
+    variables: { playlistId: String(window.location.pathname.split('/')[2]) },
+  })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const playlist = { ...data?.playlist } || {}
+  playlist.numOfTracks = playlist.items?.length
+  if (playlist.items) playlist.duration = getPlaylistDuration(playlist.items)
 
   useEffect(() => {
     if (!playlist.name) return
     document.title = `Rhythm Room - ${playlist.name}`
   }, [playlist])
+
+  if (loading) return <div>Loading...</div>
 
   return (
     <div className="playlistContainer">
@@ -91,10 +91,7 @@ export default function Playlist() {
           <Grid item xs={12} className="imgContainer">
             <img
               className="img"
-              src={
-                playlist.images?.url ||
-                'https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799'
-              }
+              src={playlist.images[0].url}
               alt={`${playlist.name} Playlist`}
             />
           </Grid>
@@ -138,15 +135,16 @@ export default function Playlist() {
             <Typography variant="subtitle2">Length</Typography>
           </Grid>
         </Grid>
-        {playlist.tracks.map((song, index) => (
-          <Song
-            key={index}
-            index={index}
-            title={song.title}
-            artist={song.artist}
-            duration={song.duration}
-          />
-        ))}
+        {playlist.items &&
+          playlist.items.map((song, index) => (
+            <Song
+              key={index}
+              index={index}
+              title={song.name}
+              artist={song.artist}
+              duration={song.duration_ms}
+            />
+          ))}
       </Container>
       <Container sx={{ mb: 3 }}>
         <Grid container spacing={2}>
@@ -154,14 +152,15 @@ export default function Playlist() {
             <Typography variant="subtitle1">Comments</Typography>
           </Grid>
         </Grid>
-        {playlist.comments.map((comment, index) => (
-          <Comment
-            key={index}
-            text={comment.commentText}
-            author={comment.commentAuthor}
-            createdAt={comment.createdAt}
-          />
-        ))}
+        {playlist.comments &&
+          playlist.comments?.map((comment, index) => (
+            <Comment
+              key={index}
+              text={comment.commentText}
+              author={comment.commentAuthor}
+              createdAt={comment.createdAt}
+            />
+          ))}
       </Container>
       {sessionId ? (
         <>
