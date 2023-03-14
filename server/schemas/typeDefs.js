@@ -29,6 +29,7 @@ const typeDefs = gql`
   }
 
   type Item {
+    _id: ID!
     trackId: String
     name: String
     artist: [String]
@@ -59,6 +60,7 @@ const typeDefs = gql`
     playlist(id: String): Playlist
     user(id: ID): User
     users: [User]
+    tracks: [Item]
   }
 
   type Mutation {
