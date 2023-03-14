@@ -16,6 +16,10 @@ import Footer from './components/Footer'
 
 import LoginProvider from './utils/LoginContext'
 
+import CreatePlaylistBTN from './components/CreatePlaylistBTN'
+
+import { useLogin } from './utils/LoginContext'
+
 const client = new ApolloClient({
   uri: 'http://localhost:5500/graphql',
   cache: new InMemoryCache(),
@@ -25,6 +29,7 @@ function App() {
   const code = new URLSearchParams(window.location.search).get('code')
   let accessToken = useSpotifyAuth(code)
   const [, setSpotifyApi] = useSpotifyApi()
+
 
   useEffect(() => {
     if (!accessToken) return
@@ -50,6 +55,7 @@ function App() {
             element={<Profile/>}
             />
           </Routes>
+          <CreatePlaylistBTN />
         </Router>
         <Footer />
       </LoginProvider>

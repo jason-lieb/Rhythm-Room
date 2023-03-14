@@ -1,3 +1,4 @@
+const { AuthenticationError } = require('apollo-server-express');
 const bcrypt = require('bcryptjs')
 const { Comment, Playlist, User } = require ('../models');
 
@@ -87,13 +88,11 @@ const resolvers = {
       const user = await User.findOne({ email })
       const wrong ='wrong email or password'
       if (!user) {
-        console.log('wrong email or password')
-        return wrong
+        throw new AuthenticationError('No user found with this email address');
       }
       const correctPass = await bcrypt.compare(password, user.password)
       if (!correctPass) {
-        console.log('wrong email or password')
-        return wrong
+        throw new AuthenticationError('Incorrect credentials');
       }
       return user
     }
