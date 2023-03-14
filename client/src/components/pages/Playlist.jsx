@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -10,6 +10,10 @@ import Song from '../Song'
 import Comment from '../Comment'
 import { useLogin } from '../../utils/LoginContext'
 import TextField from '@mui/material/TextField'
+import { ADD_COMMENT } from '../../utils/mutations';
+import { useMutation } from '@apollo/client';
+import { useParams } from 'react-router-dom'
+import Button from '@mui/material/Button';
 
 import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
@@ -47,6 +51,20 @@ const css = `
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
   const { sessionId, logout, username } = useLogin()
+  const [addComment, { error }] = useMutation(ADD_COMMENT);
+  const [commentText, setCommentText] = useState('');
+  const { playlistId } = useParams();
+  const handleCommentChange = (event) => {
+    const { value } = event.target;
+    setCommentText(value);
+  };
+
+  const commentButton = async () => {
+    console.log(username, commentText, playlistId)
+    const { data } = await addComment({
+      variables: { commentText: commentText, commentAuthor: sessionId, id: playlistId }
+    })
+  }
   // const { loading, data } = useQuery(QUERY_PLAYLIST, {variables: {playlist_id: ... }})
   // const playlist = data?.playlist || {}
 
@@ -146,13 +164,17 @@ export default function Playlist() {
         ))}
       </Container>
       {sessionId ? (
+        <>
         <TextField
           id="outlined-multiline-static"
           label="Multiline"
           multiline
           rows={4}
           defaultValue="Default Value"
+          onChange={handleCommentChange}
         />
+        <Button variant="contained" onClick={commentButton}>Add Comment</Button>
+        </>
       ) : (
         <Typography>Loading</Typography>
       )}
