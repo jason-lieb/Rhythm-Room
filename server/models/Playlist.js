@@ -8,9 +8,11 @@ const playlistSchema = new Schema({
   description: {
     type: String,
   },
-  images: [{
-    type: Object,
-  }],
+  images: [
+    {
+      type: Object,
+    },
+  ],
   name: {
     type: String,
   },
@@ -20,10 +22,19 @@ const playlistSchema = new Schema({
   owner: {
     type: Object,
   },
+  tracks: {
+    type: Object,
+  },
+  items: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Track',
+    },
+  ],
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Comments',
+      ref: 'Comment',
     },
   ],
 })

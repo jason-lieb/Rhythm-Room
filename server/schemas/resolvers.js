@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const { Comment, Playlist, User } = require ('../models');
 
 const resolvers = {
   Query: {
-      playlists: async () => Playlist.find().populate('owner'),
+      playlists: async () => Playlist.find().populate(['owner','items']),
       playlist: async (parent, { id }, context) => {
         const playlist = await Playlist.findById(id) //.populate(['comment']) add this back when we start doign comments
         return playlist 
@@ -85,13 +85,15 @@ const resolvers = {
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email })
+      const wrong ='wrong email or password'
       if (!user) {
         console.log('wrong email or password')
-        return('wrong email or password')
+        return wrong
       }
-      const correctPass = await bcrypt.compare(user.password, password)
+      const correctPass = await bcrypt.compare(password, user.password)
       if (!correctPass) {
         console.log('wrong email or password')
+        return wrong
       }
       return user
     }

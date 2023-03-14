@@ -1,14 +1,6 @@
 import Box from '@mui/material/Box'
 
-const css = {
-  backgroundColor: '#242038',
-  padding: '8px',
-  borderRadius: '7px',
-  width: 100,
-  textAlign: 'center',
-}
 const linkCSS = {
-  textDecoration: 'none',
   color: 'white',
 }
 function Footer() {
@@ -16,8 +8,12 @@ function Footer() {
     <Box
       sx={{
         width: '100%',
-        height: 300,
+        height: 100,
         backgroundColor: '#595381',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <div
@@ -25,12 +21,12 @@ function Footer() {
           color: 'white',
           width: '100%',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
         }}
       >
-        <h1>GitHub Repo</h1>
+        <span>Find us on GitHub:</span>
         <ul
           style={{
             display: 'flex',
@@ -41,9 +37,10 @@ function Footer() {
             flexWrap: 'wrap',
             margin: 0,
             padding: 0,
+            marginLeft: '20px'
           }}
         >
-          <li style={css}>
+          <li>
             <a
               style={linkCSS}
               href="https://github.com/waustin45"
@@ -53,7 +50,7 @@ function Footer() {
               Austin
             </a>
           </li>
-          <li style={css}>
+          <li>
             <a
               style={linkCSS}
               href="https://github.com/joemeetjoe"
@@ -63,7 +60,7 @@ function Footer() {
               Joe
             </a>
           </li>
-          <li style={css}>
+          <li>
             <a
               style={linkCSS}
               href="https://github.com/pppzlt"
@@ -73,7 +70,7 @@ function Footer() {
               Lantao
             </a>
           </li>
-          <li style={css}>
+          <li>
             <a
               style={linkCSS}
               href="https://github.com/codex-scribe"
@@ -83,7 +80,7 @@ function Footer() {
               Matt
             </a>
           </li>
-          <li style={css}>
+          <li>
             <a
               style={linkCSS}
               href="https://github.com/jason-lieb"

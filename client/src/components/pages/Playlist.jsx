@@ -1,4 +1,4 @@
-// import { useEffect } from 'react'
+import { useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -17,6 +17,7 @@ import { useSpotifyApi } from '../../utils/SpotifyApiContext'
 const css = `
   .playlistContainer {
     padding: 1rem 2rem;
+    color: white;
   }
   .header {
     display: flex;
@@ -57,44 +58,54 @@ export default function Playlist() {
   playlist.numOfTracks = playlist.tracks.length
   playlist.duration = getPlaylistDuration(playlist.tracks)
 
+  useEffect(() => {
+    if (!playlist.name) return
+    document.title = `Rhythm Room - ${playlist.name}`
+  }, [playlist])
+
   return (
     <div className="playlistContainer">
       <style type="text/css">{css}</style>
-      <Grid container spacing={2} className="header">
-        <Grid item xs={12} className="imgContainer">
-          <img
-            className="img"
-            src={
-              playlist.images?.url ||
-              'https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799'
-            }
-            alt={`${playlist.name} Playlist`}
-          />
-        </Grid>
-        <Grid item>
-          <Typography variant="h6" className="title">
-            {playlist.name}
-          </Typography>
-          <Typography variant="subtitle1">
-            {playlist.numOfTracks} Songs, {playlist.duration}
-          </Typography>
-        </Grid>
-        <Grid item className="actions">
-          {spotifyApi.getAccessToken() && (
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
+      <Container>
+        <Grid container spacing={2} className="header">
+          <Grid item xs={12} className="imgContainer">
+            <img
+              className="img"
+              src={
+                playlist.images?.url ||
+                'https://i.scdn.co/image/ab67706f00000003c2dde7acf212bdcb92ec4799'
+              }
+              alt={`${playlist.name} Playlist`}
+            />
+          </Grid>
+          <Grid item>
+            <Typography variant="h6" className="title">
+              {playlist.name}
+            </Typography>
+            <Typography variant="subtitle1">
+              {playlist.numOfTracks} Songs, {playlist.duration}
+            </Typography>
+          </Grid>
+          <Grid item className="actions">
+            {spotifyApi.getAccessToken() && (
+              <IconButton aria-label="Add to favorites">
+                <FavoriteIcon sx={{ color: 'white' }} />
+              </IconButton>
+            )}
+            <IconButton aria-label="More options">
+              <MoreVertIcon sx={{ color: 'white' }} />
             </IconButton>
-          )}
-          <IconButton aria-label="More options">
-            <MoreVertIcon />
-          </IconButton>
-          {spotifyApi.getAccessToken() && (
-            <IconButton aria-label="Play">
-              <PlayCircleFilledIcon className="playlistIcon" />
-            </IconButton>
-          )}
+            {spotifyApi.getAccessToken() && (
+              <IconButton aria-label="Play">
+                <PlayCircleFilledIcon
+                  className="playlistIcon"
+                  sx={{ color: 'white' }}
+                />
+              </IconButton>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
       <Container sx={{ mb: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={1}>
@@ -117,7 +128,7 @@ export default function Playlist() {
           />
         ))}
       </Container>
-      <Container>
+      <Container sx={{ mb: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <Typography variant="subtitle1">Comments</Typography>
