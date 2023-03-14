@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express')
 const bcrypt = require('bcryptjs')
-const { Comment, Playlist, User } = require('../models')
+const { Comment, Playlist, User, Track } = require('../models')
 const { signToken } = require('../utils/auth')
 
 const resolvers = {
@@ -35,6 +35,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!')
     },
+    items: async (parent, args) => Track.find()
   },
   Mutation: {
     // adds a user to the db
@@ -45,7 +46,7 @@ const resolvers = {
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email })
-      const wrong = 'wrong email or password'
+      // const wrong = 'wrong email or password'
       if (!user) {
         throw new AuthenticationError('No user found with this email address')
       }

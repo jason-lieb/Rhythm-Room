@@ -20,12 +20,12 @@ import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
 
-import LoginProvider from './utils/LoginContext'
+// import LoginProvider from './utils/LoginContext'
 
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
 
 const httpLink = createHttpLink({
-  uri: 'graphql',
+  uri: 'http://localhost:5500/graphql',
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -41,6 +41,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const client = new ApolloClient({
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 })
@@ -59,7 +60,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <LoginProvider>
+      {/* <LoginProvider> */}
         <Router>
           <Nav />
           <Routes>
@@ -75,7 +76,7 @@ function App() {
           <CreatePlaylistBTN />
         </Router>
         <Footer />
-      </LoginProvider>
+      {/* </LoginProvider> */}
     </ApolloProvider>
   )
 }

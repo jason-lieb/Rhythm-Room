@@ -5,7 +5,10 @@ import TextField from '@mui/material/TextField'
 import { useState, useEffect } from 'react'
 import { CREATE_USER } from '../utils/mutations'
 import { useMutation } from '@apollo/client'
-import { useLogin } from '../utils/LoginContext'
+// import { useLogin } from '../utils/LoginContext'
+
+import Auth from '../utils/auth'
+
 const css = `
     .container-box {
         display: flex;
@@ -37,7 +40,7 @@ const css = `
 `
 
 export default function CreateAccount({ setLoginPage }) {
-  const { sessionId, toggleSession, getUsername } = useLogin()
+  // const { sessionId, toggleSession, getUsername } = useLogin()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [addUser, { error }] = useMutation(CREATE_USER)
@@ -58,13 +61,19 @@ export default function CreateAccount({ setLoginPage }) {
     setLoginPage('login')
   }
   const buttonClick = async (event) => {
-    const { data } = await addUser({
-      variables: { email: email, username: userName, password: password },
-    })
-    toggleSession(data.addUser._id)
-    getUsername(data.addUser.username)
-    setEmail('')
-    setPassword('')
+    try {
+      const { data } = await addUser({
+        variables: { email: email, username: userName, password: password },
+      })
+
+      Auth.login(data.addUser.token)
+      // toggleSession(data.addUser._id)
+      // getUsername(data.addUser.username)
+      setEmail('')
+      setPassword('')
+    } catch (e) {
+      console.error(e)
+    }
   }
   useEffect(() => {
     document.title = 'Rhythm Room - Create User'

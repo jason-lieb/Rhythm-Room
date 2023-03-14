@@ -96,6 +96,7 @@ export default function Login() {
         const { data } = await login({
           variables: { email: email, password: password },
         })
+        console.log(data.login)
         Auth.login(data.login.token)
         // toggleSession(data.login._id)
         // getUsername(data.login.username)

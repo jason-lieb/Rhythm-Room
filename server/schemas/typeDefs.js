@@ -54,23 +54,29 @@ const typeDefs = gql`
     likedplaylist: [Playlist]
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Query {
     playlists: [Playlist]
     playlist(id: String): Playlist
     user(id: ID): User
     users: [User]
     me: User
+    items: [Item]
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): User
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
     addPlaylist(name: String!, _id: String!, owner: String!): Playlist
     addLikedPlaylist(_id: String!, ownerId: String!): Playlist
     removeLikedPlaylist(_id: String!, ownerId: String!): Playlist
     addAbout(about: String!, _id: String!): User
     addPic(profilePic: String!, _id: String!): User
     removePlaylist(_id: String!, ownerId: String!): Playlist
-    login(email: String!, password: String!): User
     addComment(commentText: String!, commentAuthor: String!, commentUsername: String!, _id: String!): Comment
   }
 `

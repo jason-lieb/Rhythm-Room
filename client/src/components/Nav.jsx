@@ -8,7 +8,9 @@ import Button from '@mui/material/Button'
 
 import LoginSpotify from './LoginSpotify'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
-import { useLogin } from '../utils/LoginContext'
+
+// import { useLogin } from '../utils/LoginContext'
+import Auth from '../utils/auth'
 
 const css = `
   .navbar {
@@ -19,22 +21,23 @@ const css = `
 export default function Nav() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
-  const { sessionId, logout, username } = useLogin()
+  // const { sessionId, logout, username } = useLogin()
 
   const handleLoginButtonClick = () => {
     navigate('/login')
   }
 
   const handleLogoutButtonClick = () => {
-    logout()
+    // logout()
+    Auth.logout()
   }
 
   const handleDiscover = () => {
-    navigate('./')
+    navigate('/')
   }
 
   const handleProfile = () => {
-    navigate(`/profile/${sessionId}`)
+    navigate(`/profile/${Auth.getProfile().data._id}`)
   }
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -60,13 +63,13 @@ export default function Nav() {
           )}
 
           {/* Render login spotify button if already logged in but not logged into spotify */}
-          {!spotifyApi.getAccessToken() && sessionId && <LoginSpotify />}
+          {!spotifyApi.getAccessToken() && Auth.loggedIn() && <LoginSpotify />}
 
           {/* Render username button and logout button if logged in */}
-          {sessionId && (
+          {Auth.loggedIn() && (
             <>
               <Button color="inherit" onClick={handleProfile}>
-                {username}
+                {Auth.getProfile().data.username}
               </Button>
               <Button color="inherit" onClick={handleLogoutButtonClick}>
                 Logout
@@ -75,7 +78,7 @@ export default function Nav() {
           )}
 
           {/* Render login button if not on the login page and not already logged in */}
-          {window.location.pathname.split('/')[1] !== 'login' && !sessionId && (
+          {window.location.pathname.split('/')[1] !== 'login' && !Auth.loggedIn() && (
             <Button color="inherit" onClick={handleLoginButtonClick}>
               Login
             </Button>
