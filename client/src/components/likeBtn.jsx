@@ -1,11 +1,9 @@
-import React from 'react'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-function likeBtn() {
-return (
-    <div>
-        <ThumbUpIcon />
-    </div>
-)
-}
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
-export default likeBtn
+export default function likeBtn() {
+  return (
+    <div>
+      <ThumbUpIcon />
+    </div>
+  )
+}

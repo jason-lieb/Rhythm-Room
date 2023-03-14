@@ -1,8 +1,6 @@
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-// import IconButton from '@mui/material/IconButton'
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 
 export default function Comment({ text, author, createdAt }) {
   text =
@@ -32,9 +30,6 @@ export default function Comment({ text, author, createdAt }) {
         </Box>
         <Typography variant="body2">{text}</Typography>
       </Box>
-      {/* <IconButton size="small" aria-label="add to favorites">
-        <FavoriteBorderIcon />
-      </IconButton> */}
     </Box>
   )
 }

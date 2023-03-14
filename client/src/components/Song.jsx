@@ -20,14 +20,11 @@ const css = `
   `
 
 export default function Song({ index, title, artist, duration }) {
-  title = title ?? 'title'
-  artist = artist ?? 'artist'
-  duration = duration ?? '3:69'
-
   const minutes = Math.floor(duration / 60000)
   let seconds = Math.floor((duration % 60000) / 1000)
   if (seconds < 10) seconds = `0${seconds}`
   const formattedDuration = `${minutes}:${seconds}`
+
   return (
     <Grid container spacing={2} key={index} className="track">
       <style type="text/css">{css}</style>

@@ -1,4 +1,12 @@
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useQuery, useMutation } from '@apollo/client'
+import { QUERY_PLAYLIST } from '../../utils/queries'
+import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations'
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
+import getPlaylistDuration from '../../utils/getPlaylistDuration'
+import Auth from '../../utils/auth'
+
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -6,21 +14,12 @@ import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
-import Song from '../Song'
-import Comment from '../Comment'
 import TextField from '@mui/material/TextField'
-import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations'
-import { useMutation } from '@apollo/client'
-import { useParams } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
-import getPlaylistDuration from '../../utils/getPlaylistDuration'
-import { useSpotifyApi } from '../../utils/SpotifyApiContext'
-import { QUERY_PLAYLIST } from '../../utils/queries'
-import { useQuery } from '@apollo/client'
-
-import Auth from '../../utils/auth'
+import Song from '../Song'
+import Comment from '../Comment'
 
 const css = `
   .playlistContainer {
@@ -56,28 +55,10 @@ export default function Playlist() {
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
   const { playlistId } = useParams()
-
-  const handleCommentChange = (event) => {
-    const { value } = event.target
-    setCommentText(value)
-  }
-
-  const commentButton = async () => {
-    console.log(commentText, playlistId)
-    const { data } = await addComment({
-      variables: { commentText: commentText, commentAuthor: Auth.getProfile().data._id, commentUsername: Auth.getProfile().data.username, id: playlistId }
-    })
-  }
-
   const { loading, data } = useQuery(QUERY_PLAYLIST, {
     variables: { playlistId },
   })
-  const likePlaylist = async () => {
-    const { data } = await addLikedPlaylist({
-      variables: { ownerId: Auth.getProfile().data._id, id: playlistId }
-    })
-    alert('Playlist Liked')
-  }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const playlist = { ...data?.playlist } || {}
   playlist.numOfTracks = playlist.items?.length
@@ -88,6 +69,29 @@ export default function Playlist() {
     document.title = `Rhythm Room - ${playlist.name}`
   }, [playlist])
   if (loading) return <div>Loading...</div>
+
+  const handleCommentChange = (event) => {
+    const { value } = event.target
+    setCommentText(value)
+  }
+
+  const commentButton = async () => {
+    const { data } = await addComment({
+      variables: {
+        commentText: commentText,
+        commentAuthor: Auth.getProfile().data._id,
+        commentUsername: Auth.getProfile().data.username,
+        id: playlistId,
+      },
+    })
+  }
+
+  const likePlaylist = async () => {
+    const { data } = await addLikedPlaylist({
+      variables: { ownerId: Auth.getProfile().data._id, id: playlistId },
+    })
+    alert('Playlist Liked')
+  }
 
   return (
     <div className="playlistContainer">
@@ -113,6 +117,7 @@ export default function Playlist() {
             </Typography>
           </Grid>
           <Grid item className="actions">
+            {/* Render like button if logged in and connected to Spotify */}
             {spotifyApi.getAccessToken() && (
               <IconButton aria-label="Add to favorites">
                 <FavoriteIcon sx={{ color: 'white' }} />
@@ -121,6 +126,8 @@ export default function Playlist() {
             <IconButton aria-label="More options">
               <MoreVertIcon sx={{ color: 'white' }} />
             </IconButton>
+
+            {/* Render play button if logged in and connected to Spotify */}
             {spotifyApi.getAccessToken() && (
               <IconButton aria-label="Play">
                 <PlayCircleFilledIcon
@@ -133,6 +140,7 @@ export default function Playlist() {
         </Grid>
       </Container>
       <Container sx={{ mb: 3 }}>
+        {/* Playlist headers */}
         <Grid container spacing={2}>
           <Grid item xs={1}>
             <Typography variant="subtitle2">#</Typography>
@@ -171,6 +179,7 @@ export default function Playlist() {
             />
           ))}
       </Container>
+      {/* If logged in, add field to leave a comment */}
       {Auth.loggedIn() && (
         <>
           <TextField

@@ -14,5 +14,3 @@ root.render(
     <App />
   </SpotifyApiContextProvider>
 )
-// <React.StrictMode>
-// </React.StrictMode>
