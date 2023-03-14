@@ -8,12 +8,17 @@ const trackSchema = new Schema({
   name: {
     type: String,
   },
-  artist: [{
-    type: String,
-  }],
+  artist: [
+    {
+      type: String,
+    },
+  ],
   duration_ms: {
     type: Number,
-  }
+  },
+  uri: {
+    type: String,
+  },
 })
 
 const Track = model('Track', trackSchema)

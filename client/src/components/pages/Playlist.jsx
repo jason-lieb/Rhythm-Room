@@ -20,6 +20,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
 import Song from '../Song'
 import Comment from '../Comment'
+import Player from '../Player'
 
 const css = `
   .playlistContainer {
@@ -55,6 +56,8 @@ export default function Playlist() {
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
   const { playlistId } = useParams()
+  const [songUri, setSongUri] = useState()
+
   const { loading, data } = useQuery(QUERY_PLAYLIST, {
     variables: { playlistId },
   })
@@ -69,6 +72,10 @@ export default function Playlist() {
     document.title = `Rhythm Room - ${playlist.name}`
   }, [playlist])
   if (loading) return <div>Loading...</div>
+
+  function chooseTrack(uri) {
+    setSongUri(uri)
+  }
 
   const handleCommentChange = (event) => {
     const { value } = event.target
@@ -162,6 +169,8 @@ export default function Playlist() {
               title={song.name}
               artist={song.artist}
               duration={song.duration_ms}
+              uri={song.uri}
+              chooseTrack={chooseTrack}
             />
           ))}
       </Container>
@@ -197,6 +206,10 @@ export default function Playlist() {
           </Button>
         </>
       )}
+      <div>
+        {' '}
+        <Player songUri={songUri} />{' '}
+      </div>
     </div>
   )
 }
