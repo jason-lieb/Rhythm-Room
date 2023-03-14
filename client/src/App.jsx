@@ -21,6 +21,7 @@ import Login from './components/pages/Login'
 import Footer from './components/Footer'
 
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
+import CreatePlaylist from './components/pages/CreatePlaylist'
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:5500/graphql',
@@ -69,6 +70,7 @@ function App() {
               element={<Playlist accessToken={accessToken} />}
             />
             <Route path="/Profile" element={<Profile />} />
+            <Route path="/createPlaylist" element={<CreatePlaylist />} />
           </Routes>
           <CreatePlaylistBTN />
         </Router>
