@@ -67,7 +67,6 @@ const typeDefs = gql`
     user(id: ID): User
     users: [User]
     me: User
-    items: [Item]
     track(id: ID): Item
     tracks: [Item]
   }
