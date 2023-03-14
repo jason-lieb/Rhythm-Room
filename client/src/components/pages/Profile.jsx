@@ -74,9 +74,12 @@ export default function Profile() {
   const [addAbout] = useMutation(CREATE_ABOUT_ME)
   const [aboutText, setAboutText] = useState('')
   const [aboutTextDisplay, setAboutTextDisplay] = useState('')
+
   const { loading, data } = useQuery(QUERY_USER, {
     variables: { userId: profileId },
   })
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const user = data?.user || {}
 
   useEffect(() => {

@@ -76,6 +76,7 @@ export default function Playlist() {
   }
 
   const commentButton = async () => {
+    // eslint-disable-next-line no-unused-vars
     const { data } = await addComment({
       variables: {
         commentText: commentText,
@@ -87,6 +88,7 @@ export default function Playlist() {
   }
 
   const likePlaylist = async () => {
+    // eslint-disable-next-line no-unused-vars
     const { data } = await addLikedPlaylist({
       variables: { ownerId: Auth.getProfile().data._id, id: playlistId },
     })
