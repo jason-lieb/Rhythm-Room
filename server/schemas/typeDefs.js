@@ -69,7 +69,7 @@ const typeDefs = gql`
     addPic(profilePic: String!, _id: String!): User
     removePlaylist(_id: String!, ownerId: String!): Playlist
     login(email: String!, password: String!): User
-    addComment(commentText: String!, commentAuthor: String!): Comment
+    addComment(commentText: String!, commentAuthor: String!, _id: String!): Comment
   }
 `
 
