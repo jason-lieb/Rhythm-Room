@@ -5,6 +5,8 @@ const db = require('./config/connection')
 const routes = require('./routes')
 const cors = require('cors')
 
+const { authMiddleware } = require('./utils/auth')
+
 // require('dotenv').config()
 
 const { typeDefs, resolvers } = require('./schemas')
@@ -15,6 +17,7 @@ const PORT = process.env.PORT || 5500
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware,
 })
 
 app.use(cors())

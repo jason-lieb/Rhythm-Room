@@ -58,6 +58,7 @@ const typeDefs = gql`
     playlist(id: String): Playlist
     user(id: ID): User
     users: [User]
+    me: User
   }
 
   type Mutation {

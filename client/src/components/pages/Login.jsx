@@ -12,10 +12,12 @@ import TextField from '@mui/material/TextField'
 import { useState, useEffect } from 'react'
 import { USER_LOGIN } from '../../utils/mutations'
 import { useMutation } from '@apollo/client'
-import { useLogin } from '../../utils/LoginContext'
-import { useNavigate } from 'react-router-dom'
 import CreateAccount from '../CreateAccount'
 import Modal from '@mui/material/Modal'
+
+// import { useNavigate } from 'react-router-dom'
+// import { useLogin } from '../../utils/LoginContext'
+import Auth from '../../utils/auth'
 
 const css = `
   .container-box {
@@ -61,13 +63,13 @@ const style = {
 }
 // exporting defalault function for login
 export default function Login() {
-  const { sessionId, toggleSession, getUsername } = useLogin()
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (sessionId) {
-      navigate('/')
-    }
-  }, [sessionId])
+  // const { sessionId, toggleSession, getUsername } = useLogin()
+  // const navigate = useNavigate()
+  // useEffect(() => {
+  //   if (sessionId) {
+  //     navigate('/')
+  //   }
+  // }, [sessionId])
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginPage, setLoginPage] = useState('login')
@@ -94,8 +96,9 @@ export default function Login() {
         const { data } = await login({
           variables: { email: email, password: password },
         })
-        toggleSession(data.login._id)
-        getUsername(data.login.username)
+        Auth.login(data.login.token)
+        // toggleSession(data.login._id)
+        // getUsername(data.login.username)
         setEmail('')
         setPassword('')
       } else {

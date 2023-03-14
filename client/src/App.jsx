@@ -2,7 +2,13 @@
 import './App.css'
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { useSpotifyApi } from './utils/SpotifyApiContext'
 import useSpotifyAuth from './utils/useSpotifyAuth'
 import Spotify from 'spotify-web-api-js'
@@ -18,8 +24,24 @@ import LoginProvider from './utils/LoginContext'
 
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
 
+const httpLink = createHttpLink({
+  uri: 'graphql',
+})
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token')
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
+
 const client = new ApolloClient({
-  uri: 'http://localhost:5500/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 })
 
