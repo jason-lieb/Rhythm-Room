@@ -2,7 +2,7 @@ const db = require('../config/connection')
 const { User, Playlist, Track } = require('../models')
 const userSeeds = require('./userSeeds.json')
 const playlistSeed = require('./playlistSeeds.json')
-const trackSeed = require('./combined.json')
+const trackSeed = require('./trackSeeds.json')
 
 db.once('open', async () => {
   try {
