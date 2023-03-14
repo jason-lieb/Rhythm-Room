@@ -3,7 +3,9 @@ import ImageListItem from '@mui/material/ImageListItem'
 import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 import { QUERY_ALL_PLAYLISTS } from '../utils/queries'
-
+import likeBtn from './likeBtn'
+import Box from '@mui/material/Box'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 export default function AllPlayLists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
   const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
@@ -14,7 +16,7 @@ export default function AllPlayLists() {
       {!loading ? (
         playlists.map((info) => {
           return (
-            <Link key={info._id} to={`/Playlist/${info._id}`}>
+            <Link style={{ zIndex: 0 }} key={info._id} to={`/Playlist/${info._id}`}>
               <ImageListItem>
                 <img
                   src={`${info.images[0].url}?w=248&fit=crop&auto=format`}
@@ -23,6 +25,9 @@ export default function AllPlayLists() {
                   loading="lazy"
                   style={{ minHeight: 10 }}
                 />
+                <div className='like-btn'>
+                  <ThumbUpIcon fontSize='large'/>
+                </div>
               </ImageListItem>
             </Link>
           )
