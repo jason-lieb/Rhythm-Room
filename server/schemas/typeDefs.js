@@ -34,6 +34,7 @@ const typeDefs = gql`
     name: String
     artist: [String]
     duration_ms: Int
+    uri: String
   }
 
   type Comment {
@@ -66,7 +67,6 @@ const typeDefs = gql`
     user(id: ID): User
     users: [User]
     me: User
-    items: [Item]
     track(id: ID): Item
     tracks: [Item]
   }

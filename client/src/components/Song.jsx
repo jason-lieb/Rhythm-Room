@@ -19,7 +19,14 @@ const css = `
   }
   `
 
-export default function Song({ index, title, artist, duration }) {
+export default function Song({
+  index,
+  title,
+  artist,
+  duration,
+  uri,
+  chooseTrack,
+}) {
   title = title ?? 'title'
   artist = artist ?? 'artist'
   duration = duration ?? '3:69'
@@ -28,6 +35,9 @@ export default function Song({ index, title, artist, duration }) {
   let seconds = Math.floor((duration % 60000) / 1000)
   if (seconds < 10) seconds = `0${seconds}`
   const formattedDuration = `${minutes}:${seconds}`
+  const handlePlay = () => {
+    chooseTrack(uri)
+  }
   return (
     <Grid container spacing={2} key={index} className="track">
       <style type="text/css">{css}</style>
@@ -36,7 +46,7 @@ export default function Song({ index, title, artist, duration }) {
           {index + 1}
         </Typography>
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={10} onClick={handlePlay} style={{ cursor: 'pointer' }}>
         <Typography variant="subtitle1" className="title">
           {title}
         </Typography>

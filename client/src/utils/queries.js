@@ -91,6 +91,7 @@ query Playlist($playlistId: ID) {
       name
       artist
       duration_ms
+      uri
     }
     owner {
       display_name
@@ -137,6 +138,7 @@ query Query($trackId: ID) {
     name
     artist
     duration_ms
+    uri
   }
 }
 `

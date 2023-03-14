@@ -21,6 +21,7 @@ import { QUERY_PLAYLIST } from '../../utils/queries'
 import { useQuery } from '@apollo/client'
 
 import Auth from '../../utils/auth'
+import Player from '../Player'
 
 const css = `
   .playlistContainer {
@@ -56,6 +57,11 @@ export default function Playlist() {
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
   const { playlistId } = useParams()
+  const [songUri, setSongUri] = useState()
+
+  function chooseTrack(uri) {
+    setSongUri(uri)
+  }
 
   const handleCommentChange = (event) => {
     const { value } = event.target
@@ -65,7 +71,12 @@ export default function Playlist() {
   const commentButton = async () => {
     console.log(commentText, playlistId)
     const { data } = await addComment({
-      variables: { commentText: commentText, commentAuthor: Auth.getProfile().data._id, commentUsername: Auth.getProfile().data.username, id: playlistId }
+      variables: {
+        commentText: commentText,
+        commentAuthor: Auth.getProfile().data._id,
+        commentUsername: Auth.getProfile().data.username,
+        id: playlistId,
+      },
     })
   }
 
@@ -74,7 +85,7 @@ export default function Playlist() {
   })
   const likePlaylist = async () => {
     const { data } = await addLikedPlaylist({
-      variables: { ownerId: Auth.getProfile().data._id, id: playlistId }
+      variables: { ownerId: Auth.getProfile().data._id, id: playlistId },
     })
     alert('Playlist Liked')
   }
@@ -82,7 +93,6 @@ export default function Playlist() {
   const playlist = { ...data?.playlist } || {}
   playlist.numOfTracks = playlist.items?.length
   if (playlist.items) playlist.duration = getPlaylistDuration(playlist.items)
-
   useEffect(() => {
     if (!playlist.name) return
     document.title = `Rhythm Room - ${playlist.name}`
@@ -152,6 +162,8 @@ export default function Playlist() {
               title={song.name}
               artist={song.artist}
               duration={song.duration_ms}
+              uri={song.uri}
+              chooseTrack={chooseTrack}
             />
           ))}
       </Container>
@@ -186,6 +198,10 @@ export default function Playlist() {
           </Button>
         </>
       )}
+      <div>
+        {' '}
+        <Player songUri={songUri} />{' '}
+      </div>
     </div>
   )
 }
