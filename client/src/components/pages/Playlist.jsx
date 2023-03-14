@@ -51,9 +51,9 @@ const css = `
 
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
-  const { sessionId, logout, username } = useLogin()
-  const [addLikedPlaylist, { errorTwo }] = useMutation(ADD_LIKED_PLAYLIST)
-  const [addComment, { error }] = useMutation(ADD_COMMENT)
+  const { sessionId, username } = useLogin()
+  const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
+  const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
   const { playlistId } = useParams()
 
