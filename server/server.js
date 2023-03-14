@@ -5,7 +5,7 @@ const db = require('./config/connection')
 const routes = require('./routes')
 const cors = require('cors')
 
-// require('dotenv').config()
+require('dotenv').config()
 
 const { typeDefs, resolvers } = require('./schemas')
 
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(routes)
-
+console.log(process.env.NODE_ENV)
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
   console.log('running production')
