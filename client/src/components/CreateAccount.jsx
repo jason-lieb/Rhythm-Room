@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 import { CREATE_USER } from '../utils/mutations'
 import { useMutation } from '@apollo/client'
 import { useLogin } from '../utils/LoginContext'
+import Modal from '@mui/material/Modal'
+import Typography from '@mui/material/Typography'
 const css = `
     .container-box {
         display: flex;
@@ -35,6 +37,18 @@ const css = `
         color: white;
     }
 `
+// styling for the modal
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 export default function CreateAccount({ setLoginPage }) {
   const { sessionId, toggleSession, getUsername } = useLogin()
@@ -42,6 +56,8 @@ export default function CreateAccount({ setLoginPage }) {
   const [password, setPassword] = useState('')
   const [addUser, { error }] = useMutation(CREATE_USER)
   const [userName, setUserName] = useState('')
+  const [open, setOpen] = React.useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const handleEmailChange = (event) => {
     const { name, value } = event.target
     setEmail(value)
@@ -57,18 +73,31 @@ export default function CreateAccount({ setLoginPage }) {
   const returnToLogin = () => {
     setLoginPage('login')
   }
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
   const buttonClick = async (event) => {
-    const { data } = await addUser({
-      variables: { email: email, username: userName, password: password },
-    })
-    toggleSession(data.addUser._id)
-    getUsername(data.addUser.username)
-    setEmail('')
-    setPassword('')
+    try {
+      const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$')
+      if (emailRegex.test(email)) {
+        const { data } = await addUser({
+          variables: { email: email, username: userName, password: password },
+        })
+        toggleSession(data.addUser._id)
+        getUsername(data.addUser.username)
+        setEmail('')
+        setPassword('')
+      } else {
+        setErrorMessage('Invalid Email')
+        handleOpen()
+      }
+    } catch (e) {
+      setErrorMessage(e.message)
+      handleOpen()
+    }
   }
-  useEffect(() => {
-    document.title = 'Rhythm Room - Create User'
-  }, [])
+      useEffect(() => {
+        document.title = 'Rhythm Room - Create User'
+      }, [])
   return (
     <div>
       <style type="text/css">{css}</style>
@@ -132,6 +161,22 @@ export default function CreateAccount({ setLoginPage }) {
           Sign Up
         </Button>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+          >
+            {errorMessage}
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   )
 }
