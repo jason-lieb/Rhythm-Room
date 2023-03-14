@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
-    playlists: async () => Playlist.find().populate(['owner', 'items']),
+    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments']),
     playlist: async (parent, { id }, context) => {
       const playlist = await Playlist.findById(id).populate([
         'items',
@@ -134,6 +134,20 @@ const resolvers = {
         return list, user
       }
       throw new AuthenticationError('You need to be logged in!')
+    },
+    addComment: async (parent, { commentText, commentAuthor, commentUsername, _id }) => {
+      const comment = await Comment.create({
+        commentText: commentText,
+        commentAuthor: commentAuthor,
+        commentUsername: commentUsername
+      })
+
+      const playlist = await Playlist.findOneAndUpdate(
+        { _id: _id },
+        { $addToSet: { comments: comment._id } },
+        { new: true }
+      )
+      return comment, playlist
     },
   },
 }

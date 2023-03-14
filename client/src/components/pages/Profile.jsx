@@ -73,7 +73,7 @@ const css = `
   }
 `
 
-export default function Login() {
+export default function Profile() {
   const theme = useTheme()
   const { profileId } = useParams()
   const { loading, data, error } = useQuery(QUERY_USER, {
