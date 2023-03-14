@@ -5,13 +5,24 @@ export default function useSpotifyAuth(code) {
   const [accessToken, setAccessToken] = useState()
   const [refreshToken, setRefreshToken] = useState()
   const [expiresIn, setExpiresIn] = useState()
+  let authURL
+  let refreshURL
+  switch (process.env.HEROKU_ENV) {
+    case 'production':
+      authURL = 'http://rhythm-room.herokuapp.com/api/auth/login'
+      refreshURL = 'http://rhythm-room.herokuapp.com/api/auth/refresh'
+      break
+    default:
+      authURL = 'http://localhost:5500/api/auth/login'
+      refreshURL = 'http://localhost:5500/api/auth/refresh'
+      break
+  }
 
   useEffect(() => {
     if (!code) return
     axios
-      .post('http://localhost:5500/api/auth/login', { code })
+      .post(authURL, { code })
       .then((res) => {
-        console.log(res.data.accessToken)
         setAccessToken(res.data.accessToken)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)
@@ -27,7 +38,7 @@ export default function useSpotifyAuth(code) {
     if (!refreshToken || !expiresIn) return
     const interval = setInterval(() => {
       axios
-        .post('http://localhost:5500/api/auth/refresh', { refreshToken })
+        .post(refreshURL, { refreshToken })
         .then((res) => {
           console.log('res.data', res.data)
           setAccessToken(res.data.accessToken)
