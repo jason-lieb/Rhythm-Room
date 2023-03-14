@@ -137,6 +137,7 @@ query Query($trackId: ID) {
     name
     artist
     duration_ms
+    uri
   }
 }
 `

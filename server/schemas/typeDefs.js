@@ -34,6 +34,7 @@ const typeDefs = gql`
     name: String
     artist: [String]
     duration_ms: Int
+    uri: String
   }
 
   type Comment {
