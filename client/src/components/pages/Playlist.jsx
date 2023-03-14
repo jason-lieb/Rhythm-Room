@@ -60,9 +60,9 @@ export default function Playlist() {
   };
 
   const commentButton = async () => {
-    console.log(username, commentText, playlistId)
+    console.log(username, commentText, playlistId, sessionId)
     const { data } = await addComment({
-      variables: { commentText: commentText, commentAuthor: sessionId, id: playlistId }
+      variables: { commentText: commentText, commentAuthor: sessionId, commentUsername: username, id: playlistId }
     })
   }
   // const { loading, data } = useQuery(QUERY_PLAYLIST, {variables: {playlist_id: ... }})

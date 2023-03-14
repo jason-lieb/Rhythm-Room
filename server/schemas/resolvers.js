@@ -102,11 +102,13 @@ const resolvers = {
       }
       return user
     },
-    addComment: async (parent, { commentText, commentAuthor, _id }) => {
+    addComment: async (parent, { commentText, commentAuthor, commentUsername, _id }) => {
       const comment = await Comment.create({
         commentText: commentText,
         commentAuthor: commentAuthor,
+        commentUsername: commentUsername
       })
+
       const playlist = await Playlist.findOneAndUpdate(
         { _id: _id },
         { $addToSet: { comments: comment._id } },

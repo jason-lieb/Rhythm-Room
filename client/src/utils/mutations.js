@@ -118,6 +118,7 @@ mutation Mutation($commentText: String!, $commentAuthor: String!, $id: String!) 
       _id
       commentAuthor
       commentText
+      commentUsername
       createdAt
     }
   }

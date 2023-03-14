@@ -40,6 +40,7 @@ const typeDefs = gql`
     commentText: String
     commentAuthor: String
     createdAt: String
+    commentUsername: String
   }
 
   type User {
@@ -69,7 +70,7 @@ const typeDefs = gql`
     addPic(profilePic: String!, _id: String!): User
     removePlaylist(_id: String!, ownerId: String!): Playlist
     login(email: String!, password: String!): User
-    addComment(commentText: String!, commentAuthor: String!, _id: String!): Comment
+    addComment(commentText: String!, commentAuthor: String!, commentUsername: String!, _id: String!): Comment
   }
 `
 
