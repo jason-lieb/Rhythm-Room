@@ -8,7 +8,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import Song from '../Song'
 import Comment from '../Comment'
-import { useLogin } from '../../utils/LoginContext'
 import TextField from '@mui/material/TextField'
 import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations'
 import { useMutation } from '@apollo/client'
@@ -20,6 +19,8 @@ import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
 import { QUERY_PLAYLIST } from '../../utils/queries'
 import { useQuery } from '@apollo/client'
+
+import Auth from '../../utils/auth'
 
 const css = `
   .playlistContainer {
@@ -51,7 +52,6 @@ const css = `
 
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
-  const { sessionId, username } = useLogin()
   const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
@@ -63,14 +63,9 @@ export default function Playlist() {
   }
 
   const commentButton = async () => {
-    // console.log(username, commentText, playlistId, sessionId)
+    console.log(commentText, playlistId)
     const { data } = await addComment({
-      variables: {
-        commentText: commentText,
-        commentAuthor: sessionId,
-        commentUsername: username,
-        id: playlistId,
-      },
+      variables: { commentText: commentText, commentAuthor: Auth.getProfile().data._id, commentUsername: Auth.getProfile().data.username, id: playlistId }
     })
   }
 
@@ -78,10 +73,8 @@ export default function Playlist() {
     variables: { playlistId },
   })
   const likePlaylist = async () => {
-    // console.log(playlistId, sessionId)
-    //add mutation logic for liking playlist here
     const { data } = await addLikedPlaylist({
-      variables: { ownerId: sessionId, id: playlistId },
+      variables: { ownerId: Auth.getProfile().data._id, id: playlistId }
     })
     alert('Playlist Liked')
   }
@@ -178,7 +171,7 @@ export default function Playlist() {
             />
           ))}
       </Container>
-      {sessionId && (
+      {Auth.loggedIn() && (
         <>
           <TextField
             id="outlined-multiline-static"

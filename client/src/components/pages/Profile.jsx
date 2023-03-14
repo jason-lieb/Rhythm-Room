@@ -18,6 +18,9 @@ import { CREATE_ABOUT_ME } from '../../utils/mutations'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
+import Auth from '../../utils/auth'
+import { Navigate } from 'react-router-dom'
+
 const css = `
   .container-box {
     display: flex;
@@ -128,53 +131,63 @@ export default function Profile() {
   }
 
   return (
-    <div className="container-box">
-      <style type="text/css">{css}</style>
-      <Card className="card">
-        <div className="left-content">
-          <div className="name-header">
-            <Avatar
-              alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
-              sx={{ width: 100, height: 100 }}
-            />
-            <Typography className="user-name">{user.username}</Typography>
-          </div>
-          <CardContent>
-            <Typography
-              className="text"
-              gutterBottom
-              variant="h5"
-              component="div"
-            >
-              About Me:
-            </Typography>
-            <Typography className="text" variant="body2" color="text.secondary">
-              {aboutTextDisplay}
-            </Typography>
-            <TextField
-              id="outlined-multiline-static"
-              label="Multiline"
-              multiline
-              rows={4}
-              defaultValue="Default Value"
-              onChange={handleAboutTextChange}
-            ></TextField>
-            <Button variant="contained" onClick={submitAbout}>
-              Submit
-            </Button>
-          </CardContent>
-        </div>
-        <div className="right-content">
-          <Card className="liked-playlist">
-            <Typography>Liked Playlists</Typography>
-            {generateLikedPlaylists()}
+    <>
+      {Auth.loggedIn() ? (
+        <div className="container-box">
+          <style type="text/css">{css}</style>
+          <Card className="card">
+            <div className="left-content">
+              <div className="name-header">
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/static/images/avatar/1.jpg"
+                  sx={{ width: 100, height: 100 }}
+                />
+                <Typography className="user-name">{user.username}</Typography>
+              </div>
+              <CardContent>
+                <Typography
+                  className="text"
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                >
+                  About Me:
+                </Typography>
+                <Typography
+                  className="text"
+                  variant="body2"
+                  color="text.secondary"
+                >
+                  {aboutTextDisplay}
+                </Typography>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Multiline"
+                  multiline
+                  rows={4}
+                  defaultValue="Default Value"
+                  onChange={handleAboutTextChange}
+                ></TextField>
+                <Button variant="contained" onClick={submitAbout}>
+                  Submit
+                </Button>
+              </CardContent>
+            </div>
+            <div className="right-content">
+              <Card className="liked-playlist">
+                <Typography>Liked Playlists</Typography>
+                {generateLikedPlaylists()}
+              </Card>
+              <Card className="created-playlist">
+                <Typography>Created Playlists</Typography>
+              </Card>
+            </div>
           </Card>
-          <Card className="created-playlist">
-            <Typography>Created Playlists</Typography>
-          </Card>
         </div>
-      </Card>
-    </div>
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </>
   )
 }

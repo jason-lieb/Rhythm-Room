@@ -5,9 +5,11 @@ import TextField from '@mui/material/TextField'
 import { useState, useEffect } from 'react'
 import { CREATE_USER } from '../utils/mutations'
 import { useMutation } from '@apollo/client'
-import { useLogin } from '../utils/LoginContext'
 import Modal from '@mui/material/Modal'
 import Typography from '@mui/material/Typography'
+
+import Auth from '../utils/auth'
+
 const css = `
     .container-box {
         display: flex;
@@ -51,7 +53,6 @@ const style = {
 }
 
 export default function CreateAccount({ setLoginPage }) {
-  const { sessionId, toggleSession, getUsername } = useLogin()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [addUser, { error }] = useMutation(CREATE_USER)
@@ -79,13 +80,12 @@ export default function CreateAccount({ setLoginPage }) {
     try {
       const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$')
       if (emailRegex.test(email)) {
-        const { data } = await addUser({
-          variables: { email: email, username: userName, password: password },
-        })
-        toggleSession(data.addUser._id)
-        getUsername(data.addUser.username)
-        setEmail('')
-        setPassword('')
+      const { data } = await addUser({
+            variables: { email: email, username: userName, password: password },
+          })
+      Auth.login(data.addUser.token)
+          setEmail('')
+          setPassword('')
       } else {
         setErrorMessage('Invalid Email')
         handleOpen()
