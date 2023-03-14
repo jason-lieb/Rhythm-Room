@@ -81,23 +81,22 @@ export default function Login() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const buttonClick = async (event) => {
-    const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
-    if (emailRegex.test(email)){
-      try {
+    try {
+      const emailRegex = new RegExp('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
+      if (emailRegex.test(email)){
         const { data } = await login({
         variables: { email: email, password: password }
       })
         toggleSession(data.login._id)
         getUsername(data.login.username)
-      }catch(error){
-        setErrorMessage(error)
-        console.log(errorMessage)
+        setEmail('')
+        setPassword('')
+      } else {
+        setErrorMessage('Invalid Email')
         handleOpen();
-    }
-      setEmail('')
-      setPassword('')
-    } else {
-      setErrorMessage('Invalid Email')
+      }
+    } catch (e) {
+      setErrorMessage(e.message);
       handleOpen();
     }
   }
