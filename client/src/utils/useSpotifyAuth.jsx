@@ -40,7 +40,6 @@ export default function useSpotifyAuth(code) {
       axios
         .post(refreshURL, { refreshToken })
         .then((res) => {
-          console.log('res.data', res.data)
           setAccessToken(res.data.accessToken)
           setExpiresIn(res.data.expiresIn)
         })
