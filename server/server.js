@@ -24,7 +24,7 @@ app.use(express.json())
 app.use(routes)
 console.log(process.env.NODE_ENV)
 // if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
+if (process.env.HEROKU_ENV === 'production') {
   console.log('running production')
   app.use(express.static(path.join(__dirname, '../client/build')))
 }
