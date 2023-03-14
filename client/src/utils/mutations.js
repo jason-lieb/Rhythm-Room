@@ -31,14 +31,40 @@ export const USER_LOGIN = gql`
 
 // creates a new playlist
 export const CREATE_PLAYLIST = gql`
-  mutation Mutation($name: String!, $id: String!, $owner: String!) {
-    addPlaylist(name: $name, _id: $id, owner: $owner) {
+mutation Mutation($name: String!, $id: String!, $owner: String!, $items: [String]!) {
+  addPlaylist(name: $name, _id: $id, owner: $owner, items: $items) {
+    _id
+    name
+    owner {
+      display_name
+      href
+    }
+    genres
+    playlistId
+    description
+    images {
+      url
+    }
+    tracks {
+      href
+      total
+    }
+    items {
       _id
+      trackId
       name
-      genres
-      owner
+      artist
+      duration_ms
+    }
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+      commentUsername
     }
   }
+}
 `
 // removes a playlist from created playlists
 export const REMOVE_PLAYLIST = gql`

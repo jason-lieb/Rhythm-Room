@@ -20,6 +20,7 @@ import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
+import CreatePlaylist from './components/pages/CreatePlaylist'
 
 const graphqlUri =
   process.env.HEROKU_ENV === 'production'
@@ -73,6 +74,7 @@ function App() {
             element={<Playlist accessToken={accessToken} />}
           />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/createPlaylist" element={<CreatePlaylist />} />
         </Routes>
         <CreatePlaylistBTN />
       </Router>

@@ -88,12 +88,13 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!')
     },
     // creates a new playlist and adds it to the user model that created it
-    addPlaylist: async (parent, { name, _id, owner }, context) => {
+    addPlaylist: async (parent, { name, _id, owner, items }, context) => {
       if (context.user) {
         const list = await Playlist.create({
           name: name,
           playlistId: _id,
           owner: owner,
+          items: [items]
         })
         const user = await User.findOneAndUpdate(
           { _id: _id },
