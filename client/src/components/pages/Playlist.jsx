@@ -8,6 +8,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import Song from '../Song'
 import Comment from '../Comment'
+import { useLogin } from '../../utils/LoginContext'
+import TextField from '@mui/material/TextField'
 
 import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
@@ -44,7 +46,7 @@ const css = `
 
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
-
+  const { sessionId, logout, username } = useLogin()
   // const { loading, data } = useQuery(QUERY_PLAYLIST, {variables: {playlist_id: ... }})
   // const playlist = data?.playlist || {}
 
@@ -143,6 +145,17 @@ export default function Playlist() {
           />
         ))}
       </Container>
+      {sessionId ? (
+        <TextField
+          id="outlined-multiline-static"
+          label="Multiline"
+          multiline
+          rows={4}
+          defaultValue="Default Value"
+        />
+      ) : (
+        <Typography>Loading</Typography>
+      )}
     </div>
   )
 }
