@@ -30,7 +30,6 @@ const typeDefs = gql`
 
   type Item {
     _id: ID!
-    _id: ID!
     trackId: String
     name: String
     artist: [String]
