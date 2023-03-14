@@ -87,6 +87,7 @@ const resolvers = {
       const user = await User.findOne({ email })
       if (!user) {
         console.log('wrong email or password')
+        return('wrong email or password')
       }
       const correctPass = await bcrypt.compare(user.password, password)
       if (!correctPass) {
