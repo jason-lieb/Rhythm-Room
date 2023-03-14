@@ -17,7 +17,6 @@ import Footer from './components/Footer'
 import LoginProvider from './utils/LoginContext'
 
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
-import CreatePlaylist from './components/pages/CreatePlaylist'
 
 import { useLogin } from './utils/LoginContext'
 
@@ -55,10 +54,9 @@ function App() {
             <Route path= "/Profile"
             element={<Profile/>}
             />
-            <Route path='createPlaylist' element={<CreatePlaylist />} />
           </Routes>
-        </Router>
           <CreatePlaylistBTN />
+        </Router>
         <Footer />
       </LoginProvider>
     </ApolloProvider>
