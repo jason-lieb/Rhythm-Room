@@ -29,13 +29,11 @@ mutation Mutation($id: String!, $ownerId: String!) {
 }
 `
 // adds a playlist to the "liked" section of a user
-export const CREATE_LIKED_PLAYLIST = gql `
-mutation Mutation($id: String!, $ownerId: String!) {
+export const ADD_LIKED_PLAYLIST = gql `
+mutation AddLikedPlaylist($id: String!, $ownerId: String!) {
     addLikedPlaylist(_id: $id, ownerId: $ownerId) {
-        _id
-        name
-        genres
-        owner
+    name
+    _id
     }
 }
 `
@@ -115,11 +113,11 @@ mutation Login($email: String!, $password: String!) {
 export const ADD_COMMENT = gql `
 mutation Mutation($commentText: String!, $commentAuthor: String!, $id: String!) {
     addComment(commentText: $commentText, commentAuthor: $commentAuthor, _id: $id) {
-      _id
-      commentAuthor
-      commentText
-      commentUsername
-      createdAt
+        _id
+        commentAuthor
+        commentText
+        commentUsername
+        createdAt
     }
-  }
+}
 `

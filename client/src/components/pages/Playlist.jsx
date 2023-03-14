@@ -10,10 +10,11 @@ import Song from '../Song'
 import Comment from '../Comment'
 import { useLogin } from '../../utils/LoginContext'
 import TextField from '@mui/material/TextField'
-import { ADD_COMMENT } from '../../utils/mutations';
-import { useMutation } from '@apollo/client';
+import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations'
+import { useMutation } from '@apollo/client'
 import { useParams } from 'react-router-dom'
-import Button from '@mui/material/Button';
+import Button from '@mui/material/Button'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
 import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
@@ -50,25 +51,40 @@ const css = `
 
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
-  const { sessionId, logout, username } = useLogin()
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
-  const [commentText, setCommentText] = useState('');
-  const { playlistId } = useParams();
+  const { sessionId, username } = useLogin()
+  const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
+  const [addComment] = useMutation(ADD_COMMENT)
+  const [commentText, setCommentText] = useState('')
+  const { playlistId } = useParams()
+
   const handleCommentChange = (event) => {
-    const { value } = event.target;
-    setCommentText(value);
-  };
+    const { value } = event.target
+    setCommentText(value)
+  }
 
   const commentButton = async () => {
-    console.log(username, commentText, playlistId, sessionId)
+    // console.log(username, commentText, playlistId, sessionId)
     const { data } = await addComment({
-      variables: { commentText: commentText, commentAuthor: sessionId, commentUsername: username, id: playlistId }
+      variables: {
+        commentText: commentText,
+        commentAuthor: sessionId,
+        commentUsername: username,
+        id: playlistId,
+      },
     })
   }
 
   const { loading, data } = useQuery(QUERY_PLAYLIST, {
-    variables: { playlistId: String(window.location.pathname.split('/')[2]) },
+    variables: { playlistId },
   })
+  const likePlaylist = async () => {
+    // console.log(playlistId, sessionId)
+    //add mutation logic for liking playlist here
+    const { data } = await addLikedPlaylist({
+      variables: { ownerId: sessionId, id: playlistId },
+    })
+    alert('Playlist Liked')
+  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const playlist = { ...data?.playlist } || {}
   playlist.numOfTracks = playlist.items?.length
@@ -78,13 +94,15 @@ export default function Playlist() {
     if (!playlist.name) return
     document.title = `Rhythm Room - ${playlist.name}`
   }, [playlist])
-
   if (loading) return <div>Loading...</div>
 
   return (
     <div className="playlistContainer">
       <style type="text/css">{css}</style>
       <Container>
+        <div className="like-btn" onClick={likePlaylist}>
+          <ThumbUpIcon fontSize="large" cursor="pointer" />
+        </div>
         <Grid container spacing={2} className="header">
           <Grid item xs={12} className="imgContainer">
             <img
@@ -160,19 +178,21 @@ export default function Playlist() {
             />
           ))}
       </Container>
-      {sessionId &&
+      {sessionId && (
         <>
-        <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          rows={4}
-          defaultValue="Default Value"
-          onChange={handleCommentChange}
-        />
-        <Button variant="contained" onClick={commentButton}>Add Comment</Button>
+          <TextField
+            id="outlined-multiline-static"
+            label="Multiline"
+            multiline
+            rows={4}
+            defaultValue="Default Value"
+            onChange={handleCommentChange}
+          />
+          <Button variant="contained" onClick={commentButton}>
+            Add Comment
+          </Button>
         </>
-      }
+      )}
     </div>
   )
 }

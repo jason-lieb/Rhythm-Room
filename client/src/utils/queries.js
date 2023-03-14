@@ -69,34 +69,40 @@ export const QUERY_USER = gql`
 `
 // queries one playlist based on an id
 export const QUERY_PLAYLIST = gql`
-  query Playlists($playlistId: String) {
-    playlist(id: $playlistId) {
-      comments {
-        commentAuthor
-        commentText
-        createdAt
-      }
-      description
-      genres
-      images {
-        url
-      }
-      items {
-        name
-        duration_ms
-        artist
-      }
+query Playlist($playlistId: ID) {
+  playlist(id: $playlistId) {
+    _id
+    name
+    comments {
+      _id
+      commentText
+      commentAuthor
+      createdAt
+      commentUsername
+    }
+    description
+    genres
+    images {
+      url
+    }
+    items {
+      _id
+      trackId
       name
-      owner {
-        display_name
-        href
-      }
-      tracks {
-        total
-        href
-      }
+      artist
+      duration_ms
+    }
+    owner {
+      display_name
+      href
+    }
+    playlistId
+    tracks {
+      href
+      total
     }
   }
+}
 `
 // queries all playlists
 export const QUERY_ALL_PLAYLISTS = gql`
@@ -122,4 +128,15 @@ export const QUERY_ALL_PLAYLISTS = gql`
       }
     }
   }
+`
+export const QUERY_SINGLE_SONG = `
+query Query($trackId: ID) {
+  track(id: $trackId) {
+    _id
+    trackId
+    name
+    artist
+    duration_ms
+  }
+}
 `

@@ -1,14 +1,15 @@
 const { AuthenticationError } = require('apollo-server-express')
 const bcrypt = require('bcryptjs')
-const { Comment, Playlist, User } = require('../models')
+const { Comment, Playlist, User, Track } = require('../models')
 
 const resolvers = {
   Query: {
-    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments']),
+    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments', 'tracks']),
     playlist: async (parent, { id }, context) => {
       const playlist = await Playlist.findById(id).populate([
         'items',
         'comments',
+        'tracks',
       ])
       return playlist
     },
@@ -23,9 +24,15 @@ const resolvers = {
         console.log(err)
       }
     },
-    users: async () =>
-      User.find({}).populate(['createdplaylist', 'likedplaylist']),
+    users: async () => { User.find({}).populate(['createdplaylist', 'likedplaylist'])
+    },
+    track: async (parent, { id }, context) => {
+      const track = await Track.findById(id)
+      return track
+    },
+    tracks: async () => Track.find({})
   },
+
   Mutation: {
     // adds a user to the db
     addUser: async (parent, args) => {

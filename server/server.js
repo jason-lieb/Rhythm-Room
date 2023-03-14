@@ -22,16 +22,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(routes)
-console.log(process.env.NODE_ENV)
+
 // if we're in production, serve client/build as static assets
 if (process.env.HEROKU_ENV === 'production') {
   console.log('running production')
   app.use(express.static(path.join(__dirname, '../client/build')))
 }
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'))
-})
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start()
