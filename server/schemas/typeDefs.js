@@ -61,6 +61,7 @@ const typeDefs = gql`
     user(id: ID): User
     users: [User]
     track(id: ID): Item
+    tracks: [Item]
   }
 
   type Mutation {
