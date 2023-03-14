@@ -1,12 +1,10 @@
 import React from 'react'
 import PlusImg from '../assets/icons8-add-new-48.png'
 import { Link, useNavigate } from 'react-router-dom'
-// import { useLogin } from '../utils/LoginContext'
 
 import Auth from '../utils/auth'
 
 function CreatePlaylistBTN() {
-    // const { sessionId, logout, username } = useLogin()
     const navigate = useNavigate()
     const goTo = () => {
         console.log('works')

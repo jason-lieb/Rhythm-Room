@@ -15,8 +15,6 @@ import { useMutation } from '@apollo/client'
 import CreateAccount from '../CreateAccount'
 import Modal from '@mui/material/Modal'
 
-// import { useNavigate } from 'react-router-dom'
-// import { useLogin } from '../../utils/LoginContext'
 import Auth from '../../utils/auth'
 
 const css = `
@@ -98,8 +96,6 @@ export default function Login() {
         })
         console.log(data.login)
         Auth.login(data.login.token)
-        // toggleSession(data.login._id)
-        // getUsername(data.login.username)
         setEmail('')
         setPassword('')
       } else {

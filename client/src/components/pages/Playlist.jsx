@@ -8,7 +8,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import Song from '../Song'
 import Comment from '../Comment'
-// import { useLogin } from '../../utils/LoginContext'
 import TextField from '@mui/material/TextField'
 import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations'
 import { useMutation } from '@apollo/client'
@@ -74,8 +73,6 @@ export default function Playlist() {
     variables: { playlistId },
   })
   const likePlaylist = async () => {
-    // console.log(playlistId, sessionId)
-    //add mutation logic for liking playlist here
     const { data } = await addLikedPlaylist({
       variables: { ownerId: Auth.getProfile().data._id, id: playlistId }
     })

@@ -20,8 +20,6 @@ import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
 
-// import LoginProvider from './utils/LoginContext'
-
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
 
 const httpLink = createHttpLink({
@@ -60,7 +58,6 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      {/* <LoginProvider> */}
         <Router>
           <Nav />
           <Routes>
@@ -76,7 +73,6 @@ function App() {
           <CreatePlaylistBTN />
         </Router>
         <Footer />
-      {/* </LoginProvider> */}
     </ApolloProvider>
   )
 }

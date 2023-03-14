@@ -9,7 +9,6 @@ import Button from '@mui/material/Button'
 import LoginSpotify from './LoginSpotify'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
 
-// import { useLogin } from '../utils/LoginContext'
 import Auth from '../utils/auth'
 
 const css = `
@@ -21,14 +20,12 @@ const css = `
 export default function Nav() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
-  // const { sessionId, logout, username } = useLogin()
 
   const handleLoginButtonClick = () => {
     navigate('/login')
   }
 
   const handleLogoutButtonClick = () => {
-    // logout()
     Auth.logout()
   }
 
