@@ -15,6 +15,9 @@ const commentSchema = new Schema(
       default: Date.now,
       get: (time) => time.toLocaleDateString(),
     },
+    commentUsername: {
+      type: String,
+    }
   },
   {
     toJSON: {

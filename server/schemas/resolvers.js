@@ -1,10 +1,10 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express')
 const bcrypt = require('bcryptjs')
 const { Comment, Playlist, User } = require('../models')
 
 const resolvers = {
   Query: {
-    playlists: async () => Playlist.find().populate(['owner', 'items']),
+    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments']),
     playlist: async (parent, { id }, context) => {
       const playlist = await Playlist.findById(id).populate([
         'items',
@@ -97,13 +97,27 @@ const resolvers = {
       const user = await User.findOne({ email })
       const wrong = 'wrong email or password'
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError('No user found with this email address')
       }
       const correctPass = await bcrypt.compare(password, user.password)
       if (!correctPass) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect credentials')
       }
       return user
+    },
+    addComment: async (parent, { commentText, commentAuthor, commentUsername, _id }) => {
+      const comment = await Comment.create({
+        commentText: commentText,
+        commentAuthor: commentAuthor,
+        commentUsername: commentUsername
+      })
+
+      const playlist = await Playlist.findOneAndUpdate(
+        { _id: _id },
+        { $addToSet: { comments: comment._id } },
+        { new: true }
+      )
+      return comment, playlist
     },
   },
 }
