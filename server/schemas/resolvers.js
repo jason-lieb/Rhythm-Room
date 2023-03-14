@@ -39,8 +39,10 @@ const resolvers = {
     track: async (parent, { id }, context) => {
       const track = await Track.findById(id)
       return track
-    }
+    },
+    tracks: async () => Track.find({})
   },
+
   Mutation: {
     // adds a user to the db
     addUser: async (parent, args) => {

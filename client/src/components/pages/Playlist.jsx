@@ -10,12 +10,11 @@ import Song from '../Song'
 import Comment from '../Comment'
 // import { useLogin } from '../../utils/LoginContext'
 import TextField from '@mui/material/TextField'
-import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations';
-import { useMutation } from '@apollo/client';
+import { ADD_COMMENT, ADD_LIKED_PLAYLIST } from '../../utils/mutations'
+import { useMutation } from '@apollo/client'
 import { useParams } from 'react-router-dom'
-import Button from '@mui/material/Button';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-
+import Button from '@mui/material/Button'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
 import getPlaylistDuration from '../../utils/getPlaylistDuration'
 import { useSpotifyApi } from '../../utils/SpotifyApiContext'
@@ -54,16 +53,15 @@ const css = `
 
 export default function Playlist() {
   const [spotifyApi] = useSpotifyApi()
-  // const { sessionId, logout, username } = useLogin()
-  // const { sessionId, logout, username } = useLogin()
-  const [addLikedPlaylist, { errorTwo }] = useMutation(ADD_LIKED_PLAYLIST)
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
-  const [commentText, setCommentText] = useState('');
-  const { playlistId } = useParams();
+  const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
+  const [addComment] = useMutation(ADD_COMMENT)
+  const [commentText, setCommentText] = useState('')
+  const { playlistId } = useParams()
+
   const handleCommentChange = (event) => {
-    const { value } = event.target;
-    setCommentText(value);
-  };
+    const { value } = event.target
+    setCommentText(value)
+  }
 
   const commentButton = async () => {
     console.log(commentText, playlistId)
@@ -73,7 +71,7 @@ export default function Playlist() {
   }
 
   const { loading, data } = useQuery(QUERY_PLAYLIST, {
-    variables: { playlistId: String(window.location.pathname.split('/')[2]) },
+    variables: { playlistId },
   })
   const likePlaylist = async () => {
     // console.log(playlistId, sessionId)
@@ -98,8 +96,8 @@ export default function Playlist() {
     <div className="playlistContainer">
       <style type="text/css">{css}</style>
       <Container>
-        <div className='like-btn'onClick={likePlaylist}>
-          <ThumbUpIcon fontSize='large' cursor="pointer"/>
+        <div className="like-btn" onClick={likePlaylist}>
+          <ThumbUpIcon fontSize="large" cursor="pointer" />
         </div>
         <Grid container spacing={2} className="header">
           <Grid item xs={12} className="imgContainer">
@@ -176,19 +174,21 @@ export default function Playlist() {
             />
           ))}
       </Container>
-      {Auth.loggedIn() &&
+      {Auth.loggedIn() && (
         <>
-        <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          rows={4}
-          defaultValue="Default Value"
-          onChange={handleCommentChange}
-        />
-        <Button variant="contained" onClick={commentButton}>Add Comment</Button>
+          <TextField
+            id="outlined-multiline-static"
+            label="Multiline"
+            multiline
+            rows={4}
+            defaultValue="Default Value"
+            onChange={handleCommentChange}
+          />
+          <Button variant="contained" onClick={commentButton}>
+            Add Comment
+          </Button>
         </>
-      }
+      )}
     </div>
   )
 }
