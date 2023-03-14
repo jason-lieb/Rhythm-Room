@@ -61,13 +61,6 @@ const style = {
 }
 // exporting defalault function for login
 export default function Login() {
-  // const { sessionId, toggleSession, getUsername } = useLogin()
-  // const navigate = useNavigate()
-  // useEffect(() => {
-  //   if (sessionId) {
-  //     navigate('/')
-  //   }
-  // }, [sessionId])
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginPage, setLoginPage] = useState('login')
