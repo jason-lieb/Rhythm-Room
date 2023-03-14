@@ -123,3 +123,14 @@ export const QUERY_ALL_PLAYLISTS = gql`
     }
   }
 `
+export const QUERY_SINGLE_SONG = `
+query Query($trackId: ID) {
+  track(id: $trackId) {
+    _id
+    trackId
+    name
+    artist
+    duration_ms
+  }
+}
+`

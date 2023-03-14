@@ -30,6 +30,7 @@ const typeDefs = gql`
 
   type Item {
     _id: ID!
+    _id: ID!
     trackId: String
     name: String
     artist: [String]
@@ -57,9 +58,10 @@ const typeDefs = gql`
 
   type Query {
     playlists: [Playlist]
-    playlist(id: String): Playlist
+    playlist(id: ID): Playlist
     user(id: ID): User
     users: [User]
+    track(id: ID): Item
     tracks: [Item]
   }
 
