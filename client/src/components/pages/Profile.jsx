@@ -26,11 +26,11 @@ const css = `
     background-color: #242038;
   }
   .card {
-    // height: 75vh;
-    // width: 75vh;
     background-color: #8d86c9;
     color: white;
     display: flex;
+    flex-direction: column;
+    margin: 30px 0;
   }
   .card-actions {
     display: flex;
@@ -98,7 +98,17 @@ export default function Profile() {
 
   const generateLikedPlaylists = () => {
     return user.likedplaylist.map((playlist, index) => (
-      <Card key={index} sx={{ display: 'flex' }}>
+      <Card
+        key={index}
+        sx={{
+          display: 'flex',
+          minHeight: '151px',
+          backgroundColor: '#8d86c9',
+          color: 'white',
+          width: '100%',
+          justifyContent: 'space-between',
+        }}
+      >
         <CardContent>
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
@@ -113,7 +123,16 @@ export default function Profile() {
   }
   const generateCreatedPlaylists = () => {
     return user.createdplaylist.map((playlist, index) => (
-      <Card key={index} sx={{ display: 'flex' }}>
+      <Card
+        key={index}
+        sx={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'space-between',
+          backgroundColor: '#8d86c9',
+          color: 'white',
+        }}
+      >
         <CardContent>
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
@@ -145,31 +164,47 @@ export default function Profile() {
   const editAboutMe = () => {
     if (!openEditBox) {
       return (
-        <Button variant="text" onClick={() => setOpenEditBox(true)}>
-          Edit
+        <Button
+          sx={{
+            fontSize: '1.2em',
+            color: '#595381',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          variant="text"
+          onClick={() => setOpenEditBox(true)}
+        >
+          <span>Edit</span>
+          <span>&#9997;</span>
         </Button>
       )
     } else if (openEditBox) {
       return (
-        <>
+        <div className="edit-div">
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="About Me"
             multiline
             rows={4}
-            defaultValue="Default Value"
+            defaultValue="Tell us about yourself..."
             onChange={handleAboutTextChange}
           ></TextField>
-          <Button variant="contained" onClick={submitAbout}>
+          <Button
+            label="About Me"
+            sx={{ backgroundColor: '#595381', marginTop: 1 }}
+            variant="contained"
+            onClick={submitAbout}
+          >
             Submit
           </Button>
-        </>
+        </div>
       )
     }
   }
 
   if (loading) {
-    return <Loading/>
+    return <Loading />
   }
 
   if (!Auth.loggedIn()) navigate('/login')
@@ -177,23 +212,28 @@ export default function Profile() {
   return (
     <div className="container-box" style={{ minHeight: 'calc(100vh - 8rem)' }}>
       <style type="text/css">{css}</style>
-      <Card className="card">
+      <Card className="card" sx={{ maxWidth: '860px', width: '85%' }}>
         <div className="left-content">
           {/* Avatar and username */}
           <div className="name-header">
             <Avatar
               alt="Remy Sharp"
               src="/static/images/avatar/1.jpg"
-              sx={{ width: 100, height: 100 }}
+              sx={{ width: 70, height: 70 }}
             />
-            <Typography className="user-name">{user.username}</Typography>
+            <Typography
+              sx={{ fontSize: '1.5em', fontWeight: 'bold' }}
+              className="user-name"
+            >
+              {user.username}
+            </Typography>
             {!disconnected && (
               <DisconnectSpotify setDisconnected={setDisconnected} />
             )}
           </div>
 
           {/* About me section */}
-          <CardContent>
+          <CardContent className="about-me">
             <Typography
               className="text"
               gutterBottom
@@ -202,7 +242,12 @@ export default function Profile() {
             >
               About Me:
             </Typography>
-            <Typography className="text" variant="body2" color="text.secondary">
+            <Typography
+              className="text"
+              variant="body2"
+              color="text.secondary"
+              sx={{ fontSize: '1.2em', marginBottom: '1rem' }}
+            >
               {aboutTextDisplay}
             </Typography>
             {editAboutMe()}
@@ -211,14 +256,14 @@ export default function Profile() {
 
         {/* Liked and created playlists */}
         <div className="right-content">
-          <Card className="liked-playlist">
-            <Typography>Liked Playlists</Typography>
+          <div className="liked-playlist playlist">
+            <div className="typ">Liked Playlists</div>
             {generateLikedPlaylists()}
-          </Card>
-          <Card className="created-playlist">
-            <Typography>Created Playlists</Typography>
+          </div>
+          <div className="created-playlist playlist">
+            <div className="typ">Created Playlists</div>
             {generateCreatedPlaylists()}
-          </Card>
+          </div>
         </div>
       </Card>
     </div>
