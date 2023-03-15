@@ -74,13 +74,14 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addPlaylist(name: String!, _id: String!, owner: String!, items: [String]!): Playlist
+    addPlaylist(name: String!, _id: String!, images: [String]!): Playlist
     addLikedPlaylist(_id: String!, ownerId: String!): Playlist
     removeLikedPlaylist(_id: String!, ownerId: String!): Playlist
     addAbout(about: String!, _id: String!): User
     addPic(profilePic: String!, _id: String!): User
     removePlaylist(_id: String!, ownerId: String!): Playlist
     addComment(commentText: String!, commentAuthor: String!, commentUsername: String!, _id: String!): Comment
+    addSong(_id: String!, id: String!): Item
   }
 `
 

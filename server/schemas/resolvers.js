@@ -5,12 +5,13 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
-    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments', 'tracks']),
+    playlists: async () => Playlist.find().populate(['owner', 'items', 'comments', 'tracks', 'images']),
     playlist: async (parent, { id }, context) => {
       const playlist = await Playlist.findById(id).populate([
         'items',
         'comments',
         'tracks',
+        'images'
       ])
       return playlist
     },
@@ -88,20 +89,20 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!')
     },
     // creates a new playlist and adds it to the user model that created it
-    addPlaylist: async (parent, { name, _id, owner, items }, context) => {
+    addPlaylist: async (parent, { name, _id, images }, context) => {
       if (context.user) {
         const list = await Playlist.create({
           name: name,
-          playlistId: _id,
-          owner: owner,
-          items: [items]
+          images: {
+            url: images
+          }
         })
         const user = await User.findOneAndUpdate(
           { _id: _id },
           { $addToSet: { createdplaylist: list._id } },
           { new: true }
         )
-        return list, user
+        return user, list
       }
       throw new AuthenticationError('You need to be logged in!')
     },
@@ -157,7 +158,17 @@ const resolvers = {
       )
       return comment, playlist
     },
+    addSong: async (parent, { id, _id}) => {
+      const song = await Track.findById(id)
+      const list = await Playlist.findOneAndUpdate(
+        {_id: _id},
+        {$addToSet: { items: song._id }},
+        { new: true }
+      )
+      return list, song
+    }
   },
+  
 }
 
 module.exports = resolvers

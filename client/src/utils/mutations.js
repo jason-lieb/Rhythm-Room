@@ -31,37 +31,21 @@ export const USER_LOGIN = gql`
 
 // creates a new playlist
 export const CREATE_PLAYLIST = gql`
-mutation Mutation($name: String!, $id: String!, $owner: String!, $items: [String]!) {
-  addPlaylist(name: $name, _id: $id, owner: $owner, items: $items) {
-    _id
+mutation AddPlaylist($name: String!, $id: String!, $images: [String]!) {
+  addPlaylist(name: $name, _id: $id, images: $images) {
     name
-    owner {
-      display_name
-      href
-    }
-    genres
+    _id
     playlistId
-    description
-    images {
-      url
-    }
-    tracks {
-      href
-      total
-    }
     items {
       _id
       trackId
       name
       artist
       duration_ms
+      uri
     }
-    comments {
-      _id
-      commentText
-      commentAuthor
-      createdAt
-      commentUsername
+    images {
+      url
     }
   }
 }
@@ -159,5 +143,13 @@ export const ADD_COMMENT = gql`
       commentUsername
       createdAt
     }
+}
+`
+export const ADD_SONG = gql `
+mutation AddSong($id: String!, $addSongId: String!) {
+  addSong(_id: $id, id: $addSongId) {
+    name
+    _id
+  }
 }
 `
