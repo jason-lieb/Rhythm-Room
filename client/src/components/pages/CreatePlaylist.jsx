@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import SearchImage from '../SearchImage'
+
 import { useParams } from 'react-router-dom'
 import Auth from '../../utils/auth'
 
