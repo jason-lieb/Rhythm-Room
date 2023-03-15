@@ -22,16 +22,13 @@ import Footer from './components/Footer'
 import CreatePlaylistBTN from './components/CreatePlaylistBTN'
 import CreatePlaylist from './components/pages/CreatePlaylist'
 
-const graphqlUri =
-  process.env.HEROKU_ENV === 'production'
-    ? 'https://spotify-playlist-app.herokuapp.com/graphql/'
-    : 'http://localhost:5500/graphql/'
+let origin =
+  window.location.host.split(':').length > 1
+    ? window.location.origin.slice(0, -4) + '5500'
+    : window.location.origin
+const graphqlUri = origin + '/graphql'
 
-// let origin =
-//   window.location.host.split(':').length > 1
-//     ? window.location.origin.slice(0, -4) + '5500'
-//     : window.location.origin
-// const graphqlUri = origin + '/graphql'
+console.log('graphqlUri', graphqlUri)
 
 const httpLink = createHttpLink({
   uri: graphqlUri,

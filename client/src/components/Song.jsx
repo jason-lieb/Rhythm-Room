@@ -35,6 +35,7 @@ export default function Song({
   const handlePlay = () => {
     chooseTrack(uri)
   }
+  const formattedArtist = artist.join(', ')
   return (
     <Grid container spacing={2} key={index} className="track">
       <style type="text/css">{css}</style>
@@ -48,7 +49,7 @@ export default function Song({
           {title}
         </Typography>
         <Typography variant="body2" className="artists">
-          {artist}
+          {formattedArtist}
         </Typography>
       </Grid>
       <Grid item xs={1} className="containerDuration">
