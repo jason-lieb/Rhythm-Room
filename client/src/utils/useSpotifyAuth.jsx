@@ -19,6 +19,20 @@ export default function useSpotifyAuth(code) {
   }
 
   useEffect(() => {
+    const accessTokenFromStorage = localStorage.getItem('access_token')
+    const { accessToken, refreshToken, expiresAt } = accessTokenFromStorage
+      ? JSON.parse(accessTokenFromStorage)
+      : {}
+    let expiresIn =
+      new Date().getTime() / 1000 > expiresAt
+        ? 0
+        : expiresAt - new Date().getTime() / 1000
+    setAccessToken(accessToken)
+    setRefreshToken(refreshToken)
+    setExpiresIn(expiresIn)
+  }, [])
+
+  useEffect(() => {
     if (!code) return
     axios
       .post(authURL, { code })
@@ -26,6 +40,15 @@ export default function useSpotifyAuth(code) {
         setAccessToken(res.data.accessToken)
         setRefreshToken(res.data.refreshToken)
         setExpiresIn(res.data.expiresIn)
+        const accessTokenForStorage = {
+          accessToken: res.data.accessToken,
+          refreshToken: res.data.refreshToken,
+          expiresAt: +(new Date().getTime() / 1000) + res.data.expiresIn,
+        }
+        localStorage.setItem(
+          'access_token',
+          JSON.stringify(accessTokenForStorage)
+        )
         window.history.pushState({}, null, '/')
       })
       .catch((err) => {
