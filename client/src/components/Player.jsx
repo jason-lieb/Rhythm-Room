@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import SpotifyPlayer from 'react-spotify-web-playback'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
 
-export default function Player(songUri) {
+export default function Player({ songUri }) {
   const [spotifyApi] = useSpotifyApi()
-  useEffect(() => setPlay(true), [songUri])
   const [play, setPlay] = useState(false)
+  useEffect(() => setPlay(true), [songUri])
 
   if (!spotifyApi.getAccessToken()) return null
   return (
@@ -15,7 +15,7 @@ export default function Player(songUri) {
         if (!state.isPlaying) setPlay(false)
       }}
       play={play}
-      uris={['spotify:track:3jHBgKdLCf46aP3HRI0WYv']}
+      uris={songUri ? [songUri] : []}
     />
   )
 }

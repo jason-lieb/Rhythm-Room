@@ -52,7 +52,7 @@ export default function Nav() {
           )}
 
           {/* Render connected to spotify statement if connected to spotify*/}
-          {spotifyApi.getAccessToken() && (
+          {spotifyApi.getAccessToken() && Auth.loggedIn() && (
             <Button style={{ color: 'white' }} disabled>
               Connected to Spotify
             </Button>
