@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
     } else {
       console.log(body)
       console.error(err)
-      res.sendStatus(500)
+      res.sendStatus(500).json({ body, err })
     }
   })
 })

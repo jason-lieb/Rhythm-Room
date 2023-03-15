@@ -6,8 +6,12 @@ export default function useSpotifyAuth(code) {
   const [refreshToken, setRefreshToken] = useState()
   const [expiresIn, setExpiresIn] = useState()
 
-  const authURL = window.location.origin + '/api/auth/login/'
-  const refreshURL = window.location.origin + '/api/auth/refresh/'
+  let origin =
+    window.location.host.split(':').length > 1
+      ? window.location.origin.slice(0, -4) + '5500'
+      : window.location.origin
+  const authURL = origin + '/api/auth/login/'
+  const refreshURL = origin + '/api/auth/refresh/'
 
   useEffect(() => {
     const accessTokenFromStorage = localStorage.getItem('access_token')

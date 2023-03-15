@@ -174,7 +174,7 @@ export default function Profile() {
   if (!Auth.loggedIn()) navigate('/login')
 
   return (
-    <div className="container-box" style={{ minHeight: '85vh', padding: 10}}>
+    <div className="container-box" style={{ minHeight: 'calc(100vh - 8rem)' }}>
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
