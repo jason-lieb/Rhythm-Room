@@ -107,22 +107,27 @@ body {
 }
 .song-section {
     width: 85%;
-    height: 400px;
+    height: 600px;
     overflow-y: scroll;
     background-color: rgb(141, 134, 201, 0.1);
-    padding: 15px;
+    padding: 25px 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 .create-div {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 ::-webkit-scrollbar {
     width: 10px;
@@ -139,7 +144,6 @@ body {
     border: 1px solid rgb(141, 134, 201, 0.3);
     padding: 10px;
     color: white;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -148,6 +152,62 @@ body {
     background-color: rgb(141, 134, 201, 0.3);
 }
 .form-section {
-    color: white;
+    color: #242038;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #8d86c9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    max-width: 85%;
 }
-
+.form-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 90%;
+}
+.input-cr {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+.btn-cr {
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    color: #242038;
+    background-color: transparent;
+    font-size: 1.5em;
+    
+}
+.btn-cr:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-cr-2 {
+    color: #242038;
+    background-color: #8d86c9;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.link-cr {
+    color: white;
+    font-size: 1.5em;
+    margin-top: 2rem;
+    text-decoration: none;
+}
+.link-cr:hover {
+    text-decoration: underline;
+}

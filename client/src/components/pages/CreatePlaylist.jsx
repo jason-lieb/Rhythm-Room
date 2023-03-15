@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Auth from '../../utils/auth'
 
 import { QUERY_ALL_SONGS } from '../../utils/queries'
@@ -8,6 +8,7 @@ import { useQuery } from '@apollo/client'
 
 import { ADD_COMMENT, CREATE_PLAYLIST, ADD_SONG } from '../../utils/mutations'
 import { useMutation } from '@apollo/client'
+
 
 function CreatePlaylist() {
     const { loading, data } = useQuery(QUERY_ALL_SONGS)
@@ -18,36 +19,28 @@ function CreatePlaylist() {
     const [addPlaylist, { error }] = useMutation(CREATE_PLAYLIST)
     const [addSong] = useMutation(ADD_SONG)
     const [pulledData, setPulledData] =useState('')
-    // console.log(data)
-    // console.log(error)
-    // const addToArray = (event) => {
-    //     console.log(event.target)
-    //     const target = event.target.id
-    //     if (target === 'btn') {
-    //         console.log('works')
-    //         setSongArray(JSON.stringify(target))
-    //         console.log(songArray)
-    //     } else {
-    //         return
-    //     }
-    // }
+
+    // sets the name for the playlist
     const handleNameChange = (event) => {
         const { value } = event.target
         setPlaylistName(value)
     }
+
+    // adds a new song to the newly created playlist
     const addNewSong = async (event) => {
         const btn = event.target.className
         const target = event.target.id
-        if (btn === 'btn') {
+        if (btn === 'btn-cr-2') {
             const { data: songz } = await addSong({
             variables: { id: pulledData, addSongId: target }
         })
-        console.log(songz)
+        // console.log(songz)
         alert('Song Added')
         } else {
             return
         }
     }
+    //creates a new playlist
     const createNewPlaylist = async () => {
         const { data: info } = await addPlaylist({
             variables: { name: playlistName, id: Auth.getProfile().data._id, images: [
@@ -60,40 +53,36 @@ function CreatePlaylist() {
             console.log(JSON.stringify(error, null, 2))
         }
         setListShown(true)
-        console.log(info)
+        // console.log(info)
         setPulledData(info.addPlaylist._id)
-        console.log(pulledData)
+        // console.log(pulledData)
     }
-    useEffect(() => {
-        console.log(pulledData, 'playlist Id')
-    }, [pulledData])
+
+
 return (
     <div className='create-div' style={{ minHeight: '95vh'}}>
         {listShown ? (
+            <>
             <section className='song-section'>
+                <h1>Add songs to your new plalist!</h1>
             { loading ? <div>Loading...</div> : data.tracks.map(song => {
                 return <div className='song-card' key={song._id}>
                     <div>
                     <h2>{song.name}</h2>
                     <h4>{song.artist.map(artist => artist).join(', ')}</h4>
                     </div>
-                    <button onClick={addNewSong} className='btn' id={song._id} style={{ display: `${buttonSight}`}}>{added}</button>
+                    <button onClick={addNewSong} className='btn-cr-2' id={song._id}>Add</button>
                 </div>
             })}
-        </section>
+            </section>
+            <Link className='link-cr' to='/'>Finish</Link>
+            </>
         ) : (
             <section className='form-section'>
-            <div>
-                <div>
-                    <span>Playlist Name</span>
-                    <input onChange={handleNameChange} type='text' placeholder='name'/>
-                </div>
-                <button onClick={createNewPlaylist}>Click here to add music!</button>
-            </div>
-                <div className=''>
-                    {/* {songArray.length <= 0 ? <div>Add Songs</div> : songArray.map(each => {
-                        return <div>{each}</div>
-                    })} */}
+                <h1>Create A Playlist</h1>
+                <div className='form-div'>
+                    <input className='input-cr' onChange={handleNameChange} type='text' placeholder='Name'/>
+                    <button className='btn-cr' onClick={createNewPlaylist}>Click here to add music!</button>
                 </div>
         </section>
         )

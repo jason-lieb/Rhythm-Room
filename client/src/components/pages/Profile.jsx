@@ -103,7 +103,22 @@ export default function Profile() {
         </CardContent>
         <CardMedia
           component="img"
-          sx={{ width: 151 }}
+          sx={{ width: 151, maxHeight: 151 }}
+          image={playlist.images[0].url}
+          alt="Live from space album cover"
+        />
+      </Card>
+    ))
+  }
+  const generateCreatedPlaylists = () => {
+    return user.createdplaylist.map((playlist, index) => (
+      <Card key={index} sx={{ display: 'flex' }}>
+        <CardContent>
+          <Typography variant="h5">{playlist.name}</Typography>
+        </CardContent>
+        <CardMedia
+          component="img"
+          sx={{ width: 151, maxHeight: 151 }}
           image={playlist.images[0].url}
           alt="Live from space album cover"
         />
@@ -132,7 +147,7 @@ export default function Profile() {
   if (!Auth.loggedIn()) navigate('/login')
 
   return (
-    <div className="container-box">
+    <div className="container-box" style={{ minHeight: '85vh', padding: 10}}>
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
@@ -184,6 +199,7 @@ export default function Profile() {
           </Card>
           <Card className="created-playlist">
             <Typography>Created Playlists</Typography>
+            {generateCreatedPlaylists()}
           </Card>
         </div>
       </Card>
