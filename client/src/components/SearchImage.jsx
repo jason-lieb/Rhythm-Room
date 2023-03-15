@@ -8,8 +8,25 @@ export default function SearchImage() {
     prompt: '',
     photo: '',
   })
-  const handleSubmit = () => {
-    console.log(123)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (form.prompt) {
+      try {
+        const {data} = await axios.post(
+          'http://localhost:5500/api/openai',
+          { prompt: form.prompt },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          }
+        )
+        setForm({ ...form, photo: data.image_url })
+        console.log(data.image_url)
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 
   const handleChange = (e) => {
@@ -20,14 +37,9 @@ export default function SearchImage() {
       <form>
         <label>
           Prompt:
-          <input type="text" name="prompt" />
+          <input type="text" name="prompt" onChange={handleChange} />
         </label>
-        <input
-          type="submit"
-          value="Generate"
-          onClick={handleSubmit}
-          onChange={handleChange}
-        />
+        <input type="submit" value="Generate" onClick={handleSubmit} />
       </form>
       <div>
         {form.photo ? <img src={form.photo} alt={form.prompt} /> : <p>abc</p>}

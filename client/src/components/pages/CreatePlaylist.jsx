@@ -100,6 +100,7 @@ return (
         </section>
         )
         }
+        <SearchImage />
     </div>
 )
 }
