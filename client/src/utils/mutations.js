@@ -31,22 +31,10 @@ export const USER_LOGIN = gql`
 
 // creates a new playlist
 export const CREATE_PLAYLIST = gql`
-mutation AddPlaylist($name: String!, $id: String!, $images: [String]!) {
+mutation AddPlaylist($name: String!, $id: String!, $images: [Imageinput]!) {
   addPlaylist(name: $name, _id: $id, images: $images) {
     name
     _id
-    playlistId
-    items {
-      _id
-      trackId
-      name
-      artist
-      duration_ms
-      uri
-    }
-    images {
-      url
-    }
   }
 }
 `

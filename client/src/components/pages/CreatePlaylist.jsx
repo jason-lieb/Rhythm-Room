@@ -50,7 +50,10 @@ function CreatePlaylist() {
     }
     const createNewPlaylist = async () => {
         const { data: info } = await addPlaylist({
-            variables: { name: playlistName, id: Auth.getProfile().data._id, images: { url: 'http://placeimg.com/640/480/any' } }
+            variables: { name: playlistName, id: Auth.getProfile().data._id, images: [
+                {
+                url: 'http://placekitten.com/200/300'
+                }] }
         }
         )
         if (error) {

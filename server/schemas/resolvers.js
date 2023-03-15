@@ -93,9 +93,8 @@ const resolvers = {
       if (context.user) {
         const list = await Playlist.create({
           name: name,
-          images: {
-            url: images
-          }
+          images: images
+          
         })
         const user = await User.findOneAndUpdate(
           { _id: _id },

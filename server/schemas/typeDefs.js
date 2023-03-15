@@ -28,6 +28,10 @@ const typeDefs = gql`
     total: Int
   }
 
+  input Imageinput {
+    url: String
+  }
+
   type Item {
     _id: ID!
     trackId: String
@@ -74,7 +78,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addPlaylist(name: String!, _id: String!, images: [String]!): Playlist
+    addPlaylist(name: String!, _id: String!, images: [Imageinput]!): Playlist
     addLikedPlaylist(_id: String!, ownerId: String!): Playlist
     removeLikedPlaylist(_id: String!, ownerId: String!): Playlist
     addAbout(about: String!, _id: String!): User
