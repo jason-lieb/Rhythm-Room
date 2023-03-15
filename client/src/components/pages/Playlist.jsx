@@ -30,7 +30,7 @@ const css = `
   .header {
     display: flex;
     align-items: center;
-    position: relative;
+    // position: relative;
     margin-bottom: 1rem;
   }
   .imgContainer {
