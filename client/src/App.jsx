@@ -27,6 +27,9 @@ const graphqlUri =
     ? 'https://spotify-playlist-app.herokuapp.com/graphql/'
     : 'http://localhost:5500/graphql/'
 
+console.log('graphqlUri', graphqlUri)
+console.log('process', process.env.HEROKU_ENV)
+
 // let origin =
 //   window.location.host.split(':').length > 1
 //     ? window.location.origin.slice(0, -4) + '5500'
