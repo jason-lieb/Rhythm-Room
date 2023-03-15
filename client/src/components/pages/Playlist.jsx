@@ -197,14 +197,18 @@ export default function Playlist() {
         <>
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Add comment"
             multiline
-            rows={4}
-            defaultValue="Default Value"
+            margin="dense"
+            size="small"
             onChange={handleCommentChange}
           />
-          <Button variant="contained" onClick={commentButton}>
-            Add Comment
+          <Button
+            variant="text"
+            sx={{ color: 'white' }}
+            onClick={commentButton}
+          >
+            Submit
           </Button>
         </>
       )}

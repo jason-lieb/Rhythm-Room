@@ -63,11 +63,26 @@ const css = `
     // width: 35vh;
     // height: 35vh;
     margin: 15px;
+    padding: 1vh;
+    background-color: #F7ECE1
   }
   .created-playlist {
     // width: 35vh;
     // height: 35vh;
     margin: 15px;
+    padding: 1vh;
+    background-color: #F7ECE1
+  }
+  .playlistCard {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2vh 0;
+  }
+  .playlistName {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-grow: 1
   }
 `
 
@@ -97,13 +112,14 @@ export default function Profile() {
 
   const generateLikedPlaylists = () => {
     return user.likedplaylist.map((playlist, index) => (
-      <Card key={index} sx={{ display: 'flex' }}>
-        <CardContent>
+      <Card key={index} className="playlistCard" sx={{ display: 'flex' }}>
+        {console.log(playlist.items)}
+        <CardContent className="playlistName">
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
         <CardMedia
           component="img"
-          sx={{ width: 151, maxHeight: 151 }}
+          sx={{ width: 100, maxHeight: 100 }}
           image={playlist.images[0].url}
           alt="Live from space album cover"
         />
@@ -144,7 +160,11 @@ export default function Profile() {
   const editAboutMe = () => {
     if (!openEditBox) {
       return (
-        <Button variant="text" onClick={() => setOpenEditBox(true)}>
+        <Button
+          variant="text"
+          sx={{ color: 'white' }}
+          onClick={() => setOpenEditBox(true)}
+        >
           Edit
         </Button>
       )
@@ -153,13 +173,15 @@ export default function Profile() {
         <>
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Edit"
             multiline
-            rows={4}
-            defaultValue="Default Value"
+            size="small"
+            margin="dense"
+            // defaultValue="Default Value"
             onChange={handleAboutTextChange}
+            sx={{ color: 'white' }}
           ></TextField>
-          <Button variant="contained" onClick={submitAbout}>
+          <Button variant="text" sx={{ color: 'white' }} onClick={submitAbout}>
             Submit
           </Button>
         </>
@@ -174,7 +196,7 @@ export default function Profile() {
   if (!Auth.loggedIn()) navigate('/login')
 
   return (
-    <div className="container-box" style={{ minHeight: '85vh', padding: 10}}>
+    <div className="container-box" style={{ minHeight: '85vh', padding: 10 }}>
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
@@ -211,11 +233,11 @@ export default function Profile() {
         {/* Liked and created playlists */}
         <div className="right-content">
           <Card className="liked-playlist">
-            <Typography>Liked Playlists</Typography>
+            <Typography variant="h7">Liked Playlists</Typography>
             {generateLikedPlaylists()}
           </Card>
           <Card className="created-playlist">
-            <Typography>Created Playlists</Typography>
+            <Typography variant="h7">Created Playlists</Typography>
             {generateCreatedPlaylists()}
           </Card>
         </div>
