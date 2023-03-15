@@ -9,6 +9,9 @@ import { useQuery } from '@apollo/client'
 import { ADD_COMMENT, CREATE_PLAYLIST, ADD_SONG } from '../../utils/mutations'
 import { useMutation } from '@apollo/client'
 
+import Loading from '../Loading'
+
+
 
 function CreatePlaylist() {
     const { loading, data } = useQuery(QUERY_ALL_SONGS)
@@ -65,7 +68,7 @@ return (
             <>
             <section className='song-section'>
                 <h1>Add songs to your new plalist!</h1>
-            { loading ? <div>Loading...</div> : data.tracks.map(song => {
+            { loading ? <Loading/> : data.tracks.map(song => {
                 return <div className='song-card' key={song._id}>
                     <div>
                     <h2>{song.name}</h2>

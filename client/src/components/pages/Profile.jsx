@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { QUERY_USER } from '../../utils/queries'
 import { CREATE_ABOUT_ME } from '../../utils/mutations'
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
 import Auth from '../../utils/auth'
 
 import Card from '@mui/material/Card'
@@ -14,7 +15,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 import DisconnectSpotify from '../DisconnectSpotify'
-import { useSpotifyApi } from '../../utils/SpotifyApiContext'
+import Loading from '../Loading'
 
 const css = `
   .container-box {
@@ -168,7 +169,7 @@ export default function Profile() {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loading/>
   }
 
   if (!Auth.loggedIn()) navigate('/login')

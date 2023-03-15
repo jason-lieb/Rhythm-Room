@@ -21,6 +21,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import Song from '../Song'
 import Comment from '../Comment'
 import Player from '../Player'
+import Loading from '../Loading'
 
 const css = `
   .playlistContainer {
@@ -72,7 +73,7 @@ export default function Playlist() {
     if (!playlist.name) return
     document.title = `Rhythm Room - ${playlist.name}`
   }, [playlist])
-  if (loading) return <div>Loading...</div>
+  if (loading) return <Loading />
 
   function chooseTrack(uri) {
     setSongUri(uri)

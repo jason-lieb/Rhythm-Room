@@ -5,13 +5,16 @@ import { QUERY_ALL_PLAYLISTS } from '../utils/queries'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
 
+import Loading from './Loading'
+
+
 export default function AllPlayLists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
   const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
   const playlists = data?.playlists || []
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   return (
