@@ -30,7 +30,7 @@ body {
 .create-btn {
   position: fixed;
   right: 20px;
-  bottom: 110px;
+  bottom: 75px;
   border-radius: 50%;
   width: 4rem;
   height: 4rem;
@@ -48,10 +48,11 @@ body {
   right: 50%;
   transform: translateX(50%);
   background-color: #595381;
-  padding: 4px;
+  padding: 0.5rem 0.25rem;
   border-radius: 3px;
   display: none;
   color: white;
+  font-family: 'Roboto', sans-serif;
 }
 .pointy-span {
   width: 20px;
@@ -59,7 +60,7 @@ body {
   background-color: #595381;
   z-index: -1;
   position: absolute;
-  top: 32px;
+  top: 40px;
   left: 45%;
   transform: translateX(-50%);
   rotate: 45deg;
