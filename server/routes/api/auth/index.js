@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
         expiresIn: body.expires_in,
       })
     } else {
+      console.log('------------------- ERROR -------------------')
       console.log(body)
       console.error(err)
       res.sendStatus(500).json({ body, err })
