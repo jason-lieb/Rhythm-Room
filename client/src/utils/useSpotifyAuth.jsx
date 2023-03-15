@@ -23,13 +23,17 @@ export default function useSpotifyAuth(code) {
     const { accessToken, refreshToken, expiresAt } = accessTokenFromStorage
       ? JSON.parse(accessTokenFromStorage)
       : {}
-    let expiresIn =
-      new Date().getTime() / 1000 > expiresAt
-        ? 0
-        : expiresAt - new Date().getTime() / 1000
-    setAccessToken(accessToken)
-    setRefreshToken(refreshToken)
-    setExpiresIn(expiresIn)
+    let expiresIn
+    if (new Date().getTime() / 1000 > expiresAt) {
+      expiresIn = 0
+      setRefreshToken(refreshToken)
+      setExpiresIn(expiresIn)
+    } else {
+      expiresIn = expiresAt - new Date().getTime() / 1000
+      setAccessToken(accessToken)
+      setRefreshToken(refreshToken)
+      setExpiresIn(expiresIn)
+    }
   }, [])
 
   useEffect(() => {
