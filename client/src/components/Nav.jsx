@@ -12,7 +12,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField';
 
 import LoginSpotify from './LoginSpotify'
-import { QUERY_SINGLE_SONG } from '../utils/queries'
+import { QUERY_SINGLE_SONG, QUERY_SONG_NAME } from '../utils/queries'
 
 const css = `
   .navbar {
@@ -52,7 +52,7 @@ export default function Nav() {
   }
 
     const [fetchedSong, setFetchedSong] = useState(null);
-    const [ getSong, { loading, data }] = useLazyQuery(QUERY_SINGLE_SONG)
+    const [ getSong, { loading, data }] = useLazyQuery(QUERY_SONG_NAME)
 
     if (loading) return <p>loading</p>
 
@@ -77,7 +77,11 @@ export default function Nav() {
             className='search-box'
             component="form"
             onChange={handleSearch}
-            onBlur={() => getSong({ variables: { name: searchValue } })}
+            onBlur={() => {
+              getSong({ variables: { name: searchValue } })
+              console.log(data)
+            }
+            }
             sx={{
               '& > :not(style)': { m: 1, width: '25ch' },
             }}

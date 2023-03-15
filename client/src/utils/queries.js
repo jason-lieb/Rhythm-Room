@@ -183,6 +183,14 @@ query Query($trackId: ID) {
   }
 }
 `
+
+export const QUERY_SONG_NAME = gql`
+  query Query($name: String) {
+    trackByName(name: $name) {
+      name
+    }
+  }
+`
 export const QUERY_ALL_SONGS = gql `
 query Query {
   tracks {
