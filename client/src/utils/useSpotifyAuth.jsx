@@ -50,8 +50,10 @@ export default function useSpotifyAuth(code) {
         )
         window.history.pushState({}, null, '/')
       })
-      .catch((err) => {
+      .catch((err, err2) => {
+        console.log(err)
         console.error(err)
+        console.error(err2)
         window.location = '/'
       })
   }, [authURL, code])
