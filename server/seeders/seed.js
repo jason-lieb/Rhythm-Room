@@ -28,7 +28,7 @@ db.once('open', async () => {
           name: track_name,
           duration_ms: track_duration,
           artist: track_artist,
-          uri: track_uri
+          uri: track_uri,
         })
         await Playlist.findByIdAndUpdate(
           { _id: _id },
