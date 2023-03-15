@@ -31,41 +31,82 @@ export const QUERY_ALL_USERS = gql`
 `
 // queries a single user based on an id
 export const QUERY_USER = gql`
-  query User($userId: ID) {
-    user(id: $userId) {
-      username
-      email
-      about
-      createdplaylist {
-        _id
-        name
-        owner {
-          display_name
-          href
-        }
-        genres
-        playlistId
-        description
-        images {
-          url
-        }
+query User($userId: ID) {
+  user(id: $userId) {
+    _id
+    username
+    email
+    password
+    about
+    profilePic
+    createdplaylist {
+      _id
+      name
+      owner {
+        display_name
+        href
       }
-      likedplaylist {
+      genres
+      playlistId
+      description
+      images {
+        url
+      }
+      tracks {
+        href
+        total
+      }
+      items {
         _id
+        trackId
         name
-        owner {
-          display_name
-          href
-        }
-        genres
-        playlistId
-        description
-        images {
-          url
-        }
+        artist
+        duration_ms
+        uri
+      }
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+        commentUsername
+      }
+    }
+    likedplaylist {
+      _id
+      name
+      owner {
+        display_name
+        href
+      }
+      genres
+      playlistId
+      description
+      images {
+        url
+      }
+      tracks {
+        href
+        total
+      }
+      items {
+        _id
+        trackId
+        name
+        artist
+        duration_ms
+        uri
+      }
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+        commentUsername
       }
     }
   }
+}
 `
 // queries one playlist based on an id
 export const QUERY_PLAYLIST = gql`
