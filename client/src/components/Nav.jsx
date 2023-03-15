@@ -11,6 +11,9 @@ import Button from '@mui/material/Button'
 import LoginSpotify from './LoginSpotify'
 
 const css = `
+  .header {
+    height: 4rem;
+  }
   .navbar {
     background-color: #595381;
   }
@@ -36,7 +39,7 @@ export default function Nav() {
     navigate(`/profile/${Auth.getProfile().data._id}`)
   }
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className="header" sx={{ flexGrow: 1 }}>
       <style type="text/css">{css}</style>
       <AppBar position="static">
         <Toolbar className="navbar">
@@ -46,14 +49,18 @@ export default function Nav() {
 
           {/* Render discover button if not on the discover page */}
           {window.location.pathname !== '/' && (
-            <Button color="inherit" onClick={handleDiscover}>
+            <Button
+              className="navButton"
+              color="inherit"
+              onClick={handleDiscover}
+            >
               Discover
             </Button>
           )}
 
           {/* Render connected to spotify statement if connected to spotify*/}
           {spotifyApi.getAccessToken() && Auth.loggedIn() && (
-            <Button style={{ color: 'white' }} disabled>
+            <Button className="navButton" style={{ color: 'white' }} disabled>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 496 512"
@@ -75,10 +82,18 @@ export default function Nav() {
           {/* Render username button and logout button if logged in */}
           {Auth.loggedIn() && (
             <>
-              <Button color="inherit" onClick={handleProfile}>
+              <Button
+                className="navButton"
+                color="inherit"
+                onClick={handleProfile}
+              >
                 {Auth.getProfile().data.username}
               </Button>
-              <Button color="inherit" onClick={handleLogoutButtonClick}>
+              <Button
+                className="navButton"
+                color="inherit"
+                onClick={handleLogoutButtonClick}
+              >
                 Logout
               </Button>
             </>
@@ -87,7 +102,11 @@ export default function Nav() {
           {/* Render login button if not on the login page and not already logged in */}
           {window.location.pathname.split('/')[1] !== 'login' &&
             !Auth.loggedIn() && (
-              <Button color="inherit" onClick={handleLoginButtonClick}>
+              <Button
+                className="navButton"
+                color="inherit"
+                onClick={handleLoginButtonClick}
+              >
                 Login
               </Button>
             )}
