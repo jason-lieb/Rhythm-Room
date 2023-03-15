@@ -13,6 +13,9 @@ import Avatar from '@mui/material/Avatar'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
+import DisconnectSpotify from '../DisconnectSpotify'
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
+
 const css = `
   .container-box {
     display: flex;
@@ -74,6 +77,12 @@ export default function Profile() {
   const [addAbout] = useMutation(CREATE_ABOUT_ME)
   const [aboutText, setAboutText] = useState('')
   const [aboutTextDisplay, setAboutTextDisplay] = useState('')
+  const [spotifyApi] = useSpotifyApi()
+  const spotifyLoggedIn = spotifyApi.getAccessToken()
+  const [disconnected, setDisconnected] = useState(true)
+  useEffect(() => {
+    if (spotifyLoggedIn) setDisconnected(false)
+  }, [spotifyLoggedIn])
 
   const { loading, data } = useQuery(QUERY_USER, {
     variables: { userId: profileId },
@@ -94,7 +103,22 @@ export default function Profile() {
         </CardContent>
         <CardMedia
           component="img"
-          sx={{ width: 151 }}
+          sx={{ width: 151, maxHeight: 151 }}
+          image={playlist.images[0].url}
+          alt="Live from space album cover"
+        />
+      </Card>
+    ))
+  }
+  const generateCreatedPlaylists = () => {
+    return user.createdplaylist.map((playlist, index) => (
+      <Card key={index} sx={{ display: 'flex' }}>
+        <CardContent>
+          <Typography variant="h5">{playlist.name}</Typography>
+        </CardContent>
+        <CardMedia
+          component="img"
+          sx={{ width: 151, maxHeight: 151 }}
           image={playlist.images[0].url}
           alt="Live from space album cover"
         />
@@ -103,7 +127,7 @@ export default function Profile() {
   }
 
   //functions for About Me section
-
+  const [openEditBox, setOpenEditBox] = useState(false)
   const handleAboutTextChange = (event) => {
     const { value } = event.target
     setAboutText(value)
@@ -114,6 +138,33 @@ export default function Profile() {
       variables: { about: aboutText, id: profileId },
     })
     setAboutTextDisplay(data.addAbout.about)
+    setOpenEditBox(false)
+  }
+
+  const editAboutMe = () => {
+    if (!openEditBox) {
+      return (
+        <Button variant="text" onClick={() => setOpenEditBox(true)}>
+          Edit
+        </Button>
+      )
+    } else if (openEditBox) {
+      return (
+        <>
+          <TextField
+            id="outlined-multiline-static"
+            label="Multiline"
+            multiline
+            rows={4}
+            defaultValue="Default Value"
+            onChange={handleAboutTextChange}
+          ></TextField>
+          <Button variant="contained" onClick={submitAbout}>
+            Submit
+          </Button>
+        </>
+      )
+    }
   }
 
   if (loading) {
@@ -123,7 +174,7 @@ export default function Profile() {
   if (!Auth.loggedIn()) navigate('/login')
 
   return (
-    <div className="container-box">
+    <div className="container-box" style={{ minHeight: 'calc(100vh - 8rem)' }}>
       <style type="text/css">{css}</style>
       <Card className="card">
         <div className="left-content">
@@ -135,6 +186,9 @@ export default function Profile() {
               sx={{ width: 100, height: 100 }}
             />
             <Typography className="user-name">{user.username}</Typography>
+            {!disconnected && (
+              <DisconnectSpotify setDisconnected={setDisconnected} />
+            )}
           </div>
 
           {/* About me section */}
@@ -150,17 +204,7 @@ export default function Profile() {
             <Typography className="text" variant="body2" color="text.secondary">
               {aboutTextDisplay}
             </Typography>
-            <TextField
-              id="outlined-multiline-static"
-              label="Multiline"
-              multiline
-              rows={4}
-              defaultValue="Default Value"
-              onChange={handleAboutTextChange}
-            ></TextField>
-            <Button variant="contained" onClick={submitAbout}>
-              Submit
-            </Button>
+            {editAboutMe()}
           </CardContent>
         </div>
 
@@ -172,6 +216,7 @@ export default function Profile() {
           </Card>
           <Card className="created-playlist">
             <Typography>Created Playlists</Typography>
+            {generateCreatedPlaylists()}
           </Card>
         </div>
       </Card>

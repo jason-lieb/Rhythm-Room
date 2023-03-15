@@ -55,6 +55,7 @@ export default function Playlist() {
   const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
+
   const { playlistId } = useParams()
   const [songUri, setSongUri] = useState()
 
@@ -92,6 +93,7 @@ export default function Playlist() {
         id: playlistId,
       },
     })
+    window.location.reload()
   }
 
   const likePlaylist = async () => {
@@ -127,7 +129,7 @@ export default function Playlist() {
           </Grid>
           <Grid item className="actions">
             {/* Render like button if logged in and connected to Spotify */}
-            {spotifyApi.getAccessToken() && (
+            {spotifyApi.getAccessToken() && Auth.loggedIn() && (
               <IconButton aria-label="Add to favorites">
                 <FavoriteIcon sx={{ color: 'white' }} />
               </IconButton>
@@ -137,7 +139,7 @@ export default function Playlist() {
             </IconButton>
 
             {/* Render play button if logged in and connected to Spotify */}
-            {spotifyApi.getAccessToken() && (
+            {spotifyApi.getAccessToken() && Auth.loggedIn() && (
               <IconButton aria-label="Play">
                 <PlayCircleFilledIcon
                   className="playlistIcon"
@@ -185,7 +187,7 @@ export default function Playlist() {
             <Comment
               key={index}
               text={comment.commentText}
-              author={comment.commentAuthor}
+              author={comment.commentUsername}
               createdAt={comment.createdAt}
             />
           ))}
