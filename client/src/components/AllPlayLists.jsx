@@ -18,25 +18,47 @@ export default function AllPlayLists() {
     <ImageList cols={3} gap={8} sx={{ padding: '10px' }}>
       {/* mapped to show all of the playlists */}
       {playlists.map((info) => {
-        return (
-          <Link
-            style={{ zIndex: 0, position: 'relative' }}
-            key={info._id}
-            to={`/Playlist/${info._id}`}
-          >
-            <ImageListItem
-              style={{ minHeight: 10, zIndex: -2, position: 'relative' }}
+        if (Object.keys(info.images[0]) === 3) {
+          return (
+            <Link
+              style={{ zIndex: 0, position: 'relative' }}
+              key={info._id}
+              to={`/Playlist/${info._id}`}
             >
-              <img
-                src={`${info.images[0].url}?w=248&fit=crop&auto=format`}
-                srcSet={`${info.images[0].url}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                alt="as"
-                loading="lazy"
-                style={{ minHeight: 10 }}
-              />
-            </ImageListItem>
-          </Link>
-        )
+              <ImageListItem
+                style={{ minHeight: 10, zIndex: -2, position: 'relative' }}
+              >
+                <img
+                  src={`${info.images[0].url}?w=248&fit=crop&auto=format`}
+                  srcSet={`${info.images[0].url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  alt="as"
+                  loading="lazy"
+                  style={{ minHeight: 10 }}
+                />
+              </ImageListItem>
+            </Link>
+          )
+        } else {
+          return (
+            <Link
+              style={{ zIndex: 0, position: 'relative' }}
+              key={info._id}
+              to={`/Playlist/${info._id}`}
+            >
+              <ImageListItem
+                style={{ minHeight: 10, zIndex: -2, position: 'relative' }}
+              >
+                <img
+                  src={`${info.images[0].url}`}
+                  srcSet={`${info.images[0].url}`}
+                  alt="as"
+                  loading="lazy"
+                  style={{ minHeight: 10 }}
+                />
+              </ImageListItem>
+            </Link>
+          )
+        }
       })}
     </ImageList>
   )

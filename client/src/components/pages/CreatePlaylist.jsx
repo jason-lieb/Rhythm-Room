@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import SearchImage from '../SearchImage'
+
 import { useParams, Link } from 'react-router-dom'
 import Auth from '../../utils/auth'
 
@@ -18,7 +20,8 @@ function CreatePlaylist() {
     const [playlistName, setPlaylistName] = useState('')
     const [addPlaylist, { error }] = useMutation(CREATE_PLAYLIST)
     const [addSong] = useMutation(ADD_SONG)
-    const [pulledData, setPulledData] =useState('')
+    const [pulledData, setPulledData] = useState('')
+    const [imgUrl, setImgUrl] = useState()
 
     // sets the name for the playlist
     const handleNameChange = (event) => {
@@ -45,7 +48,7 @@ function CreatePlaylist() {
         const { data: info } = await addPlaylist({
             variables: { name: playlistName, id: Auth.getProfile().data._id, images: [
                 {
-                url: 'http://placekitten.com/200/300'
+                url: imgUrl
                 }] }
         }
         )
@@ -87,6 +90,7 @@ return (
         </section>
         )
         }
+        <SearchImage setImgUrl={ setImgUrl} />
     </div>
 )
 }
