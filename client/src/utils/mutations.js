@@ -31,12 +31,12 @@ export const USER_LOGIN = gql`
 
 // creates a new playlist
 export const CREATE_PLAYLIST = gql`
-mutation AddPlaylist($name: String!, $id: String!, $images: [Imageinput]!) {
-  addPlaylist(name: $name, _id: $id, images: $images) {
-    name
-    _id
+  mutation AddPlaylist($name: String!, $id: String!, $images: [Imageinput]!) {
+    addPlaylist(name: $name, _id: $id, images: $images) {
+      name
+      _id
+    }
   }
-}
 `
 // removes a playlist from created playlists
 export const REMOVE_PLAYLIST = gql`
@@ -56,11 +56,11 @@ export const REMOVE_PLAYLIST = gql`
   }
 `
 // adds a playlist to the "liked" section of a user
-export const ADD_LIKED_PLAYLIST = gql `
-mutation AddLikedPlaylist($id: String!, $ownerId: String!) {
+export const ADD_LIKED_PLAYLIST = gql`
+  mutation AddLikedPlaylist($id: String!, $ownerId: String!) {
     addLikedPlaylist(_id: $id, ownerId: $ownerId) {
-    name
-    _id
+      name
+      _id
     }
   }
 `
@@ -119,11 +119,13 @@ export const ADD_COMMENT = gql`
     $commentText: String!
     $commentAuthor: String!
     $id: String!
+    $commentUsername: String!
   ) {
     addComment(
       commentText: $commentText
       commentAuthor: $commentAuthor
       _id: $id
+      commentUsername: $commentUsername
     ) {
       _id
       commentAuthor
@@ -131,13 +133,13 @@ export const ADD_COMMENT = gql`
       commentUsername
       createdAt
     }
-}
-`
-export const ADD_SONG = gql `
-mutation AddSong($id: String!, $addSongId: String!) {
-  addSong(_id: $id, id: $addSongId) {
-    name
-    _id
   }
-}
+`
+export const ADD_SONG = gql`
+  mutation AddSong($id: String!, $addSongId: String!) {
+    addSong(_id: $id, id: $addSongId) {
+      name
+      _id
+    }
+  }
 `
