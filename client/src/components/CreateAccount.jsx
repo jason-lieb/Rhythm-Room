@@ -14,12 +14,13 @@ const css = `
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: calc(100vh - 8rem);
         background-color: #242038;
     }
     .card {
-        height: 600px;
+        height: 36rem;
         background-color: #8d86c9;
+        border-radius: 1rem;
         color: white;
     }
     .card-actions {
@@ -167,11 +168,20 @@ export default function CreateAccount({ setLoginPage }) {
           variant="outlined"
         />
       </Box>
-      <div>
-        <Button onClick={returnToLogin} className="button" size="small">
+      <div style={{ padding: '1.5rem 0.5rem' }}>
+        <Button
+          onClick={returnToLogin}
+          className="button loginButton"
+          size="medium"
+          style={{ marginRight: '0.75rem' }}
+        >
           Return to Login
         </Button>
-        <Button onClick={buttonClick} className="button" size="small">
+        <Button
+          onClick={buttonClick}
+          className="button loginButton"
+          size="medium"
+        >
           Sign Up
         </Button>
       </div>
@@ -181,8 +191,22 @@ export default function CreateAccount({ setLoginPage }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Box
+          sx={style}
+          style={{
+            backgroundColor: 'rgb(141, 134, 201)',
+            borderRadius: '1rem',
+          }}
+        >
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{
+              textAlign: 'center',
+              color: 'white',
+            }}
+          >
             {errorMessage}
           </Typography>
         </Box>
