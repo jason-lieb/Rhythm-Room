@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 import LoginSpotify from './LoginSpotify'
+import SpotifyModal from './SpotifyModal'
+import { useState } from 'react'
 
 const css = `
   .header {
@@ -22,6 +24,16 @@ const css = `
 export default function Nav() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
+
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleLoginButtonClick = () => {
     navigate('/login')
@@ -77,7 +89,11 @@ export default function Nav() {
           )}
 
           {/* Render login spotify button if already logged in but not logged into spotify */}
-          {!spotifyApi.getAccessToken() && Auth.loggedIn() && <LoginSpotify />}
+          {!spotifyApi.getAccessToken() && Auth.loggedIn() && (
+            <LoginSpotify handleOpen={handleOpen} />
+          )}
+
+          <SpotifyModal open={open} handleClose={handleClose} />
 
           {/* Render username button and logout button if logged in */}
           {Auth.loggedIn() && (
