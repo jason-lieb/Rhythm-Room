@@ -13,6 +13,9 @@ import Avatar from '@mui/material/Avatar'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
+import DisconnectSpotify from '../DisconnectSpotify'
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
+
 const css = `
   .container-box {
     display: flex;
@@ -74,6 +77,12 @@ export default function Profile() {
   const [addAbout] = useMutation(CREATE_ABOUT_ME)
   const [aboutText, setAboutText] = useState('')
   const [aboutTextDisplay, setAboutTextDisplay] = useState('')
+  const [spotifyApi] = useSpotifyApi()
+  const spotifyLoggedIn = spotifyApi.getAccessToken()
+  const [disconnected, setDisconnected] = useState(true)
+  useEffect(() => {
+    if (spotifyLoggedIn) setDisconnected(false)
+  }, [spotifyLoggedIn])
 
   const { loading, data } = useQuery(QUERY_USER, {
     variables: { userId: profileId },
@@ -135,6 +144,9 @@ export default function Profile() {
               sx={{ width: 100, height: 100 }}
             />
             <Typography className="user-name">{user.username}</Typography>
+            {!disconnected && (
+              <DisconnectSpotify setDisconnected={setDisconnected} />
+            )}
           </div>
 
           {/* About me section */}
