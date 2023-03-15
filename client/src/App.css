@@ -230,3 +230,41 @@ a:hover {
   color: #242038 !important;
   background-color: #8d86c9 !important;
 }
+
+.modal:focus-visible {
+  outline: none;
+}
+.right-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.playlist {
+  min-height: 400px;
+  width: 375px;
+  background-color: #595381;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: scroll;
+  padding: 10px;
+  gap: 0.75rem;
+  border-radius: 5px;
+  max-height: 600px;
+}
+.typ {
+  color: white;
+  font-size: 2em;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+.edit-div {
+  display: flex;
+  flex-direction: column;
+}
+.btn-sub {
+  background-color: #595381;
+}
+.btn-edit {
+  font-size: 1.3em;
+}

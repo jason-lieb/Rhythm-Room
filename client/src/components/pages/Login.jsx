@@ -206,9 +206,11 @@ export default function Login() {
                 aria-describedby="modal-modal-description"
               >
                 <Box
+                  className="modal"
                   sx={style}
                   style={{
                     backgroundColor: 'rgb(141, 134, 201)',
+                    border: 'none',
                     borderRadius: '1rem',
                   }}
                 >

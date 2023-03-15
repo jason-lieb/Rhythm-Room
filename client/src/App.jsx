@@ -28,8 +28,6 @@ let origin =
     : window.location.origin
 const graphqlUri = origin + '/graphql'
 
-console.log('graphqlUri', graphqlUri)
-
 const httpLink = createHttpLink({
   uri: graphqlUri,
 })

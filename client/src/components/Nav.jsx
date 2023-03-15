@@ -13,6 +13,7 @@ import TextField from '@mui/material/TextField';
 
 import LoginSpotify from './LoginSpotify'
 import { QUERY_SINGLE_SONG, QUERY_SONG_NAME } from '../utils/queries'
+import SpotifyModal from './SpotifyModal'
 
 const css = `
   .header {
@@ -33,6 +34,16 @@ export default function Nav() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState('')
+
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const handleLoginButtonClick = () => {
     navigate('/login')
@@ -123,7 +134,11 @@ export default function Nav() {
           )}
 
           {/* Render login spotify button if already logged in but not logged into spotify */}
-          {!spotifyApi.getAccessToken() && Auth.loggedIn() && <LoginSpotify />}
+          {!spotifyApi.getAccessToken() && Auth.loggedIn() && (
+            <LoginSpotify handleOpen={handleOpen} />
+          )}
+
+          <SpotifyModal open={open} handleClose={handleClose} />
 
           {/* Render username button and logout button if logged in */}
           {Auth.loggedIn() && (
