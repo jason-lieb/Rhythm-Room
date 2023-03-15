@@ -16,7 +16,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+// import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
 import Song from '../Song'
 import Comment from '../Comment'
