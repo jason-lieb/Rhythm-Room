@@ -31,40 +31,45 @@ export const USER_LOGIN = gql`
 
 // creates a new playlist
 export const CREATE_PLAYLIST = gql`
-mutation Mutation($name: String!, $id: String!, $owner: String!, $items: [String]!) {
-  addPlaylist(name: $name, _id: $id, owner: $owner, items: $items) {
-    _id
-    name
-    owner {
-      display_name
-      href
-    }
-    genres
-    playlistId
-    description
-    images {
-      url
-    }
-    tracks {
-      href
-      total
-    }
-    items {
+  mutation Mutation(
+    $name: String!
+    $id: String!
+    $owner: String!
+    $items: [String]!
+  ) {
+    addPlaylist(name: $name, _id: $id, owner: $owner, items: $items) {
       _id
-      trackId
       name
-      artist
-      duration_ms
-    }
-    comments {
-      _id
-      commentText
-      commentAuthor
-      createdAt
-      commentUsername
+      owner {
+        display_name
+        href
+      }
+      genres
+      playlistId
+      description
+      images {
+        url
+      }
+      tracks {
+        href
+        total
+      }
+      items {
+        _id
+        trackId
+        name
+        artist
+        duration_ms
+      }
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+        commentUsername
+      }
     }
   }
-}
 `
 // removes a playlist from created playlists
 export const REMOVE_PLAYLIST = gql`
@@ -84,11 +89,11 @@ export const REMOVE_PLAYLIST = gql`
   }
 `
 // adds a playlist to the "liked" section of a user
-export const ADD_LIKED_PLAYLIST = gql `
-mutation AddLikedPlaylist($id: String!, $ownerId: String!) {
+export const ADD_LIKED_PLAYLIST = gql`
+  mutation AddLikedPlaylist($id: String!, $ownerId: String!) {
     addLikedPlaylist(_id: $id, ownerId: $ownerId) {
-    name
-    _id
+      name
+      _id
     }
   }
 `
@@ -147,11 +152,13 @@ export const ADD_COMMENT = gql`
     $commentText: String!
     $commentAuthor: String!
     $id: String!
+    $commentUsername: String!
   ) {
     addComment(
       commentText: $commentText
       commentAuthor: $commentAuthor
       _id: $id
+      commentUsername: $commentUsername
     ) {
       _id
       commentAuthor
@@ -159,5 +166,5 @@ export const ADD_COMMENT = gql`
       commentUsername
       createdAt
     }
-}
+  }
 `

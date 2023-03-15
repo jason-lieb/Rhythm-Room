@@ -185,7 +185,7 @@ export default function Playlist() {
             <Comment
               key={index}
               text={comment.commentText}
-              author={comment.commentAuthor}
+              author={comment.commentUsername}
               createdAt={comment.createdAt}
             />
           ))}
