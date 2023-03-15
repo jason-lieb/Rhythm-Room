@@ -104,12 +104,18 @@ export default function CreateAccount({ setLoginPage }) {
     }
   }
 
+  const submitForm = (e) => {
+    e.preventDefault()
+    buttonClick(e)
+  }
+
   return (
     <div>
       <style type="text/css">{css}</style>
       <Box
         component="form"
         className="username"
+        onSubmit={submitForm}
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
         }}
@@ -127,6 +133,7 @@ export default function CreateAccount({ setLoginPage }) {
       </Box>
       <Box
         component="form"
+        onSubmit={submitForm}
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
         }}
@@ -144,6 +151,7 @@ export default function CreateAccount({ setLoginPage }) {
       </Box>
       <Box
         component="form"
+        onSubmit={submitForm}
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
         }}

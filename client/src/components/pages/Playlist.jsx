@@ -127,7 +127,7 @@ export default function Playlist() {
           </Grid>
           <Grid item className="actions">
             {/* Render like button if logged in and connected to Spotify */}
-            {spotifyApi.getAccessToken() && (
+            {spotifyApi.getAccessToken() && Auth.loggedIn() && (
               <IconButton aria-label="Add to favorites">
                 <FavoriteIcon sx={{ color: 'white' }} />
               </IconButton>
@@ -137,7 +137,7 @@ export default function Playlist() {
             </IconButton>
 
             {/* Render play button if logged in and connected to Spotify */}
-            {spotifyApi.getAccessToken() && (
+            {spotifyApi.getAccessToken() && Auth.loggedIn() && (
               <IconButton aria-label="Play">
                 <PlayCircleFilledIcon
                   className="playlistIcon"
