@@ -5,18 +5,13 @@ export default function useSpotifyAuth(code) {
   const [accessToken, setAccessToken] = useState()
   const [refreshToken, setRefreshToken] = useState()
   const [expiresIn, setExpiresIn] = useState()
-  let authURL
-  let refreshURL
-  switch (process.env.HEROKU_ENV) {
-    case 'production':
-      authURL = 'http://rhythm-room.herokuapp.com/api/auth/login/'
-      refreshURL = 'http://rhythm-room.herokuapp.com/api/auth/refresh/'
-      break
-    default:
-      authURL = 'http://localhost:5500/api/auth/login/'
-      refreshURL = 'http://localhost:5500/api/auth/refresh/'
-      break
-  }
+
+  let origin =
+    window.location.host.split(':').length > 1
+      ? window.location.origin.slice(0, -4) + '5500'
+      : window.location.origin
+  const authURL = origin + '/api/auth/login/'
+  const refreshURL = origin + '/api/auth/refresh/'
 
   useEffect(() => {
     const accessTokenFromStorage = localStorage.getItem('access_token')
