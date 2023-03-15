@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
+import Loader from './Loader'
+import preview from '../assets/preview.png'
 
 export default function SearchImage() {
   const [form, setForm] = useState({
@@ -44,6 +46,7 @@ export default function SearchImage() {
       <div>
         {form.photo ? <img src={form.photo} alt={form.prompt} /> : <p>abc</p>}
       </div>
+      <Loader />
     </>
   )
 }
