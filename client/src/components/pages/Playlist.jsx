@@ -27,18 +27,19 @@ const css = `
     padding: 1rem 2rem;
     color: white;
   }
-  .header {
+  .header-2 {
     display: flex;
     align-items: center;
-    position: relative;
+    // position: relative;
     margin-bottom: 1rem;
   }
+
   .imgContainer {
     text-align: center;
     margin-bottom: -3rem;
   }
   .img {
-    margin: 0 auto;
+    margin:auto;
     max-height: 300px
   }
   .title {
@@ -55,6 +56,7 @@ export default function Playlist() {
   const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
+
   const { playlistId } = useParams()
   const [songUri, setSongUri] = useState()
 
@@ -92,6 +94,7 @@ export default function Playlist() {
         id: playlistId,
       },
     })
+    window.location.reload()
   }
 
   const likePlaylist = async () => {
@@ -105,11 +108,11 @@ export default function Playlist() {
   return (
     <div className="playlistContainer">
       <style type="text/css">{css}</style>
-      <Container>
+      <Container maxWidth="lg">
         <div className="like-btn" onClick={likePlaylist}>
           <ThumbUpIcon fontSize="large" cursor="pointer" />
         </div>
-        <Grid container spacing={2} className="header">
+        <Grid container spacing={1} className="header-2">
           <Grid item xs={12} className="imgContainer">
             <img
               className="img"
@@ -161,6 +164,7 @@ export default function Playlist() {
             <Typography variant="subtitle2">Length</Typography>
           </Grid>
         </Grid>
+        <div style={{ marginTop: 10}}>
         {playlist.items &&
           playlist.items.map((song, index) => (
             <Song
@@ -173,6 +177,7 @@ export default function Playlist() {
               chooseTrack={chooseTrack}
             />
           ))}
+          </div>
       </Container>
       <Container sx={{ mb: 3 }}>
         <Grid container spacing={2}>
@@ -185,7 +190,7 @@ export default function Playlist() {
             <Comment
               key={index}
               text={comment.commentText}
-              author={comment.commentAuthor}
+              author={comment.commentUsername}
               createdAt={comment.createdAt}
             />
           ))}

@@ -2,13 +2,14 @@ import Box from '@mui/material/Box'
 
 const linkCSS = {
   color: 'white',
+  textDecoration: 'none',
 }
 function Footer() {
   return (
     <Box
       sx={{
         width: '100%',
-        height: 100,
+        height: '4rem',
         backgroundColor: '#595381',
         display: 'flex',
         flexDirection: 'row',
@@ -37,12 +38,13 @@ function Footer() {
             flexWrap: 'wrap',
             margin: 0,
             padding: 0,
-            marginLeft: '20px'
+            marginLeft: '20px',
           }}
         >
           <li>
             <a
               style={linkCSS}
+              sx={{ '&:hover': { textDecoration: 'underline' } }}
               href="https://github.com/waustin45"
               target="_blank"
               rel="noopener noreferrer"

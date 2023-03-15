@@ -7,11 +7,13 @@ let SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
 let SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
 
 router.post('/login', async (req, res) => {
+  console.log(req.body)
   const code = req.body.code
   const redirectUri =
     process.env.HEROKU_ENV === 'production'
       ? 'http://rhythm-room.herokuapp.com/'
       : 'http://localhost:3000/'
+  console.log(redirectUri)
   const authOptions = {
     url: 'https://accounts.spotify.com/api/token/',
     form: {
@@ -38,9 +40,10 @@ router.post('/login', async (req, res) => {
         expiresIn: body.expires_in,
       })
     } else {
+      console.log('------------------- ERROR -------------------')
       console.log(body)
       console.error(err)
-      res.sendStatus(500)
+      res.sendStatus(500).json({ body, err })
     }
   })
 })

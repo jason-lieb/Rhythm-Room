@@ -13,6 +13,10 @@ import ConcertImg from '../../assets/music.jpg'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Modal from '@mui/material/Modal'
+// import Visibility from '@mui/icons-material/Visibility'
+// import VisibilityOff from '@mui/icons-material/VisibilityOff'
+// import IconButton from '@mui/material/IconButton'
+// import InputAdornment from '@mui/material/InputAdornment'
 
 import CreateAccount from '../CreateAccount'
 
@@ -21,12 +25,13 @@ const css = `
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: calc(100vh - 8rem);
     background-color: #242038;
   }
   .card {
     height: 500px;
     background-color: #8d86c9;
+    border-radius: 1rem;
     color: white;
   }
   .card-actions {
@@ -42,8 +47,8 @@ const css = `
   .button {
     color: white;
   }
-  text-field {
-    color: white;
+  #outlined-basic {
+    color: rgb(36, 32, 56, 0.9);
   }
 `
 // styling for the modal
@@ -100,7 +105,7 @@ export default function Login() {
         setEmail('')
         setPassword('')
       } else {
-        setErrorMessage('Invalid Email')
+        setErrorMessage('Invalid Email or Password')
         handleOpen()
       }
     } catch (e) {
@@ -120,6 +125,7 @@ export default function Login() {
         <CardMedia sx={{ height: 140 }} image={ConcertImg} title="concert" />
         <CardContent>
           <Typography
+            sx={{ textAlign: 'center' }}
             className="text"
             gutterBottom
             variant="h5"
@@ -127,7 +133,12 @@ export default function Login() {
           >
             Welcome to Rhythm Room!
           </Typography>
-          <Typography className="text" variant="body2" color="text.secondary">
+          <Typography
+            sx={{ textAlign: 'center' }}
+            className="text"
+            variant="body2"
+            color="text.secondary"
+          >
             Rhythm Room is a place for people to share their favorite music
           </Typography>
         </CardContent>
@@ -171,11 +182,20 @@ export default function Login() {
                   variant="outlined"
                 />
               </Box>
-              <div>
-                <Button onClick={buttonClick} className="button" size="small">
+              <div style={{ padding: '1.5rem 0.5rem' }}>
+                <Button
+                  onClick={buttonClick}
+                  className="button loginButton"
+                  size="medium"
+                  style={{ marginRight: '1rem' }}
+                >
                   Login
                 </Button>
-                <Button onClick={loginChange} className="button" size="small">
+                <Button
+                  onClick={loginChange}
+                  className="button loginButton"
+                  size="medium"
+                >
                   Create Account
                 </Button>
               </div>
@@ -185,8 +205,19 @@ export default function Login() {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
-                <Box sx={style}>
+                <Box
+                  sx={style}
+                  style={{
+                    backgroundColor: 'rgb(141, 134, 201)',
+                    borderRadius: '1rem',
+                  }}
+                >
                   <Typography
+                    sx={{
+                      textAlign: 'center',
+                      color: 'white',
+                      backgroundColor: 'rgb(141, 134, 201, 0.5)',
+                    }}
                     id="modal-modal-title"
                     variant="h6"
                     component="h2"
