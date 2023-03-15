@@ -230,3 +230,7 @@ a:hover {
   color: #242038 !important;
   background-color: #8d86c9 !important;
 }
+
+.modal:focus-visible {
+  outline: none;
+}
