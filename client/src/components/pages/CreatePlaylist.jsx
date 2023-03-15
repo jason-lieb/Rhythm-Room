@@ -19,7 +19,8 @@ function CreatePlaylist() {
     const [playlistName, setPlaylistName] = useState('')
     const [addPlaylist, { error }] = useMutation(CREATE_PLAYLIST)
     const [addSong] = useMutation(ADD_SONG)
-    const [pulledData, setPulledData] =useState('')
+    const [pulledData, setPulledData] = useState('')
+    const [imgUrl, setImgUrl] = useState()
     // console.log(data)
     // console.log(error)
     // const addToArray = (event) => {
@@ -54,7 +55,7 @@ function CreatePlaylist() {
         const { data: info } = await addPlaylist({
             variables: { name: playlistName, id: Auth.getProfile().data._id, images: [
                 {
-                url: 'http://placekitten.com/200/300'
+                url: imgUrl
                 }] }
         }
         )
@@ -100,7 +101,7 @@ return (
         </section>
         )
         }
-        <SearchImage />
+        <SearchImage setImgUrl={ setImgUrl} />
     </div>
 )
 }

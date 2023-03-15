@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Loader from './Loader'
 import preview from '../assets/preview.png'
 
-export default function SearchImage() {
+export default function SearchImage({setImgUrl}) {
+  const [generatingImg, setGeneratingImg] = useState(false)
   const [form, setForm] = useState({
     prompt: '',
     photo: '',
@@ -14,19 +12,23 @@ export default function SearchImage() {
     e.preventDefault()
     if (form.prompt) {
       try {
-        const {data} = await axios.post(
+        setGeneratingImg(true)
+        const { data } = await axios.post(
           'http://localhost:5500/api/openai',
           { prompt: form.prompt },
           {
             headers: {
               'Content-Type': 'application/json',
-            }
+            },
           }
         )
         setForm({ ...form, photo: data.image_url })
         console.log(data.image_url)
+        setImgUrl(data.image_url)
       } catch (err) {
         console.log(err)
+      } finally {
+        setGeneratingImg(false)
       }
     }
   }
@@ -37,16 +39,24 @@ export default function SearchImage() {
   return (
     <>
       <form>
-        <label>
+        <label style={{backgroundColor: 'white'}}>
           Prompt:
           <input type="text" name="prompt" onChange={handleChange} />
         </label>
         <input type="submit" value="Generate" onClick={handleSubmit} />
       </form>
+      {generatingImg && (
+        <div style={{ backgroundColor: 'white' }}>Loading</div>
+      )}
       <div>
-        {form.photo ? <img src={form.photo} alt={form.prompt} /> : <p>abc</p>}
+        {form.photo ? (
+          <img src={form.photo} alt={form.prompt} />
+        ) : (
+          <div style={{ backgroundColor: 'white' }}>
+            <img src={preview} alt="preview" height="512px" />
+          </div>
+        )}
       </div>
-      <Loader />
     </>
   )
 }
