@@ -55,6 +55,7 @@ export default function Playlist() {
   const [addLikedPlaylist] = useMutation(ADD_LIKED_PLAYLIST)
   const [addComment] = useMutation(ADD_COMMENT)
   const [commentText, setCommentText] = useState('')
+
   const { playlistId } = useParams()
   const [songUri, setSongUri] = useState()
 
@@ -92,6 +93,7 @@ export default function Playlist() {
         id: playlistId,
       },
     })
+    window.location.reload()
   }
 
   const likePlaylist = async () => {

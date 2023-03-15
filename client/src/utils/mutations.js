@@ -31,51 +31,11 @@ export const USER_LOGIN = gql`
 
 // creates a new playlist
 export const CREATE_PLAYLIST = gql`
-<<<<<<< HEAD
-  mutation Mutation(
-    $name: String!
-    $id: String!
-    $owner: String!
-    $items: [String]!
-  ) {
-    addPlaylist(name: $name, _id: $id, owner: $owner, items: $items) {
-      _id
+  mutation AddPlaylist($name: String!, $id: String!, $images: [Imageinput]!) {
+    addPlaylist(name: $name, _id: $id, images: $images) {
       name
-      owner {
-        display_name
-        href
-      }
-      genres
-      playlistId
-      description
-      images {
-        url
-      }
-      tracks {
-        href
-        total
-      }
-      items {
-        _id
-        trackId
-        name
-        artist
-        duration_ms
-      }
-      comments {
-        _id
-        commentText
-        commentAuthor
-        createdAt
-        commentUsername
-      }
+      _id
     }
-=======
-mutation AddPlaylist($name: String!, $id: String!, $images: [Imageinput]!) {
-  addPlaylist(name: $name, _id: $id, images: $images) {
-    name
-    _id
->>>>>>> fd89b4732927f367f7f605bd571688f5ece65685
   }
 `
 // removes a playlist from created playlists
@@ -175,11 +135,11 @@ export const ADD_COMMENT = gql`
     }
   }
 `
-export const ADD_SONG = gql `
-mutation AddSong($id: String!, $addSongId: String!) {
-  addSong(_id: $id, id: $addSongId) {
-    name
-    _id
+export const ADD_SONG = gql`
+  mutation AddSong($id: String!, $addSongId: String!) {
+    addSong(_id: $id, id: $addSongId) {
+      name
+      _id
+    }
   }
-}
 `
