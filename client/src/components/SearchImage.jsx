@@ -22,9 +22,9 @@ export default function SearchImage({setImgUrl}) {
             },
           }
         )
-        setForm({ ...form, photo: data.image_url })
-        console.log(data.image_url)
-        setImgUrl(data.image_url)
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.image_url}` })
+        console.log(`data:image/jpeg;base64,${data.image_url}`)
+        setImgUrl(`data:image/jpeg;base64,${data.image_url}`)
       } catch (err) {
         console.log(err)
       } finally {

@@ -21,9 +21,10 @@ router.post('/', async (req, res) => {
       prompt,
       n: 1,
       size: '512x512',
+      response_format: 'b64_json'
     })
 
-    const image_url = aiResponse.data.data[0].url
+    const image_url = aiResponse.data.data[0].b64_json
 
     res.status(200).json({ image_url: image_url })
   } catch (error) {
