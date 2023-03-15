@@ -127,7 +127,7 @@ export default function Profile() {
   }
 
   //functions for About Me section
-
+  const [openEditBox, setOpenEditBox] = useState(false)
   const handleAboutTextChange = (event) => {
     const { value } = event.target
     setAboutText(value)
@@ -138,6 +138,33 @@ export default function Profile() {
       variables: { about: aboutText, id: profileId },
     })
     setAboutTextDisplay(data.addAbout.about)
+    setOpenEditBox(false)
+  }
+
+  const editAboutMe = () => {
+    if (!openEditBox) {
+      return (
+        <Button variant="text" onClick={() => setOpenEditBox(true)}>
+          Edit
+        </Button>
+      )
+    } else if (openEditBox) {
+      return (
+        <>
+          <TextField
+            id="outlined-multiline-static"
+            label="Multiline"
+            multiline
+            rows={4}
+            defaultValue="Default Value"
+            onChange={handleAboutTextChange}
+          ></TextField>
+          <Button variant="contained" onClick={submitAbout}>
+            Submit
+          </Button>
+        </>
+      )
+    }
   }
 
   if (loading) {
@@ -177,17 +204,7 @@ export default function Profile() {
             <Typography className="text" variant="body2" color="text.secondary">
               {aboutTextDisplay}
             </Typography>
-            <TextField
-              id="outlined-multiline-static"
-              label="Multiline"
-              multiline
-              rows={4}
-              defaultValue="Default Value"
-              onChange={handleAboutTextChange}
-            ></TextField>
-            <Button variant="contained" onClick={submitAbout}>
-              Submit
-            </Button>
+            {editAboutMe()}
           </CardContent>
         </div>
 
