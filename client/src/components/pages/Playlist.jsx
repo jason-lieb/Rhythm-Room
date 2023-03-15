@@ -27,18 +27,19 @@ const css = `
     padding: 1rem 2rem;
     color: white;
   }
-  .header {
+  .header-2 {
     display: flex;
     align-items: center;
     // position: relative;
     margin-bottom: 1rem;
   }
+
   .imgContainer {
     text-align: center;
     margin-bottom: -3rem;
   }
   .img {
-    margin: 0 auto;
+    margin:auto;
     max-height: 300px
   }
   .title {
@@ -111,7 +112,7 @@ export default function Playlist() {
         <div className="like-btn" onClick={likePlaylist}>
           <ThumbUpIcon fontSize="large" cursor="pointer" />
         </div>
-        <Grid container spacing={1} className="header">
+        <Grid container spacing={1} className="header-2">
           <Grid item xs={12} className="imgContainer">
             <img
               className="img"
