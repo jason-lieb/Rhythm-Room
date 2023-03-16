@@ -2,18 +2,18 @@ import { useNavigate } from 'react-router-dom'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
 import Auth from '../utils/auth'
 import { useState } from 'react'
-import { useLazyQuery } from '@apollo/client'
+// import { useLazyQuery } from '@apollo/client'
 
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Modal from '@mui/material/Modal'
+// import TextField from '@mui/material/TextField'
+// import Modal from '@mui/material/Modal'
 
 import LoginSpotify from './LoginSpotify'
-import { QUERY_SONG_NAME } from '../utils/queries'
+// import { QUERY_SONG_NAME } from '../utils/queries'
 import SpotifyModal from './SpotifyModal'
 
 const css = `
@@ -31,22 +31,22 @@ const css = `
   }
 `
 // styling for the modal
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-}
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// }
 
 export default function Nav() {
   const [spotifyApi] = useSpotifyApi()
   const navigate = useNavigate()
-  const [searchValue, setSearchValue] = useState('')
+  // const [searchValue, setSearchValue] = useState('')
   const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
@@ -72,19 +72,19 @@ export default function Nav() {
   const handleProfile = () => {
     navigate(`/profile/${Auth.getProfile().data._id}`)
   }
-  const handleSearch = (event) => {
-    const { value } = event.target
-    setSearchValue(value)
-  }
+  // const handleSearch = (event) => {
+  //   const { value } = event.target
+  // setSearchValue(value)
+  // }
 
-  const [fetchedSong, setFetchedSong] = useState()
-  const [getSong, { loading, data }] = useLazyQuery(QUERY_SONG_NAME)
+  // const [fetchedSong, setFetchedSong] = useState()
+  // const [getSong, { loading, data }] = useLazyQuery(QUERY_SONG_NAME)
 
-  if (loading) return <p>loading</p>
+  // if (loading) return <p>loading</p>
 
-  if (data && data.name) {
-    // setFetchedSong(data.name)
-  }
+  // if (data && data.name) {
+  //   setFetchedSong(data.name)
+  // }
 
   return (
     <Box className="header" sx={{ flexGrow: 1 }}>
@@ -186,7 +186,7 @@ export default function Nav() {
             )}
         </Toolbar>
       </AppBar>
-      <Modal
+      {/* <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -197,7 +197,7 @@ export default function Nav() {
             {fetchedSong}
           </Typography>
         </Box>
-      </Modal>
+      </Modal> */}
     </Box>
   )
 }
