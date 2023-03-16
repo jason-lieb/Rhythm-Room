@@ -101,7 +101,7 @@ export default function Playlist() {
         id: playlistId,
       },
     })
-    window.location.reload()
+    // window.location.reload()
   }
 
   const likePlaylist = async () => {
