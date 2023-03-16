@@ -84,7 +84,6 @@ export default function Nav() {
 
   if (data && data.name) {
     // setFetchedSong(data.name)
-    // console.log(fetchedSong)
   }
 
   return (
@@ -95,15 +94,13 @@ export default function Nav() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Rhythm Room
           </Typography>
-          <Box
+          {/* <Box
             className="search-box"
             component="form"
             onChange={handleSearch}
             onBlur={async () => {
               await getSong({ variables: { name: searchValue } }).then(() => {
                 setFetchedSong(data.trackByName.artist[0])
-                console.log(fetchedSong)
-                console.log(data)
                 handleOpen()
               })
             }}
@@ -119,7 +116,7 @@ export default function Nav() {
               label="Search"
               variant="outlined"
             />
-          </Box>
+          </Box> */}
           {/* Render discover button if not on the discover page */}
           {window.location.pathname !== '/' && (
             <Button
