@@ -67,7 +67,7 @@ function CreatePlaylist() {
       {listShown ? (
         <>
           <section className="song-section">
-            <h1>Add songs to your new plalist!</h1>
+            <h1>Add songs to your new playlist!</h1>
             {loading ? (
               <Loading />
             ) : (
