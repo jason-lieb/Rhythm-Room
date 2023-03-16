@@ -25,7 +25,8 @@ import Loading from '../Loading'
 const css = `
   .playlistContainer {
     color: white;
-    min-height: calc(100vh - 7.75rem);
+    min-height: calc(100vh - 12rem);
+    padding: 2rem;
   }
   .header-2 {
     display: flex;
