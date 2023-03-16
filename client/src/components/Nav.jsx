@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useSpotifyApi } from '../utils/SpotifyApiContext'
 import Auth from '../utils/auth'
-import { useState} from 'react'
+import { useState } from 'react'
 import { useLazyQuery } from '@apollo/client'
 
 import AppBar from '@mui/material/AppBar'
@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField'
 import Modal from '@mui/material/Modal'
 
 import LoginSpotify from './LoginSpotify'
@@ -49,8 +49,6 @@ export default function Nav() {
   const [searchValue, setSearchValue] = useState('')
   const [open, setOpen] = useState(false)
 
-  const [open, setOpen] = useState(false)
-
   const handleOpen = () => {
     setOpen(true)
   }
@@ -79,17 +77,15 @@ export default function Nav() {
     setSearchValue(value)
   }
 
-    const [fetchedSong, setFetchedSong] = useState();
-    const [ getSong, { loading, data }] = useLazyQuery(QUERY_SONG_NAME)
+  const [fetchedSong, setFetchedSong] = useState()
+  const [getSong, { loading, data }] = useLazyQuery(QUERY_SONG_NAME)
 
-    if (loading) return <p>loading</p>
+  if (loading) return <p>loading</p>
 
-    if (data && data.name) {
-      // setFetchedSong(data.name)
-      // console.log(fetchedSong)
-    }
-    const handleOpen = () => setOpen(true)
-    const handleClose = () => setOpen(false)
+  if (data && data.name) {
+    // setFetchedSong(data.name)
+    // console.log(fetchedSong)
+  }
 
   return (
     <Box className="header" sx={{ flexGrow: 1 }}>
@@ -100,25 +96,29 @@ export default function Nav() {
             Rhythm Room
           </Typography>
           <Box
-            className='search-box'
+            className="search-box"
             component="form"
             onChange={handleSearch}
-            onBlur={async() => {
-              await getSong({ variables: { name: searchValue } }).then( () => {
+            onBlur={async () => {
+              await getSong({ variables: { name: searchValue } }).then(() => {
                 setFetchedSong(data.trackByName.artist[0])
                 console.log(fetchedSong)
                 console.log(data)
                 handleOpen()
               })
-            }
-            }
+            }}
             sx={{
               '& > :not(style)': { m: 1, width: '25ch' },
             }}
             noValidate
             autoComplete="off"
           >
-            <TextField className='search-bar' id="outlined-basic" label="Search" variant="outlined" />
+            <TextField
+              className="search-bar"
+              id="outlined-basic"
+              label="Search"
+              variant="outlined"
+            />
           </Box>
           {/* Render discover button if not on the discover page */}
           {window.location.pathname !== '/' && (
@@ -196,11 +196,7 @@ export default function Nav() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-          >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
             {fetchedSong}
           </Typography>
         </Box>
