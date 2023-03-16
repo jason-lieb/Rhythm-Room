@@ -12,11 +12,10 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+// import MoreVertIcon from '@mui/icons-material/MoreVert'
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 
 import Song from '../Song'
 import Comment from '../Comment'
@@ -31,7 +30,6 @@ const css = `
   .header-2 {
     display: flex;
     align-items: center;
-    // position: relative;
     margin-bottom: 1rem;
   }
 
@@ -43,12 +41,19 @@ const css = `
     margin:auto;
     max-height: 300px
   }
-  .title {
-  }
   .actions {
     display: flex;
     align-items: center;
     margin-left: auto;
+  }
+  .addComment {
+    margin-left: 2rem;
+    vertical-align: bottom;
+    background-color: #595381;
+  }
+  #outlined-multiline-static {
+    color: white;
+    width: 56rem;
   }
   `
 
@@ -110,9 +115,6 @@ export default function Playlist() {
     <div className="playlistContainer">
       <style type="text/css">{css}</style>
       <Container maxWidth="lg">
-        {/* <div className="like-btn" onClick={likePlaylist}>
-          <ThumbUpIcon fontSize="large" cursor="pointer" />
-        </div> */}
         <Grid container spacing={1} className="header-2">
           <Grid item xs={12} className="imgContainer">
             <img
@@ -136,9 +138,9 @@ export default function Playlist() {
                 <FavoriteIcon sx={{ color: 'white' }} />
               </IconButton>
             )}
-            <IconButton aria-label="More options">
+            {/* <IconButton aria-label="More options">
               <MoreVertIcon sx={{ color: 'white' }} />
-            </IconButton>
+            </IconButton> */}
 
             {/* Render play button if logged in and connected to Spotify */}
             {spotifyApi.getAccessToken() && Auth.loggedIn() && (
@@ -198,23 +200,27 @@ export default function Playlist() {
       </Container>
       {/* If logged in, add field to leave a comment */}
       {Auth.loggedIn() && (
-        <>
+        <Container sx={{ mb: 3 }}>
           <TextField
             id="outlined-multiline-static"
-            label="Multiline"
+            label="Add a comment"
+            style={{ border: 'none' }}
             multiline
             rows={4}
             defaultValue="Default Value"
             onChange={handleCommentChange}
           />
-          <Button variant="contained" onClick={commentButton}>
+          <Button
+            className="addComment"
+            variant="contained"
+            onClick={commentButton}
+          >
             Add Comment
           </Button>
-        </>
+        </Container>
       )}
       <div>
-        {' '}
-        <Player songUri={songUri} />{' '}
+        <Player songUri={songUri} />
       </div>
     </div>
   )

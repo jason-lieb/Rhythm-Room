@@ -7,8 +7,7 @@ import ImageListItem from '@mui/material/ImageListItem'
 
 import Loading from './Loading'
 
-
-export default function AllPlayLists() {
+export default function AllPlaylists() {
   // fetch the information needed for the playlist cards and push it as props into the PlaylistCard component
   const { loading, data } = useQuery(QUERY_ALL_PLAYLISTS)
   const playlists = data?.playlists || []
@@ -26,7 +25,7 @@ export default function AllPlayLists() {
             <Link
               style={{ zIndex: 0, position: 'relative' }}
               key={info._id}
-              to={`/Playlist/${info._id}`}
+              to={`/playlist/${info._id}`}
             >
               <ImageListItem
                 style={{ minHeight: 10, zIndex: -2, position: 'relative' }}
@@ -46,7 +45,7 @@ export default function AllPlayLists() {
             <Link
               style={{ zIndex: 0, position: 'relative' }}
               key={info._id}
-              to={`/Playlist/${info._id}`}
+              to={`/playlist/${info._id}`}
             >
               <ImageListItem
                 style={{ minHeight: 10, zIndex: -2, position: 'relative' }}
