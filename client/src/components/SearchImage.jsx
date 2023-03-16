@@ -55,21 +55,29 @@ export default function SearchImage({ setImgUrl }) {
           </button>
         </div>
       </section>
-      {/* <form>
-        <label style={{backgroundColor: 'white'}}>
-          Prompt:
-          <input type="text" name="prompt" onChange={handleChange} />
-        </label>
-        <input type="submit" value="Generate" onClick={handleSubmit} />
-      </form> */}
-      <div >
+      <div style={{ position: 'relative' }}>
         {form.photo ? (
           <img src={form.photo} alt={form.prompt} height="340px" />
         ) : (
-          <div style={{ backgroundColor: 'white', borderRadius: 10 }}>
-            <img src={preview} alt="preview" height="330px" />
-          </div>
-      {generatingImg && <div style={{position: 'absolute', top: '140px', left: '150px'}}> <Loading /></div>}
+          <>
+            {generatingImg ? (
+              <>
+                <div
+                  style={{ position: 'absolute', top: '140px', left: '150px' }}
+                >
+                  {' '}
+                  <Loading />
+                </div>
+                <div style={{ backgroundColor: 'white', borderRadius: 10 }}>
+                  <img src={preview} alt="preview" height="330px" />
+                </div>
+              </>
+            ) : (
+              <div style={{ backgroundColor: 'white', borderRadius: 10 }}>
+                <img src={preview} alt="preview" height="330px" />
+              </div>
+            )}
+          </>
         )}
       </div>
     </>
