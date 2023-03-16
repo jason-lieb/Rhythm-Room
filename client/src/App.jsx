@@ -19,7 +19,7 @@ import Profile from './components/pages/Profile'
 import Playlist from './components/pages/Playlist'
 import Login from './components/pages/Login'
 import Footer from './components/Footer'
-import CreatePlaylistBTN from './components/CreatePlaylistBTN'
+import CreatePlaylistBtn from './components/CreatePlaylistBtn'
 import CreatePlaylist from './components/pages/CreatePlaylist'
 
 let origin =
@@ -70,14 +70,10 @@ function App() {
           <Route path="/" element={<Discover />} />
           <Route path="/profile/:profileId" element={<Profile />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/Playlist/:playlistId"
-            element={<Playlist accessToken={accessToken} />}
-          />
-          <Route path="/Profile" element={<Profile />} />
-          <Route path="/createPlaylist" element={<CreatePlaylist />} />
+          <Route path="/playlist/:playlistId" element={<Playlist />} />
+          <Route path="/create-playlist" element={<CreatePlaylist />} />
         </Routes>
-        <CreatePlaylistBTN />
+        <CreatePlaylistBtn />
       </Router>
       <Footer />
     </ApolloProvider>

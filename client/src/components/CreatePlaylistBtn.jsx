@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import Auth from '../utils/auth'
 
-export default function CreatePlaylistBTN() {
+export default function CreatePlaylistBtn() {
   const navigate = useNavigate()
-  const goTo = () => navigate('/createPlaylist')
+  const goTo = () => navigate('/create-playlist')
   if (!Auth.loggedIn()) return
 
   return (
