@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import AllPlayLists from '../AllPlayLists'
+import AllPlaylists from '../AllPlaylists'
 
 function Discover() {
   // Changes the little tab name at the top of the browser
@@ -8,7 +8,7 @@ function Discover() {
   }, [])
   return (
     <div className="List-of-all-playlists">
-      <AllPlayLists />
+      <AllPlaylists />
     </div>
   )
 }

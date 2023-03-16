@@ -48,7 +48,7 @@ const css = `
     color: white;
   }
   #outlined-basic {
-    color: rgb(36, 32, 56, 0.9);
+    color: white;
   }
 `
 // styling for the modal
