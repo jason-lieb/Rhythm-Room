@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { QUERY_USER } from '../../utils/queries'
 import { CREATE_ABOUT_ME } from '../../utils/mutations'
+import { useSpotifyApi } from '../../utils/SpotifyApiContext'
 import Auth from '../../utils/auth'
 
 import Card from '@mui/material/Card'
@@ -14,8 +15,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
 import DisconnectSpotify from '../DisconnectSpotify'
-import { useSpotifyApi } from '../../utils/SpotifyApiContext'
-import { width } from '@mui/system'
+import Loading from '../Loading'
 
 const css = `
   .container-box {
@@ -98,7 +98,17 @@ export default function Profile() {
 
   const generateLikedPlaylists = () => {
     return user.likedplaylist.map((playlist, index) => (
-      <Card key={index} sx={{ display: 'flex', minHeight: '151px', backgroundColor: '#8d86c9', color: 'white', width:'100%', justifyContent:'space-between' }}>
+      <Card
+        key={index}
+        sx={{
+          display: 'flex',
+          minHeight: '151px',
+          backgroundColor: '#8d86c9',
+          color: 'white',
+          width: '100%',
+          justifyContent: 'space-between',
+        }}
+      >
         <CardContent>
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
@@ -113,7 +123,16 @@ export default function Profile() {
   }
   const generateCreatedPlaylists = () => {
     return user.createdplaylist.map((playlist, index) => (
-      <Card key={index} sx={{ display: 'flex', width:'100%', justifyContent:'space-between', backgroundColor: '#8d86c9', color: 'white' }}>
+      <Card
+        key={index}
+        sx={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'space-between',
+          backgroundColor: '#8d86c9',
+          color: 'white',
+        }}
+      >
         <CardContent>
           <Typography variant="h5">{playlist.name}</Typography>
         </CardContent>
@@ -145,13 +164,24 @@ export default function Profile() {
   const editAboutMe = () => {
     if (!openEditBox) {
       return (
-        <Button sx={{ fontSize: '1.2em', color: '#595381', display: 'flex', justifyContent: 'center', alignItems: 'center'}} variant="text" onClick={() => setOpenEditBox(true)}>
-          <span>Edit</span><span>&#9997;</span>
+        <Button
+          sx={{
+            fontSize: '1.2em',
+            color: '#595381',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          variant="text"
+          onClick={() => setOpenEditBox(true)}
+        >
+          <span>Edit</span>
+          <span>&#9997;</span>
         </Button>
       )
     } else if (openEditBox) {
       return (
-        <div className='edit-div'>
+        <div className="edit-div">
           <TextField
             id="outlined-multiline-static"
             label="About Me"
@@ -160,7 +190,12 @@ export default function Profile() {
             defaultValue="Tell us about yourself..."
             onChange={handleAboutTextChange}
           ></TextField>
-          <Button label="About Me" sx={{ backgroundColor: '#595381', marginTop: 1 }} variant="contained" onClick={submitAbout}>
+          <Button
+            label="About Me"
+            sx={{ backgroundColor: '#595381', marginTop: 1 }}
+            variant="contained"
+            onClick={submitAbout}
+          >
             Submit
           </Button>
         </div>
@@ -169,7 +204,7 @@ export default function Profile() {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   if (!Auth.loggedIn()) navigate('/login')
@@ -186,14 +221,19 @@ export default function Profile() {
               src="/static/images/avatar/1.jpg"
               sx={{ width: 70, height: 70 }}
             />
-            <Typography sx={{ fontSize: '1.5em', fontWeight: 'bold'}} className="user-name">{user.username}</Typography>
+            <Typography
+              sx={{ fontSize: '1.5em', fontWeight: 'bold' }}
+              className="user-name"
+            >
+              {user.username}
+            </Typography>
             {!disconnected && (
               <DisconnectSpotify setDisconnected={setDisconnected} />
             )}
           </div>
 
           {/* About me section */}
-          <CardContent className='about-me'>
+          <CardContent className="about-me">
             <Typography
               className="text"
               gutterBottom
@@ -202,7 +242,12 @@ export default function Profile() {
             >
               About Me:
             </Typography>
-            <Typography className="text" variant="body2" color="text.secondary" sx={{ fontSize: '1.2em', marginBottom: '1rem'}}>
+            <Typography
+              className="text"
+              variant="body2"
+              color="text.secondary"
+              sx={{ fontSize: '1.2em', marginBottom: '1rem' }}
+            >
               {aboutTextDisplay}
             </Typography>
             {editAboutMe()}
@@ -212,11 +257,11 @@ export default function Profile() {
         {/* Liked and created playlists */}
         <div className="right-content">
           <div className="liked-playlist playlist">
-            <div className='typ'>Liked Playlists</div>
+            <div className="typ">Liked Playlists</div>
             {generateLikedPlaylists()}
           </div>
           <div className="created-playlist playlist">
-            <div className='typ'>Created Playlists</div>
+            <div className="typ">Created Playlists</div>
             {generateCreatedPlaylists()}
           </div>
         </div>
