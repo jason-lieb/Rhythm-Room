@@ -18,7 +18,7 @@ Matt: https://github.com/codex-scribe
 
 ## Description
 
-A site where any user can create an account and see a list of playlist. The user can like each plalist of they desire, but they could also create their own playlist to be liked by other users.
+A site where any user can create an account and see a list of playlist. The user can like each playlist of they desire, but they could also create their own playlist to be liked by other users.
 
 ## User Story
 
@@ -50,6 +50,6 @@ I want to be able to view and like other user’s playlists
 
 ![Alt Text](./readmeImages/Profile.PNG)
 
-## Create A playlist
+## Create A Playlist
 
-![Alt Text](./readmeImages/create.PNG)
+![Alt Text](./readmeImages/create-2.PNG)
