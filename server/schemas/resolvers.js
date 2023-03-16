@@ -41,7 +41,11 @@ const resolvers = {
       const track = await Track.findById(id)
       return track
     },
-    tracks: async () => Track.find({})
+    tracks: async () => Track.find({}),
+    trackByName: async (parent, { name }) => {
+      const track = await Track.findOne({ name })
+      return track
+    }
   },
 
   Mutation: {
