@@ -13,9 +13,14 @@ export default function SearchImage({ setImgUrl }) {
     e.preventDefault()
     if (form.prompt) {
       try {
+        let origin =
+          window.location.host.split(':').length > 1
+            ? window.location.origin.slice(0, -4) + '5500'
+            : window.location.origin
+        const openAIUri = origin + '/api/openai/'
         setGeneratingImg(true)
         const { data } = await axios.post(
-          'http://localhost:5500/api/openai',
+          openAIUri,
           { prompt: form.prompt },
           {
             headers: {
