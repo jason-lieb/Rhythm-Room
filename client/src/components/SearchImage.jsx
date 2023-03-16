@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import preview from '../assets/preview.png'
+import Loading from './Loading'
 
-export default function SearchImage({setImgUrl}) {
+export default function SearchImage({ setImgUrl }) {
   const [generatingImg, setGeneratingImg] = useState(false)
   const [form, setForm] = useState({
     prompt: '',
@@ -38,23 +39,45 @@ export default function SearchImage({setImgUrl}) {
   }
   return (
     <>
-      <form>
-        <label style={{backgroundColor: 'white'}}>
-          Prompt:
-          <input type="text" name="prompt" onChange={handleChange} />
-        </label>
-        <input type="submit" value="Generate" onClick={handleSubmit} />
-      </form>
-      {generatingImg && (
-        <div style={{ backgroundColor: 'white' }}>Loading</div>
-      )}
-      <div>
+      <section
+        className="form-section"
+        style={{ marginTop: '10px', marginBottom: '10px' }}
+      >
+        <div className="form-div">
+          <input
+            className="input-cr"
+            onChange={handleChange}
+            type="text"
+            placeholder="Prompt"
+          />
+          <button className="btn-cr" onClick={handleSubmit}>
+            Generate Picture
+          </button>
+        </div>
+      </section>
+      <div style={{ position: 'relative' }}>
         {form.photo ? (
-          <img src={form.photo} alt={form.prompt} />
+          <img src={form.photo} alt={form.prompt} height="340px" />
         ) : (
-          <div style={{ backgroundColor: 'white' }}>
-            <img src={preview} alt="preview" height="512px" />
-          </div>
+          <>
+            {generatingImg ? (
+              <>
+                <div
+                  style={{ position: 'absolute', top: '140px', left: '150px' }}
+                >
+                  {' '}
+                  <Loading />
+                </div>
+                <div style={{ backgroundColor: 'white', borderRadius: 10 }}>
+                  <img src={preview} alt="preview" height="330px" />
+                </div>
+              </>
+            ) : (
+              <div style={{ backgroundColor: 'white', borderRadius: 10 }}>
+                <img src={preview} alt="preview" height="330px" />
+              </div>
+            )}
+          </>
         )}
       </div>
     </>
