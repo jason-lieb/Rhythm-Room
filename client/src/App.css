@@ -255,7 +255,6 @@ a:hover {
 .typ {
   color: white;
   font-size: 2em;
-  text-decoration: underline;
   margin-bottom: 1rem;
 }
 .edit-div {
@@ -267,4 +266,12 @@ a:hover {
 }
 .btn-edit {
   font-size: 1.3em;
+}
+
+label {
+  color: white !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #595381 !important;
 }
