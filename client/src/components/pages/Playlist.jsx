@@ -24,8 +24,8 @@ import Loading from '../Loading'
 
 const css = `
   .playlistContainer {
-    padding: 1rem 2rem;
     color: white;
+    min-height: calc(100vh - 7.75rem);
   }
   .header-2 {
     display: flex;
@@ -207,7 +207,7 @@ export default function Playlist() {
             style={{ border: 'none' }}
             multiline
             rows={4}
-            defaultValue="Default Value"
+            defaultValue="Add a comment"
             onChange={handleCommentChange}
           />
           <Button
