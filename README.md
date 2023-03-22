@@ -56,8 +56,8 @@ THEN I can view it in the discover section.
 ![Alt Text](./readmeImages/create-2.PNG)
 
 ## Contributors
-Austin: https://github.com/waustin45
-Jason: https://github.com/jason-lieb
-Joe: https://github.com/joemeetjoe
-Lantao: https://github.com/pppzlt
-Matt: https://github.com/codex-scribe
+- Austin: https://github.com/waustin45
+- Jason: https://github.com/jason-lieb
+- Joe: https://github.com/joemeetjoe
+- Lantao: https://github.com/pppzlt
+- Matt: https://github.com/codex-scribe
