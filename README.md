@@ -38,8 +38,8 @@ A site where users can explore and share their favorite music. A user can create
 
 ## Contributors
 
-- [Austin] https://github.com/waustin45
-- [Jason] https://github.com/jason-lieb
-- [Joe] https://github.com/joemeetjoe
-- [Lantao] https://github.com/pppzlt
-- [Matt] https://github.com/codex-scribe
+- [Austin](https://github.com/waustin45)
+- [Jason](https://github.com/jason-lieb)
+- [Joe](https://github.com/joemeetjoe)
+- [Lantao](https://github.com/pppzlt)
+- [Matt](https://github.com/codex-scribe)
