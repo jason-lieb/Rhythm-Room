@@ -34,7 +34,6 @@ export default function AllPlaylists() {
                   src={`${info.images[0].url}?w=248&fit=crop&auto=format`}
                   srcSet={`${info.images[0].url}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt="as"
-                  loading="lazy"
                   style={{ minHeight: 10 }}
                 />
               </ImageListItem>
@@ -54,7 +53,6 @@ export default function AllPlaylists() {
                   src={`${info.images[0].url}`}
                   srcSet={`${info.images[0].url}`}
                   alt="as"
-                  loading="lazy"
                   style={{ minHeight: 10 }}
                 />
               </ImageListItem>
