@@ -1,7 +1,7 @@
 // importing in stylings, router routes, and the components
 import './App.css'
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import {
   ApolloClient,
   ApolloProvider,

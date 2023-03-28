@@ -118,7 +118,7 @@ export default function Nav() {
             />
           </Box> */}
           {/* Render discover button if not on the discover page */}
-          {window.location.pathname !== '/' && (
+          {window.location.hash !== '#/' && (
             <Button
               className="navButton"
               color="inherit"
@@ -174,16 +174,15 @@ export default function Nav() {
           )}
 
           {/* Render login button if not on the login page and not already logged in */}
-          {window.location.pathname.split('/')[1] !== 'login' &&
-            !Auth.loggedIn() && (
-              <Button
-                className="navButton"
-                color="inherit"
-                onClick={handleLoginButtonClick}
-              >
-                Login
-              </Button>
-            )}
+          {window.location.hash !== '#/login' && !Auth.loggedIn() && (
+            <Button
+              className="navButton"
+              color="inherit"
+              onClick={handleLoginButtonClick}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       {/* <Modal
